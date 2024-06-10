@@ -31,7 +31,7 @@ CREATE TABLE responsable (
     PRIMARY KEY (pasajero),
 	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)	
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-	
+
 CREATE TABLE viaje (
     idviaje bigint AUTO_INCREMENT, /*codigo de viaje*/
 	vdestino varchar(150),
