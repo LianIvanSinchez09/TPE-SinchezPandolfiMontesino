@@ -121,8 +121,7 @@ class Persona{
 					array_push($arregloPersona,$perso);
 	
 				}
-				
-			
+					
 		 	}	else {
 		 			$this->setmensajeoperacion($base->getError());
 		 		
