@@ -7,13 +7,30 @@ CREATE TABLE empresa(
     PRIMARY KEY (idempresa)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+    CREATE TABLE persona (
+    nroDoc VARCHAR(15),
+    nombre VARCHAR(150),
+    apellido VARCHAR(150),
+    PRIMARY KEY (nroDoc)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE responsable (
     rnumeroempleado bigint AUTO_INCREMENT,
     rnumerolicencia bigint,
 	rnombre varchar(150), 
     rapellido  varchar(150), 
     PRIMARY KEY (rnumeroempleado)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;;
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+    CREATE TABLE pasajero (
+    pdocumento varchar(15),
+    pnombre varchar(150), 
+    papellido varchar(150), 
+	ptelefono int, 
+	idviaje bigint,
+    PRIMARY KEY (pasajero),
+	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)	
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
 CREATE TABLE viaje (
     idviaje bigint AUTO_INCREMENT, /*codigo de viaje*/
@@ -29,14 +46,6 @@ CREATE TABLE viaje (
     ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
 	
-CREATE TABLE pasajero (
-    pdocumento varchar(15),
-    pnombre varchar(150), 
-    papellido varchar(150), 
-	ptelefono int, 
-	idviaje bigint,
-    PRIMARY KEY (pasajero),
-	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)	
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+ 
  
   
