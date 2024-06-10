@@ -124,7 +124,6 @@ class BaseDatos {
             $resp =  $id;
         } else {
             $this->ERROR =mysqli_errno( $this->CONEXION) . ": " . mysqli_error( $this->CONEXION);
-           
         }
     return $resp;
     }
