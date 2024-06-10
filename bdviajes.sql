@@ -15,21 +15,22 @@ CREATE TABLE empresa(
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE responsable (
+    rNroDoc VARCHAR(15),
     rnumeroempleado bigint AUTO_INCREMENT,
-    rnumerolicencia bigint,
-	rnombre varchar(150), 
-    rapellido  varchar(150), 
-    PRIMARY KEY (rnumeroempleado)
+    rnumerolicencia bigint, 
+    PRIMARY KEY (rNroDoc),
+    FOREIGN KEY (rNroDoc) REFERENCES persona (nroDoc) ON UPDATE CASCADE ON DELETE CASCADE
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
     CREATE TABLE pasajero (
-    pdocumento varchar(15),
-    pnombre varchar(150), 
-    papellido varchar(150), 
+    pNroDoc varchar(15),
 	ptelefono int, 
 	idviaje bigint,
-    PRIMARY KEY (pasajero),
+    PRIMARY KEY (pNroDoc),
+    FOREIGN KEY (pNroDoc) REFERENCES persona (nroDoc) 
+    ON UPDATE CASCADE ON DELETE CASCADE
 	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)	
+    
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
     CREATE TABLE viaje (
