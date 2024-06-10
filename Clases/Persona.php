@@ -24,7 +24,7 @@ class Persona{
 		$this->setnumTelefono($mail);
     }
 	
-	
+	//<-------Metodos set---------------------------------------------------->
     public function setNrodoc($NroDNI){
 		$this->nrodoc=$NroDNI;
 	}
@@ -42,6 +42,7 @@ class Persona{
 		$this->mensajeoperacion=$mensajeoperacion;
 	}
 	
+	//<------Metodo get----------------------------------------------------->
 	public function getNrodoc(){
 		return $this->nrodoc;
 	}

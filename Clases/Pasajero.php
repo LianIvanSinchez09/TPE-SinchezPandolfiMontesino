@@ -27,7 +27,7 @@ class Pasajero {
 
 	}
 
-    // Metodo Get------------------------------------------------------------------
+    // <--------------Metodo Get------------------------------------------------------->
 	public function getNombre() {
 		return $this->nombre;
 	}
@@ -48,7 +48,7 @@ class Pasajero {
 		return $this->mensajeoperacion;
 	}
 
-    // Metodo Set------------------------------------------------------------------
+    // <------------Metodo Set----------------------------------------------------------->
 	public function setNombre($nuevoNombre) {
 		$this->nombre = $nuevoNombre;
 	}
