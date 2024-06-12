@@ -79,8 +79,7 @@ class BaseDatos {
         return $resp;
     }
     
-    //consulta: peticion de un dato dentro de bd (1 o muchos)
-    //registro: 1 fila (ej: datos de una persona en una tabla)
+    
 
 
     /**
