@@ -19,19 +19,19 @@ CREATE TABLE empresa(
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE responsable (
-    rdocumento VARCHAR(15),
+    documento VARCHAR(15),
     rnumeroempleado bigint AUTO_INCREMENT,
     rnumerolicencia bigint, 
     PRIMARY KEY (rnumeroempleado),
-    FOREIGN KEY (rdocumento) REFERENCES persona (documento) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (documento) REFERENCES persona (documento) ON UPDATE CASCADE ON DELETE CASCADE
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
     CREATE TABLE pasajero (
-    pdocumento varchar(15),
+    documento varchar(15),
 	ptelefono int, 
 	idviaje bigint,
-    PRIMARY KEY (pdocumento),
-    FOREIGN KEY (pdocumento) REFERENCES persona (documento) 
+    PRIMARY KEY (documento),
+    FOREIGN KEY (documento) REFERENCES persona (documento) 
     ON UPDATE CASCADE ON DELETE CASCADE
 	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)/*se hace por una relacion de 1:1,para saber en que viaje esta el pasajero*/	
     
@@ -42,11 +42,11 @@ CREATE TABLE responsable (
 	vdestino varchar(150),
     vcantmaxpasajeros int,
 	idempresa bigint,
-    rnumeroempleado bigint,
+    numeroempleado bigint,
     vimporte float,
     PRIMARY KEY (idviaje),
     FOREIGN KEY (idempresa) REFERENCES empresa (idempresa),
-	FOREIGN KEY (rnumeroempleado) REFERENCES responsable (rnumeroempleado)
+	FOREIGN KEY (numeroempleado) REFERENCES responsable (numeroempleado)
     ON UPDATE CASCADE
     ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
