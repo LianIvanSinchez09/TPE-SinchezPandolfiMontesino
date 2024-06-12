@@ -12,26 +12,26 @@ CREATE TABLE empresa(
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
     CREATE TABLE persona (
-    nroDoc VARCHAR(15),
+    documento VARCHAR(15),
     nombre VARCHAR(150),
     apellido VARCHAR(150),
-    PRIMARY KEY (nroDoc)
+    PRIMARY KEY (documento)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE responsable (
-    rNroDoc VARCHAR(15),
+    rdocumento VARCHAR(15),
     rnumeroempleado bigint AUTO_INCREMENT,
     rnumerolicencia bigint, 
     PRIMARY KEY (rnumeroempleado),
-    FOREIGN KEY (rNroDoc) REFERENCES persona (nroDoc) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (rdocumento) REFERENCES persona (documento) ON UPDATE CASCADE ON DELETE CASCADE
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
     CREATE TABLE pasajero (
-    pNroDoc varchar(15),
+    pdocumento varchar(15),
 	ptelefono int, 
 	idviaje bigint,
-    PRIMARY KEY (pNroDoc),
-    FOREIGN KEY (pNroDoc) REFERENCES persona (nroDoc) 
+    PRIMARY KEY (pdocumento),
+    FOREIGN KEY (pdocumento) REFERENCES persona (documento) 
     ON UPDATE CASCADE ON DELETE CASCADE
 	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)/*se hace por una relacion de 1:1,para saber en que viaje esta el pasajero*/	
     
