@@ -1,5 +1,9 @@
 CREATE DATABASE bdviajes; 
-
+    /*los FOREIGN KEY () son utilizados como puentes entre las tablas para saber en que parte estan guardada su informacion completa
+    Por ejemplo: Persona va tener un id y toda su informacion, cuando se quiere crear el responsable tendra como foranea el id,
+    gracias a ese podremos saber donde esta su informacion dentro de la tabla persona
+    Hay que hacer solo un test
+    Al querer crear un hijo, primero debo crearlo en el padre y, si se puede, ahi recien creo al hijo con todos sus datos*/
 CREATE TABLE empresa(
     idempresa bigint AUTO_INCREMENT,
     enombre varchar(150),
@@ -29,8 +33,13 @@ CREATE TABLE responsable (
     PRIMARY KEY (pNroDoc),
     FOREIGN KEY (pNroDoc) REFERENCES persona (nroDoc) 
     ON UPDATE CASCADE ON DELETE CASCADE
+<<<<<<< HEAD
     FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)
 
+=======
+	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)/*se hace por una relacion de 1:1,para saber en que viaje esta el pasajero*/	
+    
+>>>>>>> 788a33668e597af27559b6fb429ae78a972b0f88
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE viaje (
