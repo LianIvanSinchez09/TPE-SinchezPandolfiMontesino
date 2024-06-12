@@ -1,4 +1,4 @@
-<?php/**este es el mio */
+<?php
 include_once "BaseDatos.php";
 class Persona{
 	private $idpersona;
