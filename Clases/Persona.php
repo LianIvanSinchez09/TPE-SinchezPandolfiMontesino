@@ -108,17 +108,18 @@ class Persona{
 			if($base->Ejecutar($consultaPersonas)){				
 				$arregloPersona= array();
 				while($row2=$base->Registro()){
-					
+				    $id=$row2['idpersona'];
 					$NroDoc=$row2['nrodoc'];
 					$Nombre=$row2['nombre'];
 					$Apellido=$row2['apellido'];
 				
 					$perso=new Persona();
-					$perso->cargar($idpersona,$NroDoc,$Nombre,$Apellido);
+					$perso->cargar($id,$NroDoc,$Nombre,$Apellido);
 					array_push($arregloPersona,$perso);
 	
 				}
-					
+				
+			
 		 	}	else {
 		 			$this->setmensajeoperacion($base->getError());
 		 		
