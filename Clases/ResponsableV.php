@@ -19,6 +19,29 @@ class ResponsableV extends Persona {
         $this->setNumLicencia($numLicencia);
     }
 
+    public function insertar(){
+      $base=new BaseDatos();
+      $resp= false;
+      $consultaInsertar="INSERT INTO personaresponsable(documento, numeroEmpleado, numeroLicencia) 
+          VALUES (".$this->getdocumento().",'".$this->getNumEmpleado()."','".$this->getNumLicencia()."')";
+      
+      if($base->Iniciar()){
+  
+        if($base->Ejecutar($consultaInsertar)){
+  
+            $resp=  true;
+  
+        }	else {
+            $this->setmensajeoperacion($base->getError());
+            
+        }
+  
+      } else {
+          $this->setmensajeoperacion($base->getError());
+        
+      }
+      return $resp;
+    }
 
     public function getNumEmpleado() {
       return $this->numEmpleado;
