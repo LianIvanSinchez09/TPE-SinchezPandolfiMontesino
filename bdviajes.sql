@@ -1,75 +1,53 @@
-/* CREATE DATABASE bdviajes; */
-CREATE TABLE persona (
-    documento varchar(15),
-    nombre varchar(150), 
-    apellido varchar(150), 
-    PRIMARY KEY (documento)
+CREATE DATABASE bdviajes; 
+    /*los FOREIGN KEY () son utilizados como puentes entre las tablas para saber en que parte estan guardada su informacion completa
+    Por ejemplo: Persona va tener un id y toda su informacion, cuando se quiere crear el responsable tendra como foranea el id,
+    gracias a ese podremos saber donde esta su informacion dentro de la tabla persona
+    Hay que hacer solo un test
+    Al querer crear un hijo, primero debo crearlo en el padre y, si se puede, ahi recien creo al hijo con todos sus datos*/
+CREATE TABLE empresa(
+    idempresa bigint AUTO_INCREMENT,
+    enombre varchar(150),
+    edireccion varchar(150),
+    PRIMARY KEY (idempresa)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+    CREATE TABLE persona (
+    nroDoc VARCHAR(15),
+    nombre VARCHAR(150),
+    apellido VARCHAR(150),
+    PRIMARY KEY (nroDoc)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE personaResponsable (    
-    documentoR varchar(15),
-    numeroEmpleado bigint AUTO_INCREMENT,    
-    numeroLicencia bigint,
-    PRIMARY KEY (numeroEmpleado),
-    FOREIGN KEY (documentoR) REFERENCES persona (documento)
-    ON UPDATE CASCADE ON DELETE CASCADE
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;	
-
-    CREATE TABLE empresa (
-    idE bigint AUTO_INCREMENT,
-    nombre varchar(150),
-    direccion varchar(150),
-    PRIMARY KEY (idE)
+CREATE TABLE responsable (
+    rNroDoc VARCHAR(15),
+    rnumeroempleado bigint AUTO_INCREMENT,
+    rnumerolicencia bigint, 
+    PRIMARY KEY (rnumeroempleado),
+    FOREIGN KEY (rNroDoc) REFERENCES persona (nroDoc) ON UPDATE CASCADE ON DELETE CASCADE
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-    CREATE TABLE viaje (
-    idV bigint AUTO_INCREMENT,
-	destino varchar(150),
-    cantMaxPasajeros int,
-    numeroEmpleadoResponsable bigint,
-    idEmpresa bigint,
-    costoIndividualPasajero float,
-    importeTotalPasajeros float,
-    PRIMARY KEY (idV),
-    FOREIGN KEY (idEmpresa) REFERENCES empresa (idE),
-    FOREIGN KEY (numeroEmpleadoResponsable) REFERENCES personaResponsable (numeroEmpleado)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
-    
     CREATE TABLE pasajero (
-    idP bigint AUTO_INCREMENT,
-    documentoP varchar(15),	
-	idViaje bigint,
-    telefono int,
-    numeroAsiento varchar(4),
-    numeroTickect varchar(10),
-    PRIMARY KEY (idP),
-    FOREIGN KEY (documentoP) REFERENCES persona (documento)
-    ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (idViaje) REFERENCES viaje (idV)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1; 
-
-    CREATE TABLE standard (
-    idPasajero bigint,
-    PRIMARY KEY (idPasajero),
-    FOREIGN KEY (idPasajero) REFERENCES pasajero (idP)
-    ON UPDATE CASCADE ON DELETE CASCADE	
+    pNroDoc varchar(15),
+	ptelefono int, 
+	idviaje bigint,
+    PRIMARY KEY (pNroDoc),
+    FOREIGN KEY (pNroDoc) REFERENCES persona (nroDoc) 
+    ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)/*se hace por una relacion de 1:1,para saber en que viaje esta el pasajero*/	
+    
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-    CREATE TABLE vip (
-    idPasajero bigint,	
-    numeroViajeroFecuente int,
-    cantidadMillas int,
-    PRIMARY KEY (idPasajero),
-    FOREIGN KEY (idPasajero) REFERENCES pasajero (idP)
-    ON UPDATE CASCADE ON DELETE CASCADE	
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-    CREATE TABLE especial (
-    idPasajero bigint,   
-    requiereSillasRuedas varchar(10),
-    requiereAsistencia varchar(10),
-    requiereComidaEsecial varchar(10),
-    PRIMARY KEY (idPasajero),
-    FOREIGN KEY (idPasajero) REFERENCES pasajero (idP) 
-    ON UPDATE CASCADE ON DELETE CASCADE	   
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+    CREATE TABLE viaje (
+    idviaje bigint AUTO_INCREMENT, /*codigo de viaje*/
+	vdestino varchar(150),
+    vcantmaxpasajeros int,
+	idempresa bigint,
+    rnumeroempleado bigint,
+    vimporte float,
+    PRIMARY KEY (idviaje),
+    FOREIGN KEY (idempresa) REFERENCES empresa (idempresa),
+	FOREIGN KEY (rnumeroempleado) REFERENCES responsable (rnumeroempleado)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
+  
