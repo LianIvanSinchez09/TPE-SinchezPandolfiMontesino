@@ -1,6 +1,6 @@
 <?php
 
-//registra el número de empleado, número de licencia, nombre y apellido
+// aregistra el número de empleado, número de licencia, nombre y apellido
 class ResponsableV extends Persona {
     private $numEmpleado;
     private $numLicencia;
