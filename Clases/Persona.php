@@ -14,11 +14,10 @@ class Persona{
 		$this->apellido = "";
 	}
 
-	public function cargar($NroD,$Nom,$Ape,$mail){		
+	public function cargar($NroD,$Nom,$Ape){		
 		$this->setNrodoc($NroD);
 		$this->setNombre($Nom);
 		$this->setApellido($Ape);
-		$this->setnumTelefono($mail);
     }
 	
 	//<-------Metodos set---------------------------------------------------->
@@ -31,16 +30,13 @@ class Persona{
 	public function setApellido($Ape){
 		$this->apellido=$Ape;
 	}
-	public function setnumTelefono($mail){
-		$this->numTelefono=$mail;
-	}
-	
+
 	public function setmensajeoperacion($mensajeoperacion){
 		$this->mensajeoperacion=$mensajeoperacion;
 	}
 	
 	//<------Metodo get----------------------------------------------------->
-	public function getNrodoc(){
+	public function getDocumento(){
 		return $this->nrodoc;
 	}
 	public function getNombre(){
@@ -48,9 +44,6 @@ class Persona{
 	}
 	public function getApellido(){
 		return $this->apellido ;
-	}
-	public function getnumTelefono(){
-		return $this->numTelefono ;
 	}
 
 	
@@ -73,7 +66,6 @@ class Persona{
 				    $this->setNrodoc($dni);
 					$this->setNombre($row2['nombre']);
 					$this->setApellido($row2['apellido']);
-					$this->setnumTelefono($row2['numTelefono']);
 					$resp= true;
 				}				
 			
@@ -105,11 +97,9 @@ class Persona{
 					
 					$NroDoc=$row2['nrodoc'];
 					$Nombre=$row2['nombre'];
-					$Apellido=$row2['apellido'];
-					$numTelefono=$row2['numTelefono'];
-				
+					$Apellido=$row2['apellido'];				
 					$perso=new Persona();
-					$perso->cargar($NroDoc,$Nombre,$Apellido,$numTelefono);
+					$perso->cargar($NroDoc,$Nombre,$Apellido);
 					array_push($arregloPersona,$perso);
 	
 				}
@@ -130,8 +120,8 @@ class Persona{
 	public function insertar(){
 		$base=new BaseDatos();
 		$resp= false;
-		$consultaInsertar="INSERT INTO persona(nrodoc, apellido, nombre,  numTelefono) 
-				VALUES (".$this->getNrodoc().",'".$this->getApellido()."','".$this->getNombre()."','".$this->getnumTelefono()."')";
+		$consultaInsertar="INSERT INTO persona(documento, apellido, nombre) 
+				VALUES (".$this->getDocumento().",'".$this->getApellido()."','".$this->getNombre()."')";
 		
 		if($base->Iniciar()){
 
@@ -156,8 +146,7 @@ class Persona{
 	public function modificar(){
 	    $resp =false; 
 	    $base=new BaseDatos();
-		$consultaModifica="UPDATE persona SET apellido='".$this->getApellido()."',nombre='".$this->getNombre()."'
-                           ,numTelefono='".$this->getnumTelefono()."' WHERE nrodoc=". $this->getNrodoc();
+		$consultaModifica="UPDATE persona SET apellido='".$this->getApellido()."',nombre='".$this->getNombre()."' WHERE documento=". $this->getDocumento();
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaModifica)){
 			    $resp=  true;
@@ -176,7 +165,7 @@ class Persona{
 		$base=new BaseDatos();
 		$resp=false;
 		if($base->Iniciar()){
-				$consultaBorra="DELETE FROM persona WHERE nrodoc=".$this->getNrodoc();
+				$consultaBorra="DELETE FROM persona WHERE documento=".$this->getDocumento();
 				if($base->Ejecutar($consultaBorra)){
 				    $resp=  true;
 				}else{
@@ -191,7 +180,7 @@ class Persona{
 	}
 
 	public function __toString(){
-	    return "\nNombre: ".$this->getNombre(). "\n Apellido:".$this->getApellido()."\n DNI: ".$this->getNrodoc()."\n";
+	    return "\nNombre: ".$this->getNombre(). "\n Apellido:".$this->getApellido()."\n DNI: ".$this->getDocumento()."\n";
 			
 	}
 }

@@ -1,7 +1,8 @@
 <?php
 
-// aregistra el número de empleado, número de licencia, nombre y apellido
+//registra el número de empleado, número de licencia, nombre y apellido
 class ResponsableV extends Persona {
+
     private $numEmpleado;
     private $numLicencia;
 
@@ -12,8 +13,8 @@ class ResponsableV extends Persona {
     	$this->numLicencia = "";        
     }
 
-    public function cargar($idPersona,$NroD,$Nom,$Ape,$numEmpleado = "", $numLicencia = ""){
-        parent::cargar($idPersona,$NroD,$Nom,$Ape);
+    public function cargar($NroD,$Nom,$Ape,$numEmpleado = "", $numLicencia = ""){
+        parent::cargar($NroD,$Nom,$Ape);
         $this->setNumEmpleado($numEmpleado);
         $this->setNumLicencia($numLicencia);
     }
@@ -31,5 +32,10 @@ class ResponsableV extends Persona {
     }
     public function setNumLicencia($value) {
       $this->numLicencia = $value;
+    }
+
+    public function __toString()
+    {
+        return parent::__toString() . "\n" . $this->getNumEmpleado() . "\n" . $this->getNumLicencia();
     }
 }

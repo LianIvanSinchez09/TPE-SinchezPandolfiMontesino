@@ -18,13 +18,9 @@ class Pasajero extends Persona {
 	}
 
     // Metodo Cargar Datos
-    public function cargar($nomb, $apelli, $nroD, $telef){
-		
-		$this->setNombre($nomb);
-		$this->setApellido($apelli);
-		$this->setNrodoc($nroD);
+    public function cargar($nomb, $apelli, $nroD, $telef = null){
+		parent::cargar($nroD, $nomb, $apelli);
         $this->setTelefono($telef);
-
 	}
 
     // <--------------Metodo Get------------------------------------------------------->
