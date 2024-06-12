@@ -1,6 +1,6 @@
 <?php
 
-class Pasajero {
+class Pasajero extends Persona {
 
     private $nombre;
     private $apellido;
