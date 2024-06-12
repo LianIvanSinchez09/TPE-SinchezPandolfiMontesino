@@ -3,7 +3,7 @@ CREATE DATABASE bdviajes;
     Por ejemplo: Persona va tener un id y toda su informacion, cuando se quiere crear el responsable tendra como foranea el id,
     gracias a ese podremos saber donde esta su informacion dentro de la tabla persona
     Hay que hacer solo un test
-    Al querer crear un hijo, primero debo crearlo en el padre y, si se puede, ahi recien creo al hijo con todos sus datos*/
+    Al querer crear un hijo, primero debo crarlo en el padre y, si se puede, ahi recien creo al hijo con todos sus datos*/
 CREATE TABLE empresa(
     idempresa bigint AUTO_INCREMENT,
     enombre varchar(150),
