@@ -114,7 +114,7 @@ class Persona{
 					$Apellido=$row2['apellido'];
 				
 					$perso=new Persona();
-					$perso->cargar($NroDoc,$Nombre,$Apellido);
+					$perso->cargar($idpersona,$NroDoc,$Nombre,$Apellido);
 					array_push($arregloPersona,$perso);
 	
 				}
