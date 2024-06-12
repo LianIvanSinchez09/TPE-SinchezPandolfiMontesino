@@ -5,14 +5,15 @@ class ResponsableV extends Persona {
     private $numEmpleado;
     private $numLicencia;
 
+
     public function __construct() {
         parent::__construct();
     	$this->numEmpleado = "";
     	$this->numLicencia = "";        
     }
 
-    public function cargar($NroD, $Nom, $Ape, $mail, $numEmpleado = "", $numLicencia = "") {
-        parent::cargar($NroD, $Nom, $Ape, $mail);
+    public function cargar($idPersona,$NroD,$Nom,$Ape,$numEmpleado, $numLicencia){
+        parent::cargar($idPersona,$NroD,$Nom,$Ape);
         $this->setNumEmpleado($numEmpleado);
         $this->setNumLicencia($numLicencia);
     }
