@@ -18,7 +18,7 @@ class BaseDatos {
      */
     public function __construct(){
         $this->HOSTNAME = "127.0.0.1";
-        $this->BASEDATOS = "bd_prueba";
+        $this->BASEDATOS = "bdviajes";
         $this->USUARIO = "root";
         $this->CLAVE="";
         $this->RESULT= null;
