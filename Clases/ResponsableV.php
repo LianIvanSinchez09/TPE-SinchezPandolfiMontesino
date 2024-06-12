@@ -16,8 +16,8 @@ class ResponsableV extends Persona {
     	$this->numLicencia = "";        
     }
 
-    public function cargar($numEmpleado, $numLicencia, $nombre, $apellido, $dni, $mail = null){
-        parent::cargar($dni, $nombre, $apellido, $mail);
+    public function cargar($numEmpleado, $numLicencia, $nombre, $apellido, $dni){
+        parent::cargar($dni, $nombre, $apellido);
         $this->setNumEmpleado($numEmpleado);
         $this->setNumLicencia($numLicencia);
     }
