@@ -33,13 +33,8 @@ CREATE TABLE responsable (
     PRIMARY KEY (pNroDoc),
     FOREIGN KEY (pNroDoc) REFERENCES persona (nroDoc) 
     ON UPDATE CASCADE ON DELETE CASCADE
-<<<<<<< HEAD
-    FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)
-
-=======
 	FOREIGN KEY (idviaje) REFERENCES viaje (idviaje)/*se hace por una relacion de 1:1,para saber en que viaje esta el pasajero*/	
     
->>>>>>> 788a33668e597af27559b6fb429ae78a972b0f88
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE viaje (
