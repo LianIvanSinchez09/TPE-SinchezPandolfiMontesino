@@ -1,3 +1,4 @@
+/* CREATE DATABASE bdviajes; */
 CREATE TABLE persona (
     documento varchar(15),
     nombre varchar(150), 
