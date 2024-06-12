@@ -1,6 +1,4 @@
 <?php
-
-<?php
 /* IMPORTANTE !!!!  Clase para (PHP 5, PHP 7)*/
 
 class BaseDatos {
