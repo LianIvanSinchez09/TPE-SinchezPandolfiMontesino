@@ -53,6 +53,7 @@ class ResponsableV extends Persona {
     public function getNumLicencia() {
       return $this->numLicencia;
     }
+    
     public function setNumLicencia($value) {
       $this->numLicencia = $value;
     }
