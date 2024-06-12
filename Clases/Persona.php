@@ -1,7 +1,6 @@
 <?php
 include_once "BaseDatos.php";
 class Persona{
-	private $idpersona;
 	private $nrodoc;
 	private $nombre;
 	private $apellido;
@@ -9,23 +8,18 @@ class Persona{
 
 
 	public function __construct(){
-		$this->idpersona=0;
 		$this->nrodoc = "";
 		$this->nombre = "";
 		$this->apellido = "";
 	}
 
-	public function cargar($idpersona,$NroD,$Nom,$Ape){	
-	    $this->setIdPersona($idpersona);
+	public function cargar($NroD,$Nom,$Ape){	
 		$this->setNrodoc($NroD);
 		$this->setNombre($Nom);
 		$this->setApellido($Ape);
     }
 	
 	//<-------Metodos set---------------------------------------------------->
-    public function setIdPersona($idpersona){
-        $this->idpersona=$idpersona;
-    }
 	public function setNrodoc($NroDNI){
 		$this->nrodoc=$NroDNI;
 	}
@@ -41,9 +35,6 @@ class Persona{
 	}
 	
 	//<------Metodo get----------------------------------------------------->
-	public function getIdPersona(){
-	    return $this->idpersona;
-	}
 	public function getNrodoc(){
 		return $this->nrodoc;
 	}
@@ -76,7 +67,6 @@ class Persona{
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaPersona)){
 				if($row2=$base->Registro()){					
-				    $this->setIdPersona($row2['idpersona']);
 					$this->setNrodoc($dni);
 					$this->setNombre($row2['nombre']);
 					$this->setApellido($row2['apellido']);
@@ -108,13 +98,12 @@ class Persona{
 			if($base->Ejecutar($consultaPersonas)){				
 				$arregloPersona= array();
 				while($row2=$base->Registro()){
-				    $id=$row2['idpersona'];
 					$NroDoc=$row2['nrodoc'];
 					$Nombre=$row2['nombre'];
 					$Apellido=$row2['apellido'];
 				
 					$perso=new Persona();
-					$perso->cargar($id,$NroDoc,$Nombre,$Apellido);
+					$perso->cargar($NroDoc,$Nombre,$Apellido);
 					array_push($arregloPersona,$perso);
 	
 				}
@@ -136,7 +125,7 @@ class Persona{
 	public function insertar(){
 		$base=new BaseDatos();
 		$resp= false;
-		$consultaInsertar="INSERT INTO persona(nrodoc, apellido, nombre,  numTelefono) 
+		$consultaInsertar="INSERT INTO persona(nrodoc, apellido, nombre) 
 				VALUES (".$this->getNrodoc().",'"."','".$this->getNombre().$this->getApellido()."','"."')";
 		
 		if($base->Iniciar()){
