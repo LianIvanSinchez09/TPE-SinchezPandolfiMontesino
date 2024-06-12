@@ -6,9 +6,9 @@ include_once "../Clases/BaseDatos.php";
 
 $res = new ResponsableV();
 
-$res->cargar(123, 23423423, "Lian", "Sinchez", 4534534534, 34534543543);
+$res->cargar(21312312312, "Lian", "Sinchez", 123, 456);
 
-$respuesta = $res->insertar()   ;
+$respuesta = $res->insertar();
 
 if($respuesta){
     echo "Funcionando";
