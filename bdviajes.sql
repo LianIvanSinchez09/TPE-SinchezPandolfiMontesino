@@ -1,7 +1,8 @@
 CREATE DATABASE bdviajes; 
     /*los FOREIGN KEY () son utilizados como puentes entre las tablas para saber en que parte estan guardada su informacion completa
     Por ejemplo: Persona va tener un id y toda su informacion, cuando se quiere crear el responsable tendra como foranea el id,
-    gracias a ese podremos saber donde esta su informacion dentro de la tabla persona*/
+    gracias a ese podremos saber donde esta su informacion dentro de la tabla persona
+    Hay que hacer solo un test*/
 CREATE TABLE empresa(
     idempresa bigint AUTO_INCREMENT,
     enombre varchar(150),
