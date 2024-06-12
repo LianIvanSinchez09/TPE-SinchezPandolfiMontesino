@@ -161,8 +161,7 @@ class Persona{
 	public function modificar(){
 	    $resp =false; 
 	    $base=new BaseDatos();
-		$consultaModifica="UPDATE persona SET apellido='".$this->getApellido()."',nombre='".$this->getNombre()."'
-                           ,numTelefono='".$this->getnumTelefono()."' WHERE nrodoc=". $this->getNrodoc();
+		$consultaModifica="UPDATE persona SET apellido='".$this->getApellido()."',nombre='".$this->getNombre()."' WHERE nrodoc=". $this->getNrodoc();
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaModifica)){
 			    $resp=  true;
