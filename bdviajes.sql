@@ -20,9 +20,9 @@ CREATE TABLE empresa(
 
 CREATE TABLE responsable (
     documento VARCHAR(15),
-    rnumeroempleado bigint AUTO_INCREMENT,
-    rnumerolicencia bigint, 
-    PRIMARY KEY (rnumeroempleado),
+    numeroempleado bigint AUTO_INCREMENT,
+    numerolicencia bigint, 
+    PRIMARY KEY (numeroempleado),
     FOREIGN KEY (documento) REFERENCES persona (documento) ON UPDATE CASCADE ON DELETE CASCADE
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
