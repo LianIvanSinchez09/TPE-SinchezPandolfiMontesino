@@ -122,7 +122,7 @@ class Persona{
 		$base=new BaseDatos();
 		$resp= false;
 		$consultaInsertar="INSERT INTO persona(nrodoc, apellido, nombre) 
-				VALUES (".$this->getNrodoc().",'".$this->getApellido()."','".$this->getNombre()."','"."')";
+				VALUES (".$this->getNrodoc().",'".$this->getApellido()."','".$this->getNombre()."')";
 		
 		if($base->Iniciar()){
 
