@@ -81,7 +81,7 @@ class Persona{
 	}	
     
 
-	public static function listar($condicion=""){
+	public function listar($condicion=""){
 	    $arregloPersona = null;
 		$base=new BaseDatos();
 		$consultaPersonas="Select * from persona ";
