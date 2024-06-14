@@ -26,13 +26,12 @@ CREATE TABLE personaResponsable (
     idViaje bigint AUTO_INCREMENT,
 	destino varchar(150),
     cantMaxPasajeros int,
-    numeroEmpleadoResponsable bigint,
+    numeroEmpleado bigint,
     idEmpresa bigint,
-    costoIndividualPasajero float,
-    importeTotalPasajeros float,
+    importe float,
     PRIMARY KEY (idViaje),
     FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa),
-    FOREIGN KEY (numeroEmpleadoResponsable) REFERENCES personaResponsable (numeroEmpleado)
+    FOREIGN KEY (numeroEmpleado) REFERENCES personaResponsable (numeroEmpleado)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
     
     CREATE TABLE pasajero (
@@ -40,11 +39,10 @@ CREATE TABLE personaResponsable (
     documento varchar(15),	
 	idViajeiaje bigint,
     telefono int,
-    numeroAsiento varchar(4),
-    numeroTickect varchar(10),
     PRIMARY KEY (idPasajero),
     FOREIGN KEY (documento) REFERENCES persona (documento)
     ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idViajeiaje) REFERENCES viaje (idViaje)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1; 
-  
+
+    
