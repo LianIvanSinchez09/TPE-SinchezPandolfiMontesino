@@ -40,8 +40,6 @@ CREATE TABLE personaResponsable (
     documento varchar(15),	
 	idViajeiaje bigint,
     telefono int,
-    numeroAsiento varchar(4),
-    numeroTickect varchar(10),
     PRIMARY KEY (idPasajero),
     FOREIGN KEY (documento) REFERENCES persona (documento)
     ON UPDATE CASCADE ON DELETE CASCADE,
