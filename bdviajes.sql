@@ -1,12 +1,15 @@
 /* CREATE DATABASE bdviajes; */
 
+
 CREATE TABLE persona (
+    documento varchar(15) ,
     documento varchar(15) ,
     nombre varchar(150), 
     apellido varchar(150), 
     PRIMARY KEY (documento)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE personaresponsable (    
 CREATE TABLE personaresponsable (    
     documento varchar(15),
     numeroEmpleado bigint AUTO_INCREMENT,    
@@ -30,7 +33,16 @@ CREATE TABLE personaresponsable (
     numeroEmpleado BIGINT,
     idEmpresa BIGINT,
     importe FLOAT,
+    idViaje BIGINT AUTO_INCREMENT,
+    destino VARCHAR(150),
+    cantMaxPasajeros INT,
+    numeroEmpleado BIGINT,
+    idEmpresa BIGINT,
+    importe FLOAT,
     PRIMARY KEY (idViaje),
+    FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
+    FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
     FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
     FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
@@ -40,7 +52,12 @@ CREATE TABLE personaresponsable (
     documento VARCHAR(15),
     idViaje BIGINT,
     telefono INT,
+    idPasajero BIGINT AUTO_INCREMENT,
+    documento VARCHAR(15),
+    idViaje BIGINT,
+    telefono INT,
     PRIMARY KEY (idPasajero),
+    FOREIGN KEY (documento) REFERENCES persona(documento)
     FOREIGN KEY (documento) REFERENCES persona(documento)
     ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idViaje) REFERENCES viaje(idViaje)
