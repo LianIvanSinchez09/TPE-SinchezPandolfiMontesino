@@ -34,9 +34,6 @@ CREATE TABLE empresa (
     FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
     FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
-    FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
-    FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
     
     CREATE TABLE pasajero (
     idPasajero BIGINT AUTO_INCREMENT,
@@ -47,10 +44,4 @@ CREATE TABLE empresa (
     FOREIGN KEY (documento) REFERENCES persona(documento)
     ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idViaje) REFERENCES viaje(idViaje)
-<<<<<<<<< Temporary merge branch 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-    
-=========
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
->>>>>>>>> Temporary merge branch 2
