@@ -46,7 +46,6 @@ class ResponsableV extends Persona
     return parent::__toString() . "Numero de Empleado: " . $this->getNumEmpleado() . "\nNumero de Licencia: " . $this->getNumLicencia() . "\n";
   }
 
-
   public function Buscar($dni)
   {
     $base = new BaseDatos();
@@ -101,7 +100,7 @@ class ResponsableV extends Persona
     $base = new BaseDatos();
     $resp = false;
     $consultaInsertar = "INSERT INTO personaresponsable(documento, numeroEmpleado, numeroLicencia) 
-          VALUES (" . $this->getdocumento() . ",'" . $this->getNumEmpleado() . "','" . $this->getNumLicencia() . "')";
+          VALUES ('" . $this->getdocumento() . "','" . $this->getNumEmpleado() . "','" . $this->getNumLicencia() . "')";
 
     if ($base->Iniciar()) {
 

@@ -128,7 +128,7 @@ class Persona
 		$base = new BaseDatos();
 		$resp = false;
 		$consultaInsertar = "INSERT INTO persona(documento, apellido, nombre) 
-				VALUES (" . $this->getdocumento() . ",'" . $this->getApellido() . "','" . $this->getNombre() . "')";
+				VALUES ('" . $this->getdocumento() . "','" . $this->getApellido() . "','" . $this->getNombre() . "')";
 
 		if ($base->Iniciar()) {
 
