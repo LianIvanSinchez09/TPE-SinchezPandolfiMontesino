@@ -14,6 +14,11 @@ $res1->cargar(44323057, "Lian", "Sinchez",22,22);
 $respuesta = $res->insertar();
 $respuesta1 = $res1->insertar();
 
+//prueba con empresa
+$emp = new Empresa();
+$emp->cargar(1, "koko", "Neuquen Capital");
+$respuesta2 = $emp->insertar();
+
 if($respuesta){
     echo "Funcionando";
 }else{
@@ -21,3 +26,5 @@ if($respuesta){
 }
 
 echo $res;
+echo $res1;
+echo $emp;
