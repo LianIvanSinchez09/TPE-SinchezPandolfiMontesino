@@ -66,7 +66,7 @@ class Empresa
 
     public function __toString()
     {
-        return "\nId: " . $this->getIdEmpresa() . "\nNombre:" . $this->getNombre() . "\nDireccion: " . $this->getDireccion() . "\n";
+        return "\nId Empresa: " . $this->getIdEmpresa() . "\nNombre:" . $this->getNombre() . "\nDireccion: " . $this->getDireccion() . "\n";
     }
 
     /**
@@ -102,10 +102,10 @@ class Empresa
         $base = new BaseDatos();
         $consultaEmpresa = "Select * from empresa ";
         if ($condicion != "") {
-            $consultaPersonas = $consultaEmpresa . ' where ' . $condicion;
+            $consultaEmpresa = $consultaEmpresa . ' where ' . $condicion;
         }
         $consultaEmpresa .= " order by nombre ";
-        //echo $consultaPersonas;
+        //echo $consultaEmpresa;
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaEmpresa)) {
                 $arregloEmpresa = array();

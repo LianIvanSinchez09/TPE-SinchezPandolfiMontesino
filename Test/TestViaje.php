@@ -2,6 +2,8 @@
 
 include_once "../Clases/Persona.php";
 include_once "../Clases/ResponsableV.php";
+include_once "../Clases/Empresa.php";
+include_once "../Clases/Viaje.php";
 include_once "../Clases/BaseDatos.php";
 
 //si no tiene cargado a la persona antes de cargarlo en responsable, no funciona
