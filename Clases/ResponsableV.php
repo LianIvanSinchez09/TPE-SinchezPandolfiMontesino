@@ -100,7 +100,7 @@ class ResponsableV extends Persona
     $base = new BaseDatos();
     $resp = false;
     $consultaInsertar = "INSERT INTO personaresponsable(documento, numeroEmpleado, numeroLicencia) 
-          VALUES ('" . $this->getdocumento() . "','" . $this->getNumEmpleado() . "','" . $this->getNumLicencia() . "')";
+          VALUES ('" . parent::getdocumento() . "','" . $this->getNumEmpleado() . "','" . $this->getNumLicencia() . "')";
 
     if ($base->Iniciar()) {
 
