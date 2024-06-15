@@ -35,7 +35,7 @@ $persona2 = new Persona();
 $persona2->cargar(34534534, "Francisco", "Pandolfi");
 $persona2->insertar();
 $pasajero = new Pasajero();
-$pasajero->cargar(34534534, "Francisco", "Pandolfi", $viaje , 123456);
+$pasajero->cargar(34534534, "Francisco", "Pandolfi", $viaje);
 $pasajero->insertar();
 
 echo "\nClase Persona";
