@@ -20,11 +20,14 @@ $emp->cargar(1, "koko", "Neuquen Capital");
 $respuesta2 = $emp->insertar();
 
 if($respuesta){
-    echo "Funcionando";
+    echo "\nFuncionando\n";
 }else{
-    echo "No funciona :(";
+    echo "\nNo funciona :(\n";
 }
 
+echo "\nClase Persona";
 echo $res;
+echo "\nClase Persona Responsable";
 echo $res1;
+echo "\nClase Empresa";
 echo $emp;

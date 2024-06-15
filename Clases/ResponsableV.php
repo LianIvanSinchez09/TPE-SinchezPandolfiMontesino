@@ -43,7 +43,7 @@ class ResponsableV extends Persona
 
   public function __toString()
   {
-    return parent::__toString() . "\n" . $this->getNumEmpleado() . "\n" . $this->getNumLicencia();
+    return parent::__toString() . "Numero de Empleado: " . $this->getNumEmpleado() . "\nNumero de Licencia: " . $this->getNumLicencia() . "\n";
   }
 
 
