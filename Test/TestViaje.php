@@ -19,6 +19,11 @@ $emp = new Empresa();
 $emp->cargar(1, "koko", "Neuquen Capital");
 $respuesta2 = $emp->insertar();
 
+//prueba con viaje 
+$viaje = new Viaje();
+$viaje->cargar(1, "Cipolletti", 20, $res1, $emp, 1000);
+$respuesta3 = $viaje->insertar();
+
 if($respuesta){
     echo "\nFuncionando\n";
 }else{
@@ -31,3 +36,5 @@ echo "\nClase Persona Responsable";
 echo $res1;
 echo "\nClase Empresa";
 echo $emp;
+echo "\nClase Viaje";
+echo $viaje;
