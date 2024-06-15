@@ -15,11 +15,11 @@ class Empresa
         $this->direccion = "";
     }
 
-    public function cargar($NroD, $Nom, $Ape)
+    public function cargar($idEmpresa, $Nom, $direccion)
     {
-        $this->setIdEmpresa($NroD);
+        $this->setIdEmpresa($idEmpresa);
         $this->setNombre($Nom);
-        $this->setDireccion($Ape);
+        $this->setDireccion($direccion);
     }
 
     //<-------Metodos get---------------------------------------------------->
