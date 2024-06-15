@@ -77,7 +77,7 @@ class ResponsableV extends Persona
     if ($condicion != "") {
       $consulta = $consulta . ' where ' . $condicion;
     }
-    $consulta .= " order by carrera ";
+    $consulta .= " order by documento ";
     //echo $consultaPersonas;
     if ($base->Iniciar()) {
       if ($base->Ejecutar($consulta)) {
