@@ -8,7 +8,6 @@ class Pasajero extends Persona {
 
     public function __construct(){
         parent::__construct();
-        $this->idpasajero = 0;
         $this->objViaje = new Viaje();
         $this->telefono = "";
     }
@@ -16,7 +15,6 @@ class Pasajero extends Persona {
     // Metodo Cargar Datos
     public function cargar($NroD, $Nom, $Ape, $objViaje = null, $telef = null){
         parent::cargar($NroD, $Nom, $Ape);
-        $this->setIdPasajero(0);
         $this->setTelefono($telef);
         $this->setobjViaje($objViaje);
     }
@@ -59,8 +57,8 @@ class Pasajero extends Persona {
     public function insertar(){
         $base = new BaseDatos();
         $resp = false;
-        $consultaInsertar = "INSERT INTO pasajero(idPasajero, documento, idViaje, telefono) 
-                             VALUES ('".$this->getIdPasajero()."', '".parent::getdocumento()."', '".$this->getobjViaje()->getIdViaje()."', '" . $this->getTelefono() . "')";
+        $consultaInsertar = "INSERT INTO pasajero(documento, idViaje, telefono) 
+                             VALUES ('".parent::getdocumento()."', '".$this->getobjViaje()->getIdViaje()."', '" . $this->getTelefono() . "')";
         
         if($base->Iniciar()){
             if($id = $base->devuelveIDInsercion($consultaInsertar)){
