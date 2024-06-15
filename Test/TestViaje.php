@@ -7,7 +7,7 @@ include_once "../Clases/Viaje.php";
 include_once "../Clases/BaseDatos.php";
 include_once "../Clases/Pasajero.php";
 
-//si no tiene cargado a la persona antes de cargarlo en responsable, no funciona
+//si no tiene cargado a la persona antes de cargarlo en responsable,
 $res = new Persona();
 $res1 = new ResponsableV();
 $res->cargar(44323057, "Lian", "Sinchez");
