@@ -1,8 +1,8 @@
 <?php
 
 class Pasajero extends Persona {
-    private $idpasajero;
-    private $objViaje;
+	private $idpasajero;
+	private $objViaje;
     private $telefono;
     private $mensajeoperacion;
 
@@ -16,21 +16,19 @@ class Pasajero extends Persona {
     public function cargar($NroD, $Nom, $Ape, $objViaje = null, $telef = null){
         parent::cargar($NroD, $Nom, $Ape);
         $this->setTelefono($telef);
-        $this->setobjViaje($objViaje);
-    }
+		$this->setobjViaje($objViaje);
+	}
 
-    // Métodos Get
-    public function getIdPasajero(){
-        return $this->idpasajero;
-    }
-
-    public function getTelefono() {
-        return $this->telefono;
-    }
-
-    public function getobjViaje(){
-        return $this->objViaje;
-    }
+    // <--------------Metodo Get------------------------------------------------------->
+	public function getIdPasajero(){
+	    return $this->idpasajero;
+	}
+	public function getTelefono() {
+		return $this->telefono;
+	}
+	public function getobjViaje(){
+		return $this->objViaje;
+	}
 
     public function getMensajeoperacion() {
         return $this->mensajeoperacion;
@@ -45,9 +43,9 @@ class Pasajero extends Persona {
         $this->telefono = $nuevoTelefono;
     }
 
-    public function setobjViaje($objViaje){
-        $this->objViaje = $objViaje;
-    }
+	public function setobjViaje($objViaje){
+		$this->objViaje=$objViaje;
+	}
 
     public function setMensajeoperacion($nuevoMensajeOperacion) {
         $this->mensajeoperacion = $nuevoMensajeOperacion;
@@ -73,42 +71,45 @@ class Pasajero extends Persona {
         return $resp;
     }
 
-    public function modificar(){
-        $resp = false;
-        $base = new BaseDatos();
-        $consultaModifica = "UPDATE pasajero SET telefono='".$this->getTelefono()."' WHERE documento='".$this->getdocumento()."'";
-        
-        if($base->Iniciar()){
-            if($base->Ejecutar($consultaModifica)){
-                $resp = true;
-            } else {
-                $this->setmensajeoperacion($base->getError());
-            }
-        } else {
-            $this->setmensajeoperacion($base->getError());
-        }
-        return $resp;
-    }
+	public function modificar(){
+	$resp =false; 
+	$base=new BaseDatos();
+	$consultaModifica="UPDATE pasajero SET telefono='".$this->getTelefono()."' WHERE documento=". $this->getdocumento();
+	if($base->Iniciar()){
+		if($base->Ejecutar($consultaModifica)){
+			$resp=  true;
+		}else{
+			$this->setmensajeoperacion($base->getError());
+			
+		}
+	}else{
+			$this->setmensajeoperacion($base->getError());
+		
+	}
+	return $resp;
+}
+	
+	public function eliminar(){
+		$base=new BaseDatos();
+		$resp=false;
+		if($base->Iniciar()){
+				$consultaBorra="DELETE FROM persona WHERE documento=".$this->getdocumento();
+				if($base->Ejecutar($consultaBorra)){
+				    $resp=  true;
+				}else{
+						$this->setmensajeoperacion($base->getError());
+					
+				}
+		}else{
+				$this->setmensajeoperacion($base->getError());
+			
+		}
+		return $resp; 
+	}
 
-    public function eliminar(){
-        $base = new BaseDatos();
-        $resp = false;
-        
-        if($base->Iniciar()){
-            $consultaBorra = "DELETE FROM persona WHERE documento='".$this->getdocumento()."'";
-            if($base->Ejecutar($consultaBorra)){
-                $resp = true;
-            } else {
-                $this->setmensajeoperacion($base->getError());
-            }
-        } else {
-            $this->setmensajeoperacion($base->getError());
-        }
-        return $resp;
-    }
+	public function __toString(){
+		return parent::__toString() . "\nobjViaje: " . $this->getobjViaje() . "\nTelefono: " . $this->getTelefono();
+	}
 
-    public function __toString(){
-        return parent::__toString() . "\nobjViaje: " . $this->getobjViaje() . "\nTelefono: " . $this->getTelefono();
-    }
 }
 ?>

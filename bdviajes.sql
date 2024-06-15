@@ -1,3 +1,5 @@
+/* CREATE DATABASE bdviajes; */
+
 CREATE TABLE persona (
     documento varchar(15) ,
     nombre varchar(150), 
@@ -5,9 +7,9 @@ CREATE TABLE persona (
     PRIMARY KEY (documento)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE personaresponsable (
+CREATE TABLE personaresponsable (    
     documento varchar(15),
-    numeroEmpleado bigint AUTO_INCREMENT,
+    numeroEmpleado bigint AUTO_INCREMENT,    
     numeroLicencia bigint,
     PRIMARY KEY (numeroEmpleado),
     FOREIGN KEY (documento) REFERENCES persona (documento)
@@ -32,7 +34,7 @@ CREATE TABLE empresa (
     FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
     FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
-
+    
     CREATE TABLE pasajero (
     idPasajero BIGINT AUTO_INCREMENT,
     documento VARCHAR(15),
