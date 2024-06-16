@@ -133,7 +133,7 @@ class Empresa
         $base = new BaseDatos();
         $resp = false;
         $consultaInsertar = "INSERT INTO empresa(idEmpresa, nombre, direccion) 
-				VALUES (" . $this->getIdEmpresa() . ",'" . $this->getNombre() . "','" . $this->getDireccion() . "')";
+				VALUES ('" . $this->getIdEmpresa() . "','" . $this->getNombre() . "','" . $this->getDireccion() . "')";
 
         if ($base->Iniciar()) {
 

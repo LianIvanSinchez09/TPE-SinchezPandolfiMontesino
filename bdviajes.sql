@@ -1,49 +1,62 @@
 /* CREATE DATABASE bdviajes; */
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+-- Crear tabla persona
     CREATE TABLE persona (
-    documento varchar(15) ,
-    nombre varchar(150), 
-    apellido varchar(150), 
+    documento VARCHAR(15),
+    nombre VARCHAR(150), 
+    apellido VARCHAR(150), 
     PRIMARY KEY (documento)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-    CREATE TABLE personaresponsable (    
-    documento varchar(15),
-    numeroEmpleado bigint AUTO_INCREMENT,    
-    numeroLicencia bigint,
+-- Crear tabla personaresponsable
+    CREATE TABLE personaresponsable (
+    documento VARCHAR(15),
+    numeroEmpleado BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,    
+    numeroLicencia BIGINT,
     PRIMARY KEY (numeroEmpleado),
     FOREIGN KEY (documento) REFERENCES persona (documento)
     ON UPDATE CASCADE ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
 
+-- Crear tabla empresa
     CREATE TABLE empresa (
-    idEmpresa BIGINT AUTO_INCREMENT,
+    idEmpresa BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(150),
     direccion VARCHAR(150),
     PRIMARY KEY (idEmpresa)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+-- Crear tabla viaje
     CREATE TABLE viaje (
-    idViaje BIGINT AUTO_INCREMENT,
+    idViaje BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     destino VARCHAR(150),
     cantMaxPasajeros INT,
-    numeroEmpleado BIGINT,
-    idEmpresa BIGINT,
+    numeroEmpleado BIGINT UNSIGNED,
+    idEmpresa BIGINT UNSIGNED,
     importe FLOAT,
     PRIMARY KEY (idViaje),
-    FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa),
+    FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
+    ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
+    ON UPDATE CASCADE ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-    /*primero agregar las tablas desde persona hasta viaje. y luego pasajero una vez ingresadas las otras tablas anteriormente*/
     
     CREATE TABLE pasajero (
-    idPasajero BIGINT AUTO_INCREMENT,
+    idPasajero BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     documento VARCHAR(15),
-    idViaje BIGINT,
+    idViaje BIGINT UNSIGNED,  -- Asegurar que este campo es UNSIGNED
     telefono BIGINT,
     PRIMARY KEY (idPasajero),
     FOREIGN KEY (documento) REFERENCES persona(documento)
     ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idViaje) REFERENCES viaje(idViaje)
+    ON UPDATE CASCADE ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+COMMIT;
