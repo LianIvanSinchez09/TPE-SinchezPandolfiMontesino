@@ -140,6 +140,7 @@ class Pasajero extends Persona {
 
         return $resp;
     }
+
     public function eliminar(){
         $base = new BaseDatos();
         $resp = false;

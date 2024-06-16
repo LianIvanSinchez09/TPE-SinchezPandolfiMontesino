@@ -150,37 +150,36 @@ class Empresa
     }
 
     public function modificar()
-	{
-		$resp = false;
-		$base = new BaseDatos();
-		$consultaModifica = "UPDATE empresa SET direccion='" . $this->getDireccion() . "',nombre='" . $this->getNombre() . "' WHERE idEmpresa=" . $this->getIdEmpresa();
-		if ($base->Iniciar()) {
-			if ($base->Ejecutar($consultaModifica)) {
-				$resp =  true;
-			} else {
-				$this->setmensajeoperacion($base->getError());
-			}
-		} else {
-			$this->setmensajeoperacion($base->getError());
-		}
-		return $resp;
-	}
+    {
+        $resp = false;
+        $base = new BaseDatos();
+        $consultaModifica = "UPDATE empresa SET direccion='" . $this->getDireccion() . "',nombre='" . $this->getNombre() . "' WHERE idEmpresa=" . $this->getIdEmpresa();
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($consultaModifica)) {
+                $resp =  true;
+            } else {
+                $this->setmensajeoperacion($base->getError());
+            }
+        } else {
+            $this->setmensajeoperacion($base->getError());
+        }
+        return $resp;
+    }
 
     public function eliminar()
-	{
-		$base = new BaseDatos();
-		$resp = false;
-		if ($base->Iniciar()) {
-			$consultaBorra = "DELETE FROM empresa WHERE idEmpresa=" . $this->getIdEmpresa();
-			if ($base->Ejecutar($consultaBorra)) {
-				$resp =  true;
-			} else {
-				$this->setmensajeoperacion($base->getError());
-			}
-		} else {
-			$this->setmensajeoperacion($base->getError());
-		}
-		return $resp;
-	}
+    {
+        $base = new BaseDatos();
+        $resp = false;
+        if ($base->Iniciar()) {
+            $consultaBorra = "DELETE FROM empresa WHERE idEmpresa=" . $this->getIdEmpresa();
+            if ($base->Ejecutar($consultaBorra)) {
+                $resp =  true;
+            } else {
+                $this->setmensajeoperacion($base->getError());
+            }
+        } else {
+            $this->setmensajeoperacion($base->getError());
+        }
+        return $resp;
+    }
 }
-?>
