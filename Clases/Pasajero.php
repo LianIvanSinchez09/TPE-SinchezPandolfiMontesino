@@ -103,6 +103,8 @@ class Pasajero extends Persona {
         return $arreglo;
     }
 
+    
+
     public function hayPasajesDisponibles(){
         $cantActualPasajeros = count($this->listar());
         $esDisponible = false;
@@ -172,4 +174,30 @@ class Pasajero extends Persona {
         return parent::__toString() . "Id Pasajero: " . $this->getIdPasajero() . "\nId Viaje: " . $this->getObjViaje()->getIdViaje() . "\nTelefono: " . $this->getTelefono() ."\n";
     }
 }
+
+/*
+    public function hayPasajesDisponibles(){
+        
+        $colViaje = [];
+        $esDisponible = false;
+        $colTotalPasajeros = $this->listar();
+
+        foreach($colTotalPasajeros as $pasajero){
+
+            if(pasajero->$this->getobjViaje()->getIdViaje()) == 1){
+                
+                array_push($colViaje,  $pasajero);
+
+            }
+
+        }
+            
+        
+        if($this->getObjViaje()->getCantMaxPasajeros() > $count($colViaje)){
+            $esDisponible = true;
+        }
+
+        return $esDisponible;
+    }
+    */
 ?>
