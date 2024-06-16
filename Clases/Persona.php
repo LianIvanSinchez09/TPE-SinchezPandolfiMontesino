@@ -182,6 +182,6 @@ class Persona
 
 	public function __toString()
 	{
-		return "\nNombre: " . $this->getNombre() . "\nApellido:" . $this->getApellido() . "\nDNI: " . $this->getdocumento() . "\n";
+		return "\nNombre: " . $this->getNombre() . "\nApellido: " . $this->getApellido() . "\nDNI: " . $this->getdocumento() . "\n";
 	}
 }

@@ -34,17 +34,21 @@ if($respuesta){
 $persona2 = new Persona();
 $persona2->cargar(34534534, "Francisco", "Pandolfi");
 $persona2->insertar();
-$pasajero = new Pasajero();
-$pasajero->cargar(34534534, "Francisco", "Pandolfi", $viaje);
+
+$pasajero = new Pasajero(); 
+$pasajero->cargar(34534534, "Francisco", "Pandolfi", 1, $viaje, 2995920034);
 $pasajero->insertar();
 
-echo "\nClase Persona";
+echo "\nClase Persona 1";
 echo $res;
+echo "\nClase Persona 2";
+echo $persona2;
 echo "\nClase Persona Responsable";
 echo $res1;
 echo "\nClase Empresa";
 echo $emp;
-echo "\nClase Pasajero";
-echo $pasajero;
 echo "\nClase Viaje";
 echo $viaje;
+echo "\nClase Pasajero";
+echo $pasajero;
+

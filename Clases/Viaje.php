@@ -94,7 +94,7 @@ class Viaje {
         $info .= "\nCantidad Max De Pasajeros: " . $this->getCantMaxPasajeros();
         $info .= "\nNumero Empleado: " . $this->getObjNumeroEmpleado()->getNumEmpleado(); // clave foranea
         $info .= "\nId Empresa: " . $this->getObjIdEmpresa()->getIdEmpresa(); // clave foranea
-        $info .= "\nImporte: $" . $this->getImporte();
+        $info .= "\nImporte: $" . $this->getImporte() . "\n";
 
         return $info;
     }
