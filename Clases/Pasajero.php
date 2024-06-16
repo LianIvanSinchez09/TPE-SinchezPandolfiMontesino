@@ -103,6 +103,15 @@ class Pasajero extends Persona {
         return $arreglo;
     }
 
+    public function hayPasajesDisponibles(){
+        $cantActualPasajeros = count($this->listar());
+        $esDisponible = false;
+        if($this->getObjViaje()->getCantMaxPasajeros() > $cantActualPasajeros){
+            $esDisponible = true;
+        }
+        return $esDisponible;
+    }
+
     public function insertar(){
         $base = new BaseDatos();
         $resp = false;
