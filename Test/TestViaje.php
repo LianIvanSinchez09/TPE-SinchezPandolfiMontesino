@@ -11,23 +11,23 @@ include_once "../Clases/Pasajero.php";
 $res = new Persona();
 $res1 = new ResponsableV();
 $res->cargar(44323057, "Lian", "Sinchez");
-$res1->cargar(44323057, "Lian", "Sinchez",22,22);
+$res1->cargar(44323057, "Lian", "Sinchez", 22, 22);
 $respuesta = $res->insertar();
 $respuesta1 = $res1->insertar();
 
-// //prueba con empresa
+//prueba con empresa
 $emp = new Empresa();
 $emp->cargar(1, "koko", "Neuquen Capital");
 $respuesta2 = $emp->insertar();
 
-// //prueba con viaje 
+//prueba con viaje 
 $viaje = new Viaje();
 $viaje->cargar(1, "Cipolletti", 20, $res1, $emp, 1000);
 $respuesta3 = $viaje->insertar();
 
-if($respuesta){
+if ($respuesta) {
     echo "\nFuncionando\n";
-}else{
+} else {
     echo "\nNo funciona :(\n";
 }
 
@@ -52,3 +52,15 @@ echo $viaje;
 echo "\nClase Pasajero";
 echo $pasajero;
 
+$pasajero->setTelefono("2995551234");
+
+if ($pasajero->modificar()) {
+    echo "\nDatos del pasajero modificados correctamente.\n";
+} else {
+    echo "\nError al modificar los datos del pasajero: " . $pasajero->getMensajeoperacion() . "\n";
+}
+
+echo "\nClase Pasajero modificada";
+echo $pasajero;
+
+?>
