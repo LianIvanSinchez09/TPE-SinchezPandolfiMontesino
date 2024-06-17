@@ -103,17 +103,6 @@ class Pasajero extends Persona {
         return $arreglo;
     }
 
-    
-
-    public function hayPasajesDisponibles(){
-        $cantActualPasajeros = count($this->listar());
-        $esDisponible = false;
-        if($this->getObjViaje()->getCantMaxPasajeros() > $cantActualPasajeros){
-            $esDisponible = true;
-        }
-        return $esDisponible;
-    }
-
     public function insertar(){
         $base = new BaseDatos();
         $resp = false;
@@ -175,36 +164,18 @@ class Pasajero extends Persona {
     }
 
     //<---------------------------METODOS PROPIOS--------------------------------->
-    public function devuelveAlquien($unDni){
+	public function devuelveAlguien($unDni){
         $unPasajero=parent::devuelveAlguien($unDni);
         return $unPasajero;
     }
 
-}
-
-/*
     public function hayPasajesDisponibles(){
-        
-        $colViaje = [];
+        $cantActualPasajeros = count($this->listar());
         $esDisponible = false;
-        $colTotalPasajeros = $this->listar();
-
-        foreach($colTotalPasajeros as $pasajero){
-
-            if(pasajero->$this->getobjViaje()->getIdViaje()) == 1){
-                
-                array_push($colViaje,  $pasajero);
-
-            }
-
-        }
-            
-        
-        if($this->getObjViaje()->getCantMaxPasajeros() > $count($colViaje)){
+        if($this->getObjViaje()->getCantMaxPasajeros() > $cantActualPasajeros){
             $esDisponible = true;
         }
-
         return $esDisponible;
     }
-    */
+}
 ?>
