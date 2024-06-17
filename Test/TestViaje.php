@@ -164,6 +164,41 @@ function cambiarDato($opcionCambio,$elPasajero){
 }
 
 //<-------------EMPIEZA EL TEST----------------->
+/*$emp = new Empresa();
+$emp->cargar(1, "viaje feliz", "Neuquen Capital");
+$emp->insertar();
+$viaje=new Viaje();
+$responsableV= new ResponsableV();
+$perRespo=new Persona();
+
+echo "\nInformacion del viaje: \n";
+echo "Ingrese el destino\n";
+$destino = trim(fgets(STDIN));
+echo "Ingrese la cantidad maxima de pasajeros\n";
+$cantMaxPasajeros = trim(fgets(STDIN));
+echo "Ingrese el importe del viaje";
+$importe=trim(fgets(STDIN));
+
+
+echo "Informacion del responsable se ese viaje: \n";
+echo "Ingrese el nombre del empleado\n";
+$nombreEmpleado= trim(fgets(STDIN));
+echo "Ingrese el apellido del empleado\n";
+$apellidoEmpleado= trim(fgets(STDIN));
+echo "ingrese el documento del empleado\n";
+$docEmpleado=trim(fgets(STDIN));
+echo "Ingrese el numero de empleado\n";
+$numEmpleado= trim(fgets(STDIN));
+echo "Ingrese el numero de licencia\n";
+$numLicencia= trim(fgets(STDIN));
+
+$perRespo->cargar($numEmpleado,$nombreEmpleado,$apellidoEmpleado);
+$perRespo->insertar();
+$responsableV->cargar($numEmpleado,$nombreEmpleado,$apellidoEmpleado,$numEmpleado,$numLicencia);
+$responsableV->insertar();
+$viaje->cargar(1,$destino,$cantMaxPasajeros,$responsableV,$emp,$importe);
+
+*/
 do{
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
