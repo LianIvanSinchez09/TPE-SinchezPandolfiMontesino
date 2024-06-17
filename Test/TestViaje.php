@@ -40,6 +40,14 @@ function menuGeneral(){
          "\nIngrese (todo): Para cambiar toda la informacion de un pasajero\n";
 }
 
+function menuViaje(){
+    echo "que quiere cambiar?\n";
+    echo "\nIngrese (destino): Para cambiar el destino del viaje" .
+         "\nIngrese (maximo): Para cambiar la capacidad maxima de pasajeros" .
+         "\nIngrese (costo): Para cambiar el costo del viaje".
+         "\nIngrese (todo): Para cambiar toda la informacion del viaje\n";
+}
+
 /**
  * Cambia los datos que comparten todos los pasajero
  * @param string
@@ -168,7 +176,6 @@ do{
     $otroPersona=new Persona();
     $otroPasajero=new Pasajero();
     $otroResponsable=new ResponsableV();
-    $otroViaje=new Viaje();
     switch($opcion){
 
         case 1:
@@ -219,14 +226,49 @@ do{
             ;break;
 
         case 3:
-            echo "Ingrese destino: \n";
-            $destino = trim(fgets(STDIN));
-            echo "Ingrese cantidad maxima de pasajeros: \n";
-            $cantMaxPasajeros = trim(fgets(STDIN));
-            echo "Inserte importe a pagar del pasaje: \n";
-            $importe=trim(fgets(STDIN));
-            $viaje->cargar(1,$destino,$cantMaxPasajeros,$responsableV,$empresa,$importe);
-            $viaje->insertar();
+            menuViaje();
+            $opcionCambio=trim(fgets(STDIN));
+            switch($opcionCambio){
+                case 'destino':
+                    do{
+                        echo "ingrese otro destino\n";
+                        $otroDato=trim(fgets(STDIN));
+                        if(strcmp($viaje->getDestino(),$otroDato)!=0){
+                            echo "destino cambiado";
+                            echo $viaje;
+                            $estado=true;
+                        }else{
+                            echo "No se puede cambiar por el mismo destino\n";
+                        }
+                    }while(!$estado);break;
+                    
+                case 'maximo':
+                    do{
+                        echo "ingrese otra capacidad maxima de personas\n";
+                        $otroDato=trim(fgets(STDIN));
+                        if($viaje->getCantMaxPasajeros()!=$otroDato){
+                            echo "capacidad cambiado";
+                            echo $viaje;
+                            $estado=true;
+                        }else{
+                            echo "No se puede cambiar por el misma capacidad\n";
+                        }
+                }while(!$estado);break;
+
+                case 'importe':
+                    do{
+                        echo "ingrese otra valor de importe\n";
+                        $otroDato=trim(fgets(STDIN));
+                        if($viaje->getImporte()!=$otroDato){
+                            echo "importe cambiado";
+                            echo $viaje;
+                            $estado=true;
+                        }else{
+                            echo "No se puede cambiar por el misma importe\n";
+                        }
+                    }while(!$estado);break;
+            }
+            
         break;
 
         case 4://ingresar un nuevo responsable, no esta terminado
@@ -247,24 +289,6 @@ do{
                 $numLicencia=trim(fgets(STDIN));
 
             }   
-            /*
-             $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
-                $personaYaCargada = $otroPersona->Buscar($numDoc);
-                if ($pasajeroYacargado) {
-                    echo "Ya se encuentra en ese viaje";
-                } else if($personaYaCargada){
-                    echo "Esta persona ya fue cargada en la base de datos";
-                }else{
-                    echo "ingrese el numero de telefono del pasajero\n";
-                    $numTele = trim(fgets(STDIN));
-                    $nuevaPersona=new Persona();
-                    $nuevaPersona->cargar($numDoc,$nombre,$apellido);
-                    $otroPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
-                    $nuevaPersona->insertar();
-                    $otroPasajero->insertar();
-                    echo "Pasajero cargado en la base de datos";
-                } 
-             */
             ;break;
         case 5:;break;
     }
