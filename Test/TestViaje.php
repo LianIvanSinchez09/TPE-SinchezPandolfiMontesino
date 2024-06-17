@@ -28,7 +28,7 @@ $pasajero = new Pasajero();
 $pasajero->cargar(34534534, "Francisco", "Pandolfi", 1, $viaje, 2995920034);
 $pasajero->insertar();
 
-//<-------------------------ACA ESTA--------------------->
+//<-------------------------METODOS UTILIZADOS--------------------->
 /**
  * menu de opciones para hacer el test
  * @return string
@@ -73,7 +73,7 @@ function cambiarDato($opcionCambio,$elPasajero){
                     $elPasajero->setNombre($otroDato);
                     $elPasajero->modificar();
                     echo "nombre cambiado";
-                    //echo $elPasajero; NO SE SI QUIEREN MOSTRARLE AL USUARIO EL CAMBIO QUE SE REALIZO?
+                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el nombre tiene que ser diferente\n";
@@ -90,6 +90,7 @@ function cambiarDato($opcionCambio,$elPasajero){
                     $elPasajero->setApellido($otroDato);
                     $elPasajero->modificar();
                     echo "apellido cambiado";
+                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el nombre tiene que ser diferente\n";
@@ -106,6 +107,7 @@ function cambiarDato($opcionCambio,$elPasajero){
                     $elPasajero->setTelefono($otroDato);
                     $elPasajero->modificar();
                     echo "telefono cambiado";
+                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el telefono tiene que ser diferente\n";
@@ -124,7 +126,9 @@ function cambiarDato($opcionCambio,$elPasajero){
             $elPasajero->setApellido($apellido);
             $elPasajero->setTelefono($numTele);
             $elPasajero->modificar();
-            echo "datos cambiados";break;
+            echo "datos cambiados";
+            echo $elPasajero;
+            ;break;
     }
 }
 
