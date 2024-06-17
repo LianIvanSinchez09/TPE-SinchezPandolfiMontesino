@@ -161,15 +161,16 @@ class Viaje {
         return $arregloViaje;
     }
 
+
+
+
     public function insertar() {
         $base = new BaseDatos();
         $resp = false;
-        $consultaInsertar = "INSERT INTO viaje(idViaje, destino, cantMaxPasajeros, numeroEmpleado, idEmpresa, importe) 
-                VALUES ('" . $this->getIdViaje() . "','" . $this->getDestino() . "','" . $this->getCantMaxPasajeros() . "','" . $this->getObjNumeroEmpleado()->getNumEmpleado() . "','" . $this->getObjIdEmpresa()->getIdEmpresa() . "','" . $this->getImporte() . "')";
+        $consultaInsertar = "INSERT INTO viaje(destino, cantMaxPasajeros, numeroEmpleado, idEmpresa, importe) 
+                VALUES ('" . $this->getDestino() . "','" . $this->getCantMaxPasajeros() . "','" . $this->getObjNumeroEmpleado()->getNumEmpleado() . "','" . $this->getObjIdEmpresa()->getIdEmpresa() . "','" . $this->getImporte() . "')";
         if ($base->Iniciar()) {
-
             if ($base->Ejecutar($consultaInsertar)) {
-
                 $resp =  true;
             } else {
                 $this->setmensajeoperacion($base->getError());
