@@ -260,8 +260,7 @@ do{
         break;
         case 4:
             echo "que quiere cambiar?\n";
-            echo "Ingrese (codigo): Para cambiar el codigo del viaje" .
-            "\nIngrese (destino): Para cambiar el destino del viaje" .
+            echo "\nIngrese (destino): Para cambiar el destino del viaje" .
             "\nIngrese (maximo): Para cambiar la capacidad maxima de pasajeros" .
             "\nIngrese (costo): Para cambiar el costo del viaje".
             $opcionCambio = trim(fgets(STDIN));
