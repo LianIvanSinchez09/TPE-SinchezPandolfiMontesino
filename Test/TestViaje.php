@@ -193,7 +193,7 @@ do{
             }
             ;break;
         case 3:
-                menuViaje();
+                /*menuViaje();
                 $opcionCambio=trim(fgets(STDIN));
                 switch($opcionCambio){
                     case 'destino':
@@ -241,21 +241,21 @@ do{
                             }
                         }while(!$estado);break;
 
-                case 'todo':
-                    echo "ingrese otro destino\n";
-                    $destino=trim(fgets(STDIN));
-                    echo "ingrese otra capacidad maxima de personas\n";
-                    $maximo=trim(fgets(STDIN));
-                    echo "ingrese otra valor de importe\n";
-                    $importe=trim(fgets(STDIN));
-                    $viaje->setDestino($destino);
-                    $viaje->setCantMaxPasajeros($maximo);
-                    $viaje->setImporte($importe);
-                    $viaje->modificar();
-                    echo "datos cambiados";
-                    echo $viaje;
+                    case 'todo':
+                        echo "ingrese otro destino\n";
+                        $destino=trim(fgets(STDIN));
+                        echo "ingrese otra capacidad maxima de personas\n";
+                        $maximo=trim(fgets(STDIN));
+                        echo "ingrese otra valor de importe\n";
+                        $importe=trim(fgets(STDIN));
+                        $viaje->setDestino($destino);
+                        $viaje->setCantMaxPasajeros($maximo);
+                        $viaje->setImporte($importe);
+                        $viaje->modificar();
+                        echo "datos cambiados";
+                        echo $viaje;
                     break;
-            }
+                }*/
 
         case 4://ingresar un nuevo responsable, no esta terminado
             echo "Ingrese el documento del responsable";
