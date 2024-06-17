@@ -204,8 +204,36 @@ do{
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
     menu();
     $opcion = trim(fgets(STDIN));
+    $otroPasajero=new Pasajero();//hago esto para poder acceder a los metodos de pasajero
     switch($opcion){
         case 1:
+            $listaPasajero=$otroPasajero->listar();
+            if(count($listaPasajero)<$viaje->getCantMaxPasajeros()){
+                echo "ingrese el nombre del pasajero\n";
+                $nombre = trim(fgets(STDIN));
+                echo "ingrese el apellido del pasajero\n";
+                $apellido = trim(fgets(STDIN));
+                echo "ingrese el numero de documento del pasajero\n";
+                $numDoc = trim(fgets(STDIN));
+
+                $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
+
+                if ($pasajeroYacargado) {
+                    echo "Ya se encuentra en ese viaje";
+                } else {
+                    echo "ingrese el numero de telefono del pasajero\n";
+                    $numTele = trim(fgets(STDIN));
+                    $nuevaPersona=new Persona();
+                    $nuevoPasajero= new Pasajero();
+                    $nuevaPersona->cargar($numDoc,$nombre,$apellido);
+                    $nuevoPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
+                    $nuevaPersona->insertar();
+                    $nuevoPasajero->insertar();
+                    echo "Pasajero cargado en la base de datos";
+                }
+            }else{
+                echo "No disponible";
+            }
             ;break;
         case 2:
             echo "Ingrese el documento del pasajero";
