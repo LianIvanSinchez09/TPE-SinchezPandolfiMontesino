@@ -181,30 +181,4 @@ class Pasajero extends Persona {
     }
 
 }
-
-/*
-    public function hayPasajesDisponibles(){
-        
-        $colViaje = [];
-        $esDisponible = false;
-        $colTotalPasajeros = $this->listar();
-
-        foreach($colTotalPasajeros as $pasajero){
-
-            if(pasajero->$this->getobjViaje()->getIdViaje()) == 1){
-                
-                array_push($colViaje,  $pasajero);
-
-            }
-
-        }
-            
-        
-        if($this->getObjViaje()->getCantMaxPasajeros() > $count($colViaje)){
-            $esDisponible = true;
-        }
-
-        return $esDisponible;
-    }
-    */
 ?>

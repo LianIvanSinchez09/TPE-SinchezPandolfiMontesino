@@ -8,11 +8,11 @@ include_once "../Clases/BaseDatos.php";
 include_once "../Clases/Pasajero.php";
 
 $res = new Persona();
-$res1 = new ResponsableV();
+$responsableV = new ResponsableV();
 $res->cargar(44323057, "Lian", "Sinchez");
-$res1->cargar(44323057, "Lian", "Sinchez", 22, 22);
+$responsableV->cargar(44323057, "Lian", "Sinchez", 22, 22);
 $res->insertar();
-$res1->insertar();
+$responsableV->insertar();
 
 //<-------------------------METODOS UTILIZADOS--------------------->
 /**
@@ -22,11 +22,10 @@ $res1->insertar();
 function menu(){
     echo"\nIngrese 1: Para ingresar un pasajero" . 
         "\nIngrese 2: Para modificar datos del pasajero".
-        "\nIngrese 3: Para ingresar un viaje".
-        "\nIngrese 4: Para modificar datos del viaje".
-        "\nIngrese 5: Para ingresar a un responsable en realizar el viaje".
-        "\nIngrese 6: Para modificar datos del responsable en realizar el viaje".
-        "\nIngrese 7: Para ver los datos del viaje\n";
+        "\nIngrese 3: Para modificar datos del viaje".
+        "\nIngrese 4: Para ingresar a un responsable en realizar el viaje".
+        "\nIngrese 5: Para modificar datos del responsable en realizar el viaje".
+        "\nIngrese 6: Para ver los datos del viaje\n";
 }
 
 /*
@@ -156,7 +155,7 @@ $responsableV->insertar();
 $empresa=new Empresa();
 $empresa->cargar(10,"Viaje Feliz","Buenos Aires 1800");
 $viaje = new Viaje();
-$viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
+$viaje->cargar(1, "Cipolletti", 20, $responsableV, $empresa, 1000);
 $empresa->insertar();
 $viaje->insertar();
 
@@ -169,6 +168,7 @@ do{
     $otroPersona=new Persona();
     $otroPasajero=new Pasajero();
     $otroResponsable=new ResponsableV();
+    $otroViaje=new Viaje();
     switch($opcion){
 
         case 1:
@@ -224,63 +224,12 @@ do{
             echo "Ingrese cantidad maxima de pasajeros: \n";
             $cantMaxPasajeros = trim(fgets(STDIN));
             echo "Inserte importe a pagar del pasaje: \n";
-            $viaje->cargar(1,$destino,$cantMaxPasajeros,$responsableV,$emp,$importe);
+            $importe=trim(fgets(STDIN));
+            $viaje->cargar(1,$destino,$cantMaxPasajeros,$responsableV,$empresa,$importe);
             $viaje->insertar();
         break;
 
-        case 4:
-            echo "que quiere cambiar?\n";
-            echo "\nIngrese (destino): Para cambiar el destino del viaje" .
-            "\nIngrese (maximo): Para cambiar la capacidad maxima de pasajeros" .
-            "\nIngrese (costo): Para cambiar el costo del viaje".
-            $opcionCambio = trim(fgets(STDIN));
-            $estado=false;
-            switch($opcionCambio){
-                case "destino":
-                    do{
-                        echo "ingrese otro destino\n";
-                        $otroDato=trim(fgets(STDIN));
-                        $unViaje->setDestino($otroDato);
-                        if($unViaje->modificar()){
-                            echo "valor cambiado";
-                            $estado=true;
-                        }else{
-                            echo "No se puede cambiar por el mismo valor\n";
-                        }
-                    }while(!$estado);
-                    break;
-                case "maximo";
-                    do{
-                        echo "ingrese otra capacidad maxima de pasajeros\n";
-                        $otroDato=trim(fgets(STDIN));
-                        $unViaje->setCantMaxPasajeros($otroDato);
-                        if($unViaje->modificar()){
-                            echo "valor cambiado";
-                            $estado=true;
-                        }else{
-                            echo "No se puede cambiar por el mismo valor\n";
-                        }
-                    }while(!$estado);break;
-
-                case "costo":
-                    do{
-                        echo "ingrese otro costo al viaje\n";
-                        $otroDato=trim(fgets(STDIN));
-                        $unViaje->setImporte($otroDato);
-                        if($unViaje->modificar()){
-                            echo "valor cambiado";
-                            $estado=true;
-                        }else{
-                            echo "No se puede cambiar por el mismo valor\n";
-                        }
-                    }while(!$estado);
-                    break;
-                }   
-                default:
-                    echo "Opcion no existente";
-                break;
-
-        case 5://ingresar un nuevo responsable
+        case 4://ingresar un nuevo responsable, no esta terminado
             echo "Ingrese el documento del responsable";
             $numDoc=trim(fgets(STDIN));
             $responsableYacargado = $otroResponsable->Buscar($numDoc);
@@ -317,7 +266,7 @@ do{
                 } 
              */
             ;break;
-        case 6:;break;
+        case 5:;break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
