@@ -40,7 +40,8 @@ function menu(){
         "\nIngrese 4: Para modificar datos del viaje".
         "\nIngrese 5: Para ingresar a un responsable en realizar el viaje".
         "\nIngrese 6: Para modificar datos del responsable en realizar el viaje".
-        "\nIngrese 7: Para ver los datos del viaje\n";
+        "\nIngrese 7: Modificar empresa\n";
+        "\nIngrese 8: Mostrar detalles del viaje\n";
 }
 
 /*
@@ -284,12 +285,46 @@ do{
                 default:
                     echo "Opcion no existente";
                 break;
-        break;
         case 7:
-            echo $unViaje;
+            echo "Desea cambiar dirección o nombre de la empresa?: ";
+            $opcion = trim(fgets(STDIN));
+            switch ($opcion) {
+                case 'direccion':
+                        do {
+                            echo "Ingrese nueva dirección: \n";
+                            $direccion = trim(fgets(STDIN));
+                            $emp->setDireccion($direccion);
+                            if($emp->modificar()){
+                                echo "Direccion modificada correctamente\n";
+                                $estado = true;
+                            }else{
+                                echo "No se pudo modificar la dirección";
+                            }
+                        } while (!$estado);
+                    break;
+                case 'nombre':
+                    do {
+                        echo "Ingrese nueva nombre: \n";
+                        $nombre = trim(fgets(STDIN));
+                        $emp->setNombre($nombre);
+                        if($emp->modificar()){
+                            echo "Nombre modificada correctamente\n";
+                            $estado = true;
+                        }else{
+                            echo "No se pudo modificar el nombre";
+                        }
+                    } while (!$estado);
+                break;
+                default:
+                    # code...
+                    break;
+            }
+        break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
 } while ($desicion == 's');
+// case 7:
+//     echo $unViaje;
 
 ?>
