@@ -18,6 +18,7 @@ $respuesta1 = $res1->insertar();
 // prueba con viaje
 $empresa=new Empresa();
 $empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
+$empresa->insertar();
 $viaje = new Viaje();
 $viaje->cargar(1, "Cipolletti", 20, $res1, $emp, 1000);
 $viaje->insertar();
