@@ -173,6 +173,13 @@ class Pasajero extends Persona {
     public function __toString(){
         return parent::__toString() . "Id Pasajero: " . $this->getIdPasajero() . "\nId Viaje: " . $this->getObjViaje()->getIdViaje() . "\nTelefono: " . $this->getTelefono() ."\n";
     }
+
+    //<---------------------------METODOS PROPIOS--------------------------------->
+    public function devuelveAlquien($unDni){
+        $unPasajero=parent::devuelveAlguien($unDni);
+        return $unPasajero;
+    }
+
 }
 
 /*
