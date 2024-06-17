@@ -121,7 +121,7 @@ class ResponsableV extends Persona
     $resp = false;
     $base = new BaseDatos();
     if (parent::modificar()) {
-      $consultaModifica = "UPDATE personaresponsable SET numeroEmpleado='" . $this->getNumEmpleado() . "',numeroLicencia='" . $this->getNumLicencia() . "' WHERE documento =" . parent::getdocumento();
+      $consultaModifica = "UPDATE personaresponsable SET numeroLicencia='" . $this->getNumLicencia() . "' WHERE documento='" . parent::getDocumento() . "' AND numeroEmpleado='" . $this->getNumEmpleado();
       if ($base->Iniciar()) {
         if ($base->Ejecutar($consultaModifica)) {
           $resp =  true;
