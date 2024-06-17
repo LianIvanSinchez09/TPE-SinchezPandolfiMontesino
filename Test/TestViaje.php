@@ -21,12 +21,12 @@ $viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
 $empresa->insertar();
 $viaje->insertar();
 
-$res = new Persona();
-$res1 = new Pasajero();
-$res->cargar(22222222, "matias", "peña");
-$res1->cargar(22222222, "matias", "peña", 2, $viaje,2994130513);
-$res->insertar();
-$res1->insertar();
+$per = new Persona();
+$pas = new Pasajero();
+$per->cargar(22222222, "matias", "peña");
+$pas->cargar(22222222, "matias", "peña", 2, $viaje,2994130513);
+$per->insertar();
+$pas->insertar();
 
 //<-------------------------METODOS UTILIZADOS--------------------->
 /**
