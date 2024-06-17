@@ -14,20 +14,6 @@ $res1->cargar(44323057, "Lian", "Sinchez", 22, 22);
 $res->insertar();
 $res1->insertar();
 
-$empresa=new Empresa();
-$empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
-$viaje = new Viaje();
-$viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
-$empresa->insertar();
-$viaje->insertar();
-
-$per = new Persona();
-$pas = new Pasajero();
-$per->cargar(22222222, "matias", "peña");
-$pas->cargar(22222222, "matias", "peña", 2, $viaje,2994130513);
-$per->insertar();
-$pas->insertar();
-
 //<-------------------------METODOS UTILIZADOS--------------------->
 /**
  * menu de opciones para hacer el test
@@ -167,9 +153,13 @@ $responsableV->cargar($numEmpleado,$nombreEmpleado,$apellidoEmpleado,$numEmplead
 $responsableV->insertar();
 */
 // prueba con empresa
-$emp = new Empresa();
-$emp->cargar(1, "koko", "Neuquen Capital");
-$respuesta2 = $emp->insertar();
+$empresa=new Empresa();
+$empresa->cargar(10,"Viaje Feliz","Buenos Aires 1800");
+$viaje = new Viaje();
+$viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
+$empresa->insertar();
+$viaje->insertar();
+
 do{
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
