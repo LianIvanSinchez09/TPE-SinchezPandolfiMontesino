@@ -7,13 +7,6 @@ include_once "../Clases/Viaje.php";
 include_once "../Clases/BaseDatos.php";
 include_once "../Clases/Pasajero.php";
 
-$res = new Persona();
-$responsableV = new ResponsableV();
-$res->cargar(44323057, "Lian", "Sinchez");
-$responsableV->cargar(44323057, "Lian", "Sinchez", 22, 22);
-$res->insertar();
-$responsableV->insertar();
-
 //<-------------------------METODOS UTILIZADOS--------------------->
 /**
  * menu de opciones para hacer el test
@@ -160,6 +153,13 @@ $responsableV->cargar($numEmpleado,$nombreEmpleado,$apellidoEmpleado,$numEmplead
 $responsableV->insertar();
 */
 // prueba con empresa
+$res = new Persona();
+$responsableV = new ResponsableV();
+$res->cargar(44323057, "Lian", "Sinchez");
+$responsableV->cargar(44323057, "Lian", "Sinchez", 22, 22);
+$res->insertar();
+$responsableV->insertar();
+
 $empresa=new Empresa();
 $empresa->cargar(10,"Viaje Feliz","Buenos Aires 1800");
 $viaje = new Viaje();
@@ -235,6 +235,8 @@ do{
                         $otroDato=trim(fgets(STDIN));
                         if(strcmp($viaje->getDestino(),$otroDato)!=0){
                             echo "destino cambiado";
+                            $viaje->setDestino($otroDato);
+                            $viaje->modificar();
                             echo $viaje;
                             $estado=true;
                         }else{
@@ -248,6 +250,8 @@ do{
                         $otroDato=trim(fgets(STDIN));
                         if($viaje->getCantMaxPasajeros()!=$otroDato){
                             echo "capacidad cambiado";
+                            $viaje->setCantMaxPasajeros($otroDato);
+                            $viaje->modificar();
                             echo $viaje;
                             $estado=true;
                         }else{
@@ -261,6 +265,8 @@ do{
                         $otroDato=trim(fgets(STDIN));
                         if($viaje->getImporte()!=$otroDato){
                             echo "importe cambiado";
+                            $viaje->setImporte($otroDato);
+                            $viaje->modificar();
                             echo $viaje;
                             $estado=true;
                         }else{
