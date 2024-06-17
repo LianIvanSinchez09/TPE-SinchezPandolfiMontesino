@@ -28,37 +28,7 @@ $pasajero = new Pasajero();
 $pasajero->cargar(34534534, "Francisco", "Pandolfi", 1, $viaje, 2995920034);
 $pasajero->insertar();
 
-/*echo "\nClase Persona 1";
-echo $res;
-echo "\nClase Persona 2";
-echo $persona2;
-echo "\nClase Persona Responsable";
-echo $res1;
-echo "\nClase Empresa";
-echo $emp;
-echo "\nClase Viaje";
-echo $viaje;
-echo "\nClase Pasajero";
-echo $pasajero;
-
-$pasajero->setTelefono("2995551234");
-
-if ($pasajero->modificar()) {
-    echo "\nDatos del pasajero modificados correctamente.\n";
-} else {
-    echo "\nError al modificar los datos del pasajero: " . $pasajero->getMensajeoperacion() . "\n";
-}
-
-echo "\nClase Pasajero modificada";
-echo $pasajero;
-
-if($pasajero->hayPasajesDisponibles()){
-    echo "Hay pasajes disponibles";
-}else{
-    echo "No disponible";
-}*/
-
-//<-------------------------ACA ESTA--------------------->
+//<-------------------------METODOS UTILIZADOS--------------------->
 /**
  * menu de opciones para hacer el test
  * @return string
@@ -103,7 +73,7 @@ function cambiarDato($opcionCambio,$elPasajero){
                     $elPasajero->setNombre($otroDato);
                     $elPasajero->modificar();
                     echo "nombre cambiado";
-                    //echo $elPasajero; NO SE SI QUIEREN MOSTRARLE AL USUARIO EL CAMBIO QUE SE REALIZO?
+                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el nombre tiene que ser diferente\n";
@@ -120,6 +90,7 @@ function cambiarDato($opcionCambio,$elPasajero){
                     $elPasajero->setApellido($otroDato);
                     $elPasajero->modificar();
                     echo "apellido cambiado";
+                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el nombre tiene que ser diferente\n";
@@ -136,6 +107,7 @@ function cambiarDato($opcionCambio,$elPasajero){
                     $elPasajero->setTelefono($otroDato);
                     $elPasajero->modificar();
                     echo "telefono cambiado";
+                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el telefono tiene que ser diferente\n";
@@ -154,7 +126,9 @@ function cambiarDato($opcionCambio,$elPasajero){
             $elPasajero->setApellido($apellido);
             $elPasajero->setTelefono($numTele);
             $elPasajero->modificar();
-            echo "datos cambiados";break;
+            echo "datos cambiados";
+            echo $elPasajero;
+            ;break;
     }
 }
 
@@ -203,6 +177,7 @@ do{
     $opcion = trim(fgets(STDIN));
     $otroPersona=new Persona();
     $otroPasajero=new Pasajero();//hago esto para poder acceder a los metodos de pasajero
+    $otroResponsable=new ResponsableV();
     switch($opcion){
         case 1:
             $listaPasajero=$otroPasajero->listar();
@@ -260,8 +235,7 @@ do{
         break;
         case 4:
             echo "que quiere cambiar?\n";
-            echo "Ingrese (codigo): Para cambiar el codigo del viaje" .
-            "\nIngrese (destino): Para cambiar el destino del viaje" .
+            echo "\nIngrese (destino): Para cambiar el destino del viaje" .
             "\nIngrese (maximo): Para cambiar la capacidad maxima de pasajeros" .
             "\nIngrese (costo): Para cambiar el costo del viaje".
             $opcionCambio = trim(fgets(STDIN));
