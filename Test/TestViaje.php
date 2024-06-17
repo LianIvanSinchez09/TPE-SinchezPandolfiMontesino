@@ -310,6 +310,9 @@ do{
                 default:
                     echo "Opcion no existente";
                 break;
+        break;
+        case 7:
+            echo $unViaje;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
