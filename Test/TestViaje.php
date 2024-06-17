@@ -15,7 +15,9 @@ $res1->cargar(44323057, "Lian", "Sinchez", 22, 22);
 $respuesta = $res->insertar();
 $respuesta1 = $res1->insertar();
 
-// prueba con viaje 
+// prueba con viaje
+$empresa=new Empresa();
+$empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
 $viaje = new Viaje();
 $viaje->cargar(1, "Cipolletti", 20, $res1, $emp, 1000);
 $viaje->insertar();
@@ -175,10 +177,12 @@ do{
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
     menu();
     $opcion = trim(fgets(STDIN));
+    //hago esto para poder acceder a los metodos de cada clase
     $otroPersona=new Persona();
-    $otroPasajero=new Pasajero();//hago esto para poder acceder a los metodos de pasajero
+    $otroPasajero=new Pasajero();
     $otroResponsable=new ResponsableV();
     switch($opcion){
+
         case 1:
             $listaPasajero=$otroPasajero->listar();
             if(count($listaPasajero)<$viaje->getCantMaxPasajeros()){
@@ -206,9 +210,10 @@ do{
                     echo "Pasajero cargado en la base de datos";
                 }
             }else{
-                echo "No disponible";
+                echo "No disponible para cargar mas pasajeros";
             }
             ;break;
+
         case 2:
             echo "Ingrese el documento del pasajero";
             $doc=trim(fgets(STDIN));
@@ -224,6 +229,7 @@ do{
                 echo "Ese pasajero no existe";
             }
             ;break;
+
         case 3:
             echo "Ingrese destino: \n";
             $destino = trim(fgets(STDIN));
@@ -233,6 +239,7 @@ do{
             $viaje->cargar(1,$destino,$cantMaxPasajeros,$responsableV,$emp,$importe);
             $viaje->insertar();
         break;
+
         case 4:
             echo "que quiere cambiar?\n";
             echo "\nIngrese (destino): Para cambiar el destino del viaje" .
@@ -284,8 +291,43 @@ do{
                 default:
                     echo "Opcion no existente";
                 break;
-        case 5:
-            echo "Ingrese";
+
+        case 5://ingresar un nuevo responsable
+            echo "Ingrese el documento del responsable";
+            $numDoc=trim(fgets(STDIN));
+            $responsableYacargado = $otroResponsable->Buscar($numDoc);
+            $personaYaCargada = $otroPersona->Buscar($numDoc);
+            if($responsableYacargado){
+                echo "este responsable ya existe";
+            } else if($personaYaCargada){
+                echo "Esta persona ya fue cargada en la base de datos";
+            }else{
+                echo "ingrese el nombre";
+                $nombre=trim(fgets(STDIN));
+                echo "ingrese el apellido";
+                $apellido=trim(fgets(STDIN));
+                echo "ingrese el numero de licencia";
+                $numLicencia=trim(fgets(STDIN));
+
+            }   
+            /*
+             $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
+                $personaYaCargada = $otroPersona->Buscar($numDoc);
+                if ($pasajeroYacargado) {
+                    echo "Ya se encuentra en ese viaje";
+                } else if($personaYaCargada){
+                    echo "Esta persona ya fue cargada en la base de datos";
+                }else{
+                    echo "ingrese el numero de telefono del pasajero\n";
+                    $numTele = trim(fgets(STDIN));
+                    $nuevaPersona=new Persona();
+                    $nuevaPersona->cargar($numDoc,$nombre,$apellido);
+                    $otroPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
+                    $nuevaPersona->insertar();
+                    $otroPasajero->insertar();
+                    echo "Pasajero cargado en la base de datos";
+                } 
+             */
             ;break;
         case 6:;break;
     }
