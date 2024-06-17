@@ -304,11 +304,12 @@ do{
                         }else{
                             echo "No se puede cambiar por el mismo valor\n";
                         }
-                    }while(!$estado);break;
-                }            
-            ;break;
-
-
+                    }while(!$estado);
+                    break;
+                }   
+                default:
+                    echo "Opcion no existente";
+                break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
