@@ -7,7 +7,6 @@ include_once "../Clases/Viaje.php";
 include_once "../Clases/BaseDatos.php";
 include_once "../Clases/Pasajero.php";
 
-// prueba con viaje
 $res = new Persona();
 $res1 = new ResponsableV();
 $res->cargar(44323057, "Lian", "Sinchez");
@@ -21,6 +20,13 @@ $viaje = new Viaje();
 $viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
 $empresa->insertar();
 $viaje->insertar();
+
+$res = new Persona();
+$res1 = new Pasajero();
+$res->cargar(22222222, "matias", "peña");
+$res1->cargar(22222222, "matias", "peña", 22, $viaje,2994130513);
+$res->insertar();
+$res1->insertar();
 
 //<-------------------------METODOS UTILIZADOS--------------------->
 /**
