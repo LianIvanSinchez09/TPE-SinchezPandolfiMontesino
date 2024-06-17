@@ -24,7 +24,7 @@ $viaje->insertar();
 $res = new Persona();
 $res1 = new Pasajero();
 $res->cargar(22222222, "matias", "peña");
-$res1->cargar(22222222, "matias", "peña", 22, $viaje,2994130513);
+$res1->cargar(22222222, "matias", "peña", 2, $viaje,2994130513);
 $res->insertar();
 $res1->insertar();
 
