@@ -159,7 +159,7 @@ function cambiarDato($opcionCambio,$elPasajero){
             $elPasajero->setApellido($apellido);
             $elPasajero->setTelefono($numTele);
             $elPasajero->modificar();
-            echo "datos cambiados";
+            echo "datos cambiados";break;
     }
 }
 
