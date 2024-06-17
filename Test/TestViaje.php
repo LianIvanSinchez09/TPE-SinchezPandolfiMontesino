@@ -7,29 +7,20 @@ include_once "../Clases/Viaje.php";
 include_once "../Clases/BaseDatos.php";
 include_once "../Clases/Pasajero.php";
 
-// si no tiene cargado a la persona antes de cargarlo en responsable,
+// prueba con viaje
 $res = new Persona();
 $res1 = new ResponsableV();
 $res->cargar(44323057, "Lian", "Sinchez");
 $res1->cargar(44323057, "Lian", "Sinchez", 22, 22);
-$respuesta = $res->insertar();
-$respuesta1 = $res1->insertar();
+$res->insertar();
+$res1->insertar();
 
-// prueba con viaje
 $empresa=new Empresa();
 $empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
-$empresa->insertar();
 $viaje = new Viaje();
-$viaje->cargar(1, "Cipolletti", 20, $res1, $emp, 1000);
+$viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
+$empresa->insertar();
 $viaje->insertar();
-
-$persona2 = new Persona();
-$persona2->cargar(34534534, "Francisco", "Pandolfi");
-$persona2->insertar();
-
-$pasajero = new Pasajero(); 
-$pasajero->cargar(34534534, "Francisco", "Pandolfi", 1, $viaje, 2995920034);
-$pasajero->insertar();
 
 //<-------------------------METODOS UTILIZADOS--------------------->
 /**
