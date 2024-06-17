@@ -42,13 +42,6 @@ function menuViaje(){
          "\nIngrese (todo): Para cambiar toda la informacion del viaje\n";
 }
 
-/**
- * Cambia los datos que comparten todos los pasajero
- * @param string
- * @param Viaje
- * @param int
- * @return boolean
- */
 function cambiarDato($opcionCambio,$elPasajero){
     $estado=false;
     switch ($opcionCambio) {
