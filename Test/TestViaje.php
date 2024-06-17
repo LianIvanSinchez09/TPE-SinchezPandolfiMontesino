@@ -14,10 +14,12 @@ include_once "../Clases/Pasajero.php";
 function menu(){
     echo"\nIngrese 1: Para ingresar un pasajero" . 
         "\nIngrese 2: Para modificar datos del pasajero".
-        "\nIngrese 3: Para modificar datos del viaje".
-        "\nIngrese 4: Para ingresar a un responsable en realizar el viaje".
-        "\nIngrese 5: Para modificar datos del responsable en realizar el viaje".
-        "\nIngrese 6: Para ver los datos del viaje\n";
+        "\nIngrese 3: Para ingresar un viaje".
+        "\nIngrese 4: Para modificar datos del viaje".
+        "\nIngrese 5: Para ingresar a un responsable en realizar el viaje".
+        "\nIngrese 6: Para modificar datos del responsable en realizar el viaje".
+        "\nIngrese 7: Modificar empresa\n";
+        "\nIngrese 8: Mostrar detalles del viaje\n";
 }
 
 /**
@@ -254,11 +256,68 @@ do{
                     echo $viaje;
                     break;
             }
+
+        case 4://ingresar un nuevo responsable, no esta terminado
+            echo "Ingrese el documento del responsable";
+            $numDoc=trim(fgets(STDIN));
+            $responsableYacargado = $otroResponsable->Buscar($numDoc);
+            $personaYaCargada = $otroPersona->Buscar($numDoc);
+            if($responsableYacargado){
+                echo "este responsable ya existe";
+            } else if($personaYaCargada){
+                echo "Esta persona ya fue cargada en la base de datos";
+            }else{
+                echo "ingrese el nombre";
+                $nombre=trim(fgets(STDIN));
+                echo "ingrese el apellido";
+                $apellido=trim(fgets(STDIN));
+                echo "ingrese el numero de licencia";
+                $numLicencia=trim(fgets(STDIN));
+
+            }   
+            ;break;
+        case 6:;break;
+        case 7:
+            echo "Desea cambiar dirección o nombre de la empresa?: ";
+            $opcion = trim(fgets(STDIN));
+            switch ($opcion) {
+                case 'direccion':
+                        do {
+                            echo "Ingrese nueva dirección: \n";
+                            $direccion = trim(fgets(STDIN));
+                            $empresa->setDireccion($direccion);
+                            if($empresa->modificar()){
+                                echo "Direccion modificada correctamente\n";
+                                $estado = true;
+                            }else{
+                                echo "No se pudo modificar la dirección";
+                            }
+                        } while (!$estado);
+                    break;
+                case 'nombre':
+                    do {
+                        echo "Ingrese nueva nombre: \n";
+                        $nombre = trim(fgets(STDIN));
+                        $empresa->setNombre($nombre);
+                        if($empresa->modificar()){
+                            echo "Nombre modificada correctamente\n";
+                            $estado = true;
+                        }else{
+                            echo "No se pudo modificar el nombre";
+                        }
+                    } while (!$estado);
+                break;
+                default:
+                    # code...
+                    break;
+            }
                 
             break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
 } while ($desicion == 's');
+// case 7:
+//     echo $unViaje;
 
 ?>
