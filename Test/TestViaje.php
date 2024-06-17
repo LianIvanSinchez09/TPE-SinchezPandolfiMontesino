@@ -319,6 +319,40 @@ do{
              */
             ;break;
         case 6:;break;
+        case 7:
+            echo "Desea cambiar dirección o nombre de la empresa?: ";
+            $opcion = trim(fgets(STDIN));
+            switch ($opcion) {
+                case 'direccion':
+                        do {
+                            echo "Ingrese nueva dirección: \n";
+                            $direccion = trim(fgets(STDIN));
+                            $empresa->setDireccion($direccion);
+                            if($empresa->modificar()){
+                                echo "Direccion modificada correctamente\n";
+                                $estado = true;
+                            }else{
+                                echo "No se pudo modificar la dirección";
+                            }
+                        } while (!$estado);
+                    break;
+                case 'nombre':
+                    do {
+                        echo "Ingrese nueva nombre: \n";
+                        $nombre = trim(fgets(STDIN));
+                        $empresa->setNombre($nombre);
+                        if($empresa->modificar()){
+                            echo "Nombre modificada correctamente\n";
+                            $estado = true;
+                        }else{
+                            echo "No se pudo modificar el nombre";
+                        }
+                    } while (!$estado);
+                break;
+                default:
+                    # code...
+                    break;
+            }
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
