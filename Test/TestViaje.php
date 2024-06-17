@@ -7,7 +7,6 @@ include_once "../Clases/Viaje.php";
 include_once "../Clases/BaseDatos.php";
 include_once "../Clases/Pasajero.php";
 
-//<-------------------------METODOS UTILIZADOS--------------------->
 /**
  * menu de opciones para hacer el test
  * @return string
@@ -15,11 +14,10 @@ include_once "../Clases/Pasajero.php";
 function menu(){
     echo"\nIngrese 1: Para ingresar un pasajero" . 
         "\nIngrese 2: Para modificar datos del pasajero".
-        "\nIngrese 3: Para ingresar un viaje".
-        "\nIngrese 4: Para modificar datos del viaje".
-        "\nIngrese 5: Para ingresar a un responsable en realizar el viaje".
-        "\nIngrese 6: Para modificar datos del responsable en realizar el viaje".
-        "\nIngrese 7: Para ver los datos del viaje\n";
+        "\nIngrese 3: Para modificar datos del viaje".
+        "\nIngrese 4: Para ingresar a un responsable en realizar el viaje".
+        "\nIngrese 5: Para modificar datos del responsable en realizar el viaje".
+        "\nIngrese 6: Para ver los datos del viaje\n";
 }
 
 /**
@@ -42,6 +40,13 @@ function menuViaje(){
          "\nIngrese (todo): Para cambiar toda la informacion del viaje\n";
 }
 
+/**
+ * Cambia los datos que comparten todos los pasajero
+ * @param string
+ * @param Viaje
+ * @param int
+ * @return boolean
+ */
 function cambiarDato($opcionCambio,$elPasajero){
     $estado=false;
     switch ($opcionCambio) {
@@ -249,27 +254,8 @@ do{
                     echo $viaje;
                     break;
             }
-
-        case 4://ingresar un nuevo responsable, no esta terminado
-            echo "Ingrese el documento del responsable";
-            $numDoc=trim(fgets(STDIN));
-            $responsableYacargado = $otroResponsable->Buscar($numDoc);
-            $personaYaCargada = $otroPersona->Buscar($numDoc);
-            if($responsableYacargado){
-                echo "este responsable ya existe";
-            } else if($personaYaCargada){
-                echo "Esta persona ya fue cargada en la base de datos";
-            }else{
-                echo "ingrese el nombre";
-                $nombre=trim(fgets(STDIN));
-                echo "ingrese el apellido";
-                $apellido=trim(fgets(STDIN));
-                echo "ingrese el numero de licencia";
-                $numLicencia=trim(fgets(STDIN));
-
-            }   
-            ;break;
-        case 5:;break;
+                
+            break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
