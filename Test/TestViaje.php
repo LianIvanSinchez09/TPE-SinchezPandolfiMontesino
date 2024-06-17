@@ -264,8 +264,6 @@ do{
             "\nIngrese (destino): Para cambiar el destino del viaje" .
             "\nIngrese (maximo): Para cambiar la capacidad maxima de pasajeros" .
             "\nIngrese (costo): Para cambiar el costo del viaje".
-            "\nIngrese (abonado): PAra cambair el costo de abonados en el viaje".
-            "\nIngrese (todo): Para cambiar toda la informacion del viaje\n";
             $opcionCambio = trim(fgets(STDIN));
             $estado=false;
             switch($opcionCambio){
