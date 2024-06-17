@@ -127,6 +127,36 @@ class Viaje {
         return $resp;
     }
 
+    /**
+     * Cambia la informacion del viaje segun la opcion que eligio
+     * @param String
+     * @param String
+     * @return boolean
+     */
+    public function cambiarViaje($opcionCambio,$otroDato){
+        $cumple=false;
+        switch($opcionCambio){
+            case "destino":
+                if($otroDato!=$this->getDestino()){
+                    $this->setDestino($otroDato);
+                    $cumple=true;
+                };break;
+            case "maximo":
+                if($otroDato!=$this->getCantMaxPasajeros()){
+                    $this->setCantMaxPasajeros($otroDato);
+                    $cumple=true;
+                };break;
+            case "costo":
+                if($otroDato!=$this->getImporte()){
+                    $this->setImporte($otroDato);
+                    $cumple=true;
+                };break;
+        }
+        return $cumple;
+    }
+
+
+
     public function listar($condicion = "") {
         $arregloViaje = null;
         $base = new BaseDatos();
