@@ -227,13 +227,10 @@ do{
                     echo "ingrese el numero de telefono del pasajero\n";
                     $numTele = trim(fgets(STDIN));
                     $nuevaPersona=new Persona();
-                    //$nuevoPasajero= new Pasajero();
                     $nuevaPersona->cargar($numDoc,$nombre,$apellido);
                     $otroPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
-                    //$nuevoPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
                     $nuevaPersona->insertar();
                     $otroPasajero->insertar();
-                    //$nuevoPasajero->insertar();
                     echo "Pasajero cargado en la base de datos";
                 }
             }else{
