@@ -14,8 +14,8 @@ include_once "../Clases/Pasajero.php";
 function menu(){
     echo"\nIngrese 1: Para ingresar un pasajero" . 
         "\nIngrese 2: Para modificar datos del pasajero".
-        "\nIngrese 3: Modificar viaje".
-        "\nIngrese 4: Modificar responsable del viaje".
+        "\nIngrese 3: Insertar viaje".
+        "\nIngrese 4: Modificar viaje".
         "\nIngrese 5: Modificar empresa".
         "\nIngrese 6: Mostrar detalles del viaje\n";
 }
