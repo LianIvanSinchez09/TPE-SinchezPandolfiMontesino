@@ -121,17 +121,17 @@ function cambiarDato($opcionCambio,$elPasajero){
 }
 
 //--------------------------------------------------------------------------
-$res = new Persona();
-$res1 = new ResponsableV();
-$res->cargar(44323057, "Lian", "Sinchez");
-$res1->cargar(44323057, "Lian", "Sinchez", 22, 22);
-$res->insertar();
-$res1->insertar();
+$responsable = new Persona();
+$responsable1 = new ResponsableV();
+$responsable->cargar(44323057, "Lian", "Sinchez");
+$responsable1->cargar(44323057, "Lian", "Sinchez", 22, 22);
+$responsable->insertar();
+$responsable1->insertar();
 
 $empresa=new Empresa();
 $empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
 $viaje = new Viaje();
-$viaje->cargar(1, "Cipolletti", 20, $res1, $empresa, 1000);
+$viaje->cargar(1, "Cipolletti", 20, $responsable1, $empresa, 1000);
 $empresa->insertar();
 $viaje->insertar();
 
@@ -193,91 +193,95 @@ do{
             }
             ;break;
         case 3:
-                /*menuViaje();
-                $opcionCambio=trim(fgets(STDIN));
-                switch($opcionCambio){
-                    case 'destino':
-                        do{
-                            echo "ingrese otro destino\n";
-                            $otroDato=trim(fgets(STDIN));
-                            if(strcmp($viaje->getDestino(),$otroDato)!=0){
-                                echo "destino cambiado";
-                                $viaje->setDestino($otroDato);
-                                $viaje->modificar();
-                                echo $viaje;
-                                $estado=true;
-                            }else{
-                                echo "No se puede cambiar por el mismo destino\n";
-                            }
-                        }while(!$estado);break;
-                        
-                    case 'maximo':
-                        do{
-                            echo "ingrese otra capacidad maxima de personas\n";
-                            $otroDato=trim(fgets(STDIN));
-                            if($viaje->getCantMaxPasajeros()!=$otroDato){
-                                echo "capacidad cambiado";
-                                $viaje->setCantMaxPasajeros($otroDato);
-                                $viaje->modificar();
-                                echo $viaje;
-                                $estado=true;
-                            }else{
-                                echo "No se puede cambiar por el misma capacidad\n";
-                            }
-                    }while(!$estado);break;
-    
-                    case 'importe':
-                        do{
-                            echo "ingrese otra valor de importe\n";
-                            $otroDato=trim(fgets(STDIN));
-                            if($viaje->getImporte()!=$otroDato){
-                                echo "importe cambiado";
-                                $viaje->setImporte($otroDato);
-                                $viaje->modificar();
-                                echo $viaje;
-                                $estado=true;
-                            }else{
-                                echo "No se puede cambiar por el misma importe\n";
-                            }
-                        }while(!$estado);break;
-
-                    case 'todo':
+            menuViaje();
+            $opcionCambio=trim(fgets(STDIN));
+            switch($opcionCambio){
+                case 'destino':
+                    do{
                         echo "ingrese otro destino\n";
-                        $destino=trim(fgets(STDIN));
+                        $otroDato=trim(fgets(STDIN));
+                        if(strcmp($viaje->getDestino(),$otroDato)!=0){
+                            echo "destino cambiado";
+                            $viaje->setDestino($otroDato);
+                            $viaje->modificar();
+                            echo $viaje;
+                            $estado=true;
+                        }else{
+                            echo "No se puede cambiar por el mismo destino\n";
+                        }
+                    }while(!$estado);
+                break;
+                case 'maximo':
+                    do{
                         echo "ingrese otra capacidad maxima de personas\n";
-                        $maximo=trim(fgets(STDIN));
+                        $otroDato=trim(fgets(STDIN));
+                        if($viaje->getCantMaxPasajeros()!=$otroDato){
+                            echo "capacidad cambiado";
+                            $viaje->setCantMaxPasajeros($otroDato);
+                            $viaje->modificar();
+                            echo $viaje;
+                            $estado=true;
+                        }else{
+                            echo "No se puede cambiar por el misma capacidad\n";
+                        }
+                }while(!$estado);
+                break;
+                case 'importe':
+                    do{
                         echo "ingrese otra valor de importe\n";
-                        $importe=trim(fgets(STDIN));
-                        $viaje->setDestino($destino);
-                        $viaje->setCantMaxPasajeros($maximo);
-                        $viaje->setImporte($importe);
-                        $viaje->modificar();
+                        $otroDato=trim(fgets(STDIN));
+                        if($viaje->getImporte()!=$otroDato){
+                            echo "importe cambiado";
+                            $viaje->setImporte($otroDato);
+                            $viaje->modificar();
+                            echo $viaje;
+                            $estado=true;
+                        }else{
+                            echo "No se puede cambiar por el misma importe\n";
+                        }
+                    }while(!$estado);
+                break;
+                case 'todo':
+                    echo "ingrese otro destino\n";
+                    $destino=trim(fgets(STDIN));
+                    echo "ingrese otra capacidad maxima de personas\n";
+                    $maximo=trim(fgets(STDIN));
+                    echo "ingrese otra valor de importe\n";
+                    $importe=trim(fgets(STDIN));
+                    $viaje->setDestino($destino);
+                    $viaje->setCantMaxPasajeros($maximo);
+                    $viaje->setImporte($importe);
+                    if($viaje->modificar()){
                         echo "datos cambiados";
                         echo $viaje;
-                    break;
-                }*/
-
+                    }
+                break;
+            }
+        break;
         case 4://ingresar un nuevo responsable, no esta terminado
             echo "Ingrese el documento del responsable";
             $numDoc=trim(fgets(STDIN));
-            $responsableYacargado = $otroResponsable->Buscar($numDoc);
-            $personaYaCargada = $otroPersona->Buscar($numDoc);
-            if($responsableYacargado){
+            if($res->Buscar($numDoc)){
                 echo "este responsable ya existe";
-            } else if($personaYaCargada){
-                echo "Esta persona ya fue cargada en la base de datos";
-            }else{
-                echo "ingrese el nombre";
+            } else{
+                echo "Ingrese el nombre: \n";
                 $nombre=trim(fgets(STDIN));
-                echo "ingrese el apellido";
+                $responsable1->setNombre($nombre);
+                echo "Ingrese el apellido: \n";
                 $apellido=trim(fgets(STDIN));
-                echo "ingrese el numero de licencia";
+                $responsable1->setApellido($apellido);
+                echo "ingrese el numero de licencia: \n";
                 $numLicencia=trim(fgets(STDIN));
-
+                $responsable1->setNumLicencia($numLicencia);
+                if($responsable1->modificar()){
+                    echo "Datos Actualizados\n";
+                    echo $responsable1;
+                }else{
+                    echo "Hubo un error actualizando los datos\n";
+                }
             }   
             ;break;
-        case 6:;break;
-        case 7:
+        case 5:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
@@ -308,10 +312,8 @@ do{
                     } while (!$estado);
                 break;
                 default:
-                    # code...
                     break;
             }
-                
             break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
