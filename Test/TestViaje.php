@@ -14,12 +14,10 @@ include_once "../Clases/Pasajero.php";
 function menu(){
     echo"\nIngrese 1: Para ingresar un pasajero" . 
         "\nIngrese 2: Para modificar datos del pasajero".
-        "\nIngrese 3: Para ingresar un viaje".
-        "\nIngrese 4: Para modificar datos del viaje".
-        "\nIngrese 5: Para ingresar a un responsable en realizar el viaje".
-        "\nIngrese 6: Para modificar datos del responsable en realizar el viaje".
-        "\nIngrese 7: Modificar empresa\n";
-        "\nIngrese 8: Mostrar detalles del viaje\n";
+        "\nIngrese 3: Modificar viaje".
+        "\nIngrese 4: Modificar responsable del viaje".
+        "\nIngrese 5: Modificar empresa".
+        "\nIngrese 6: Mostrar detalles del viaje\n";
 }
 
 /**
@@ -103,19 +101,19 @@ function cambiarDato($opcionCambio,$elPasajero){
             } while (!$estado)
             ;break;
         case "todo":
-                echo "ingrese el nombre del pasajero\n";
-                $nombre = trim(fgets(STDIN));
-                echo "ingrese el apellido del pasajero\n";
-                $apellido = trim(fgets(STDIN));
-                echo "ingrese el numero de telefono del pasajero\n";
-                $numTele=trim(fgets(STDIN));
-    
-                $elPasajero->setNombre($nombre);
-                $elPasajero->setApellido($apellido);
-                $elPasajero->setTelefono($numTele);
-                $elPasajero->modificar();
-                echo $elPasajero;
-                echo "datos cambiados";break;
+            echo "ingrese el nombre del pasajero\n";
+            $nombre = trim(fgets(STDIN));
+            echo "ingrese el apellido del pasajero\n";
+            $apellido = trim(fgets(STDIN));
+            echo "ingrese el numero de telefono del pasajero\n";
+            $numTele=trim(fgets(STDIN));
+
+            $elPasajero->setNombre($nombre);
+            $elPasajero->setApellido($apellido);
+            $elPasajero->setTelefono($numTele);
+            $elPasajero->modificar();
+            echo $elPasajero;
+            echo "datos cambiados";break;
     }
     return $estado;
 }
@@ -193,6 +191,23 @@ do{
             }
             ;break;
         case 3:
+            echo "Ingrese destino: \n";
+            $destino = trim(fgets(STDIN));
+            echo "Cantidad maxima de pasajeros: \n";
+            $cantMaxPasajeros = trim(fgets(STDIN));
+            $otroViaje = new Viaje();
+            echo "Ingrese coste del viaje: ";
+            $costo = trim(fgets(STDIN));
+            $otroViaje->cargar(1, $destino, $cantMaxPasajeros, $responsable1, $empresa, $costo);
+            if($otroViaje->insertar()){
+                echo "Viaje correctamente insertado\n";
+                $colViajes = $otroViaje->listar();
+                foreach ($colViajes as $viaje) {
+                    echo $viaje . "\n";
+                } 
+            }
+        break;
+        case 4:
             menuViaje();
             $opcionCambio=trim(fgets(STDIN));
             switch($opcionCambio){
@@ -258,10 +273,10 @@ do{
                 break;
             }
         break;
-        case 4://ingresar un nuevo responsable, no esta terminado
+        case 4:
             echo "Ingrese el documento del responsable";
             $numDoc=trim(fgets(STDIN));
-            if($res->Buscar($numDoc)){
+            if($responsable1->Buscar($numDoc)){
                 echo "este responsable ya existe";
             } else{
                 echo "Ingrese el nombre: \n";
@@ -280,7 +295,7 @@ do{
                     echo "Hubo un error actualizando los datos\n";
                 }
             }   
-            ;break;
+        break;
         case 5:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
@@ -314,7 +329,16 @@ do{
                 default:
                     break;
             }
-            break;
+        break;
+        case 6:
+            $col = $viaje->listar();
+            foreach ($col as $viaje) {
+                echo $viaje;
+            }
+        break;
+        default:
+            echo "\nOpcion Invalida";
+        break;
     }
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
