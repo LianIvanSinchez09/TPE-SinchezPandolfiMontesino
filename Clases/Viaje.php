@@ -253,7 +253,7 @@ class Viaje {
             }
         }
 
-        if($viaje->getCantMaxPasajeros() > $cantPasajeros){
+        if(count($pasajeros) == 0 || $viaje->getCantMaxPasajeros() > $cantPasajeros){
             $esDisponible = true;
         }
         return $esDisponible;

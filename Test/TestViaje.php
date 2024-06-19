@@ -21,13 +21,12 @@ function menu()
         "\nIngrese 6: Modificar responsable del viaje" .
         "\nIngrese 7: Modificar empresa" .
         "\nIngrese 8: Mostrar detalles del viaje" .
-        "\nIngrese 9: Eliminar pasajero" .
-        "\nIngrese 10: Eliminar viaje" .
-        "\nIngrese 11: Eliminar responsable" .
+        "\nIngrese 9: Eliminar viaje" .
+        "\nIngrese 10: Eliminar responsable" .
+        "\nIngrese 11: Eliminar empresa" .
         "\nIngrese 12: Eliminar pasajero" .
-        "\nIngrese 13: Mostrar pasajero" .
-        "\nIngrese 14: Mostrar viaje" .
-        "\nIngrese 15: Mostrar responsable\n";
+        "\nIngrese 13: Mostrar pasajeros" .
+        "\nIngrese 14: Mostrar responsables\n";
 }
 
 /**
@@ -708,21 +707,19 @@ do {
             };
             break;
         case 13:
-            $colPasajero = $res1->listar();
-            foreach ($colPasajero as $pasajero) {
-                echo $pasajero;
+            $losPasajeros = new Pasajero();
+            $arrayPas = $losPasajeros->listar();
+            if(count($arrayPas) > 0){
+                for ($i = 0; $i < count($arrayPas); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayPas[$i];
+                    echo "\n";
+                };
+            }else{
+                echo 'No hay pasajeros\n';
             }
             break;
         case 14:
-            $losViajes = new Viaje();
-            $arrayViajes = $losViajes->listar();
-            for ($i = 0; $i < count($arrayViajes); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrayViajes[$i];
-                echo "\n";
-            };
-            break;
-        case 15:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
             for ($i = 0; $i < count($arrResponsable); $i++) {
