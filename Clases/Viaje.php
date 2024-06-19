@@ -249,12 +249,8 @@ class Viaje {
         for ($i=0; $i < count($pasajeros); $i++) { 
             if($id == $pasajeros[$i]->getObjViaje()->getIdViaje()){
                 $cantPasajeros++;
-                echo $pasajeros[$i];
             }
         }
-        echo "---------------------\n";
-        echo $cantPasajeros;
-        echo "---------------------\n";
         if($this->getCantMaxPasajeros() > $cantPasajeros){
             $esDisponible = true;
         }
