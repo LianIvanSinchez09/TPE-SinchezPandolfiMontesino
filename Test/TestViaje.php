@@ -557,10 +557,7 @@ do {
             $opcionCambio=trim(fgets(STDIN));
             cambiarResponsable($responsableSeleccionado,$opcionCambio);
             ;break;
-
         case 7:
-            ;break;
-        case 8:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
@@ -600,7 +597,7 @@ do {
                 echo $viaje;
             }
             break;
-        case 10:
+        case 9:
             $losViajes = new Viaje();
             $arrayViajes = $losViajes->listar();
             for ($i = 0; $i < count($arrayViajes); $i++) {
@@ -623,7 +620,7 @@ do {
                 echo "Hubo un error eliminando el viaje\n";
             };
             break;
-        case 11:
+        case 10:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
             for ($i = 0; $i < count($arrResponsable); $i++) {
@@ -646,7 +643,7 @@ do {
             } else {
                 echo "Hubo un error eliminando el responsable\n";
             }
-        case 12:
+        case 11:
             $lasEmpresas = new Empresa();
             $arrEmpresas = $lasEmpresas->listar();
             for ($i = 0; $i < count($arrEmpresas); $i++) {
