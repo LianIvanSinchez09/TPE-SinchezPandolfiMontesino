@@ -159,13 +159,13 @@ do{
                 $numDoc = trim(fgets(STDIN));
 
                 $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
-
+                $nuevaPersona=new Persona();
                 if ($pasajeroYacargado) {
                     echo "Ya se encuentra en ese viaje";
                 } else {
                     echo "ingrese el numero de telefono del pasajero\n";
                     $numTele = trim(fgets(STDIN));
-                    $nuevaPersona=new Persona();
+                    
                     $nuevoPasajero= new Pasajero();
                     $nuevaPersona->cargar($numDoc,$nombre,$apellido);
                     $nuevoPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
@@ -274,7 +274,7 @@ do{
                 break;
             }
         break;
-        case 4:
+        case 5:
             echo "Ingrese el documento del responsable";
             $numDoc=trim(fgets(STDIN));
             if($responsable1->Buscar($numDoc)){
@@ -297,7 +297,7 @@ do{
                 }
             }   
         break;
-        case 5:
+        case 6:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
@@ -331,7 +331,7 @@ do{
                     break;
             }
         break;
-        case 6:
+        case 7:
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
@@ -344,7 +344,4 @@ do{
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
 } while ($desicion == 's');
-// case 7:
-//     echo $unViaje;
-
 ?>
