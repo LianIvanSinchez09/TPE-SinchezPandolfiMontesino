@@ -243,15 +243,17 @@ class Viaje {
     public function hayPasajesDisponibles($id){
         $pasajero = new Pasajero();
         $cantPasajeros = 0;
+        $viaje = null;
         $pasajeros = $pasajero->listar();
-        print_r($pasajeros);
         $esDisponible = false;
         for ($i=0; $i < count($pasajeros); $i++) { 
             if($id == $pasajeros[$i]->getObjViaje()->getIdViaje()){
+                $viaje = $pasajeros[$i]->getObjViaje();
                 $cantPasajeros++;
             }
         }
-        if($this->getCantMaxPasajeros() > $cantPasajeros){
+
+        if($viaje->getCantMaxPasajeros() > $cantPasajeros){
             $esDisponible = true;
         }
         return $esDisponible;

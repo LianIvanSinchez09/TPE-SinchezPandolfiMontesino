@@ -454,6 +454,7 @@ do {
     switch ($opcion) {
         case 1:
             $colViajes = $viaje->listar();
+            $viaje = new Viaje();
             foreach ($colViajes as $viaje) {
                 echo $viaje . "\n";
             }
