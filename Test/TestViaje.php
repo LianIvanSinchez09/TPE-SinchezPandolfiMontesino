@@ -15,11 +15,12 @@ function menu(){
     echo"\nIngrese 1: Para ingresar un pasajero" . 
         "\nIngrese 2: Para modificar datos del pasajero".
         "\nIngrese 3: Insertar viaje".
-        "\nIngrese 4: Modificar viaje".
-        "\nIngrese 5: Modificar al responsable del viaje".
-        "\nIngrese 6: Modificar empresa".
-        "\nIngrese 7: Mostrar detalles del viaje\n";
-        "\nIngrese 8: Eliminar Viaje\n";
+        "\nIngrese 4: Modificar un viaje".
+        "\nIngrese 5: Ingresar al responsable del viaje".
+        "\nIngrese 6: Modificar responsable del viaje".
+        "\nIngrese 7: Modificar empresa".
+        "\nIngrese 8: Mostrar detalles del viaje".
+        "\nIngrese 9: Eliminar viaje";
 }
 
 /**
