@@ -43,6 +43,15 @@ function menuViaje(){
          "\nIngrese (todo): Para cambiar toda la informacion del viaje\n";
 }
 
+function menuResponsable(){
+    echo "que quiere cambiar?\n";
+    echo "Ingrese (nombre): Para cambiar el nombre del responsable" .
+         "\nIngrese (apellido): Para cambiar el apellido del responsable" .
+         "\nIngrese (empleado): Para cambiar el numero de empleado del responsable".
+         "\nIngrese (licencia): Para cambiar el numero de licencia del responsable".
+         "\nIngrese (todo): Para cambiar toda la informacion de un responsable\n";
+}
+
 /**
  * Cambia los datos que comparten todos los pasajero
  * @param string
@@ -120,6 +129,98 @@ function cambiarDato($opcionCambio,$elPasajero){
     }
     return $estado;
 }
+
+function cambiarResponsable($responsable,$opcionCambio){
+    $estado=false;
+    switch ($opcionCambio) {
+        case "nombre":
+            do {
+                echo "ingrese otro nombre\n";
+                $otroDato = trim(fgets(STDIN));
+                $cumple = strcmp($responsable->getNombre(),$otroDato);
+                if ($cumple!=0) {
+                    $responsable->setNombre($otroDato);
+                    $responsable->modificar();
+                    echo "nombre cambiado";
+                    echo $responsable;
+                    $estado = true;
+                } else {
+                    echo "el nombre tiene que ser diferente\n";
+                }
+            } while (!$estado)
+            ;break;
+
+        case "apellido":
+            do {
+                echo "ingrese otro apellido\n";
+                $otroDato = trim(fgets(STDIN));
+                $cumple = strcmp($responsable->getApellido(),$otroDato);
+                if ($cumple!=0) {
+                    $responsable->setApellido($otroDato);
+                    $responsable->modificar();
+                    echo "apellido cambiado";
+                    echo $responsable;
+                    $estado = true;
+                } else {
+                    echo "el apellido tiene que ser diferente\n";
+                }
+            } while (!$estado)
+            ;break;
+        
+        case "empleado":
+            do {
+                echo "ingrese otro numero de empleado\n";
+                $otroDato = trim(fgets(STDIN));
+                $cumple = $responsable->getNumEmpleado()!=$otroDato;
+                if ($cumple) {
+                    $responsable->setNumEmpleado($otroDato);
+                    $responsable->modificar();
+                    echo "numero de empleado cambiado";
+                    echo $responsable;
+                    $estado = true;
+                } else {
+                    echo "el numero de empleado tiene que ser diferente\n";
+                }
+            } while (!$estado)
+            ;break;
+
+        case "licencia":
+            do {
+                echo "ingrese otro numero de licencia\n";
+                $otroDato = trim(fgets(STDIN));
+                $cumple = $responsable->getNumLicencia()!=$otroDato;
+                if ($cumple) {
+                    $responsable->setNumLicencia($otroDato);
+                    $responsable->modificar();
+                    echo "numero de licencia cambiado";
+                    echo $responsable;
+                    $estado = true;
+                } else {
+                     echo "el numero de licencia tiene que ser diferente\n";
+                }
+            } while (!$estado)
+            ;break;        
+
+        case "todo":
+                echo "ingrese el nombre del responsable\n";
+                $nombre = trim(fgets(STDIN));
+                echo "ingrese el apellido del responsable\n";
+                $apellido = trim(fgets(STDIN));
+                echo "ingrese otro numero de empleado\n";
+                $numEmple = trim(fgets(STDIN));
+                echo "ingrese otro numero de licencia\n";
+                $numLice = trim(fgets(STDIN));
+                $responsable->setNombre($nombre);
+                $responsable->setApellido($apellido);
+                $responsable->setNumEmpleado($numEmple);
+                $responsable->setNumLicencia($numLice);
+                $responsable->modificar();
+                echo "datos cambiados";
+                ;break;
+    }
+    return $estado;
+}
+
 
 //--------------------------------------------------------------------------
 $responsable = new Persona();
