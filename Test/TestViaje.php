@@ -642,26 +642,31 @@ do {
         case 10:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
-            for ($i = 0; $i < count($arrResponsable); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrResponsable[$i];
-                echo "\n";
-            }
-            echo "Seleccione cual responsable quiere cambiar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $responsableSeleccionado = $arrResponsable[$seleccion];
-            $responsableSeleccionado->eliminar();
-            if ($responsableSeleccionado->eliminar()) {
-                unset($arrResponsable[$seleccion]);
-                echo "Responsable eliminado\n";
+            if($arrResponsable==null){
+                echo "no hay ningun responsable";
+            }else{
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrResponsable[$i];
                     echo "\n";
                 }
-            } else {
-                echo "Hubo un error eliminando el responsable\n";
+                echo "Seleccione cual responsable quiere cambiar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $responsableSeleccionado = $arrResponsable[$seleccion];
+                $responsableSeleccionado->eliminar();
+                if ($responsableSeleccionado->eliminar()) {
+                    unset($arrResponsable[$seleccion]);
+                    echo "Responsable eliminado\n";
+                    for ($i = 0; $i < count($arrResponsable); $i++) {
+                        echo "---------" . $i + 1 . "------------";
+                        echo $arrResponsable[$i];
+                        echo "\n";
+                    }
+                } else {
+                    echo "Hubo un error eliminando el responsable\n";
+                }
             }
+        ;break;
         case 11:
             $lasEmpresas = new Empresa();
             $arrEmpresas = $lasEmpresas->listar();
