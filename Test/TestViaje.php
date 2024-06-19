@@ -407,44 +407,12 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
 }
 
 //---------------CARGA DE OBJETOS PRINCIPALES-----------------------------------------
-$responsable = new Persona();
-$responsable1 = new ResponsableV();
 $empresa = new Empresa();
-$viaje = new Viaje();
-$viaje2 = new Viaje();
-$res = new Persona();
-$res1 = new Pasajero();
-$arrayViajes = [];
-
-$responsable->cargar(44323057, "Lian", "Sinchez");
-$responsable1->cargar(44323057, "Lian", "Sinchez", 22, 22);
-$empresa->cargar(1, "Viaje Feliz", "Buenos Aires 1800");
-$viaje->cargar(1, "Cipolletti", 20, $responsable1, $empresa, 1000);
-$viaje2->cargar(2, "Cipolletti", 20, $responsable1, $empresa, 1000);
-$res->cargar(22222222, "matias", "pera");
-$res1->cargar(22222222, "matias", "pera", 22, $viaje, 2994130513);
-
-if (!$res1->Buscar(22222222) && !$res->Buscar(22222222)) {
-    $res->insertar();
-    $res1->insertar();
-}
-if (!$responsable->Buscar(44323057) && !$responsable1->Buscar(44323057)) {
-    $responsable->insertar();
-    $responsable1->insertar();
-}
-if (!$empresa->Buscar(1)) {
+if($empresa->listar()==null){
+    $empresa->cargar(1, "Viaje Feliz", "Buenos Aires 1800");
     $empresa->insertar();
 }
-if (!$viaje->Buscar(1) && !$viaje2->Buscar(2)) {
-    $arrayViajes = [];
-
-    $viaje->insertar();
-    $viaje2->insertar();
-    $arrayViajes[] = $viaje;
-    $arrayViajes[] = $viaje2;
-}
-//------------------------------------------------------------------------------------
-
+//---------------------------------------------------------------------------
 do {
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
@@ -526,18 +494,22 @@ do {
         case 4:
             $misViajes = new Viaje();
             $arrayViajes = $misViajes->listar();
-            for ($i = 0; $i < count($arrayViajes); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrayViajes[$i];
-                echo "\n";
+            if($arrayViajes==null){
+                echo "No se hay cargado ningun viaje";
+            }else{
+                for ($i = 0; $i < count($arrayViajes); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayViajes[$i];
+                    echo "\n";
+                }
+                echo "Seleccione cual viaje quiere cambiar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $viajeSeleccionado = $arrayViajes[$seleccion];
+                menuViaje();
+                $opcionCambio = trim(fgets(STDIN));
+                cambioViaje($opcionCambio, $viajeSeleccionado);
             }
-            echo "Seleccione cual viaje quiere cambiar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $viajeSeleccionado = $arrayViajes[$seleccion];
-            menuViaje();
-            $opcionCambio = trim(fgets(STDIN));
-            cambioViaje($opcionCambio, $viajeSeleccionado);;
-            break;
+            ;break;
         case 5:
             echo "Ingrese el numero de documento del responsable del viaje";
             $numDoc = trim(fgets(STDIN));
@@ -566,18 +538,22 @@ do {
         case 6:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
-            for ($i = 0; $i < count($arrResponsable); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrResponsable[$i];
-                echo "\n";
+            if($arrResponsable==null){
+                echo "No hay ningun responsable cargado";
+            }else{
+                for ($i = 0; $i < count($arrResponsable); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrResponsable[$i];
+                    echo "\n";
+                }
+                echo "Seleccione cual responsable quiere cambiar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $responsableSeleccionado = $arrResponsable[$seleccion];
+                menuResponsable();
+                $opcionCambio = trim(fgets(STDIN));
+                cambiarResponsable($responsableSeleccionado, $opcionCambio);
             }
-            echo "Seleccione cual responsable quiere cambiar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $responsableSeleccionado = $arrResponsable[$seleccion];
-            menuResponsable();
-            $opcionCambio = trim(fgets(STDIN));
-            cambiarResponsable($responsableSeleccionado, $opcionCambio);;
-            break;
+            ;break;        
         case 7:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
@@ -608,11 +584,10 @@ do {
                         }
                     } while (!$estado);
                     break;
-                default:
-                    break;
             };
             break;
         case 8:
+            
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
