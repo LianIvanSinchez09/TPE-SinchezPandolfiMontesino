@@ -23,11 +23,11 @@ function menu()
         "\nIngrese 8: Mostrar detalles del viaje" .
         "\nIngrese 9: Eliminar pasajero" .
         "\nIngrese 10: Eliminar viaje" .
-        "\nIngrese 11: Eliminar responsable" .
-        "\nIngrese 12: Eliminar pasajero" .
+        "\nIngrese 11: Eliminar responsable".
+        "\nIngrese 12: Eliminar pasajero".
         "\nIngrese 13: Mostrar pasajero" .
-        "\nIngrese 14: Mostrar viaje" .
-        "\nIngrese 15: Mostrar responsable\n";
+        "\nIngrese 14: Mostrar viaje".
+        "\nIngrese 15: Mostrar responsable\n" ;
 }
 
 /**
@@ -442,8 +442,14 @@ do {
     $otroPasajero = new Pasajero();
     switch ($opcion) {
         case 1:
-            $listaPasajero = $otroPasajero->listar();
-            if (count($listaPasajero) < $viaje->getCantMaxPasajeros()) {
+            $colViajes = $viaje->listar();
+            foreach ($colViajes as $viaje) {
+                echo $viaje . "\n";
+            }
+            echo "A cual viaje desea ir: \n";
+            $idOpcViaje = trim(fgets(STDIN)) - 1;            
+            if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
+                echo "Hay pasajes disponibles\n";
                 echo "ingrese el nombre del pasajero\n";
                 $nombre = trim(fgets(STDIN));
                 echo "ingrese el apellido del pasajero\n";
@@ -692,12 +698,7 @@ do {
                 echo "Hubo un error eliminando al pasajero\n";
             };
             break;
-        case 13:
-            $colPasajero = $res1->listar();
-            foreach ($colPasajero as $pasajero) {
-                echo $pasajero;
-            }
-            ;break;
+
         case 14:
             $losViajes = new Viaje();
             $arrayViajes = $losViajes->listar();
