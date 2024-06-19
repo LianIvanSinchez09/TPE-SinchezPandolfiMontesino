@@ -239,5 +239,22 @@ class Viaje {
         }
         return $resp;
     }
+
+    public function hayPasajesDisponibles($id){
+        $pasajero = new Pasajero();
+        $cantPasajeros = 0;
+        $pasajeros = $pasajero->listar();
+        $esDisponible = false;
+        for ($i=0; $i < count($pasajeros); $i++) { 
+            if($id == $pasajeros[$i]->getObjViaje()->getIdViaje()){
+                $cantPasajeros++;
+            }
+        }
+        if($this->getCantMaxPasajeros() > $cantPasajeros){
+            $esDisponible = true;
+        }
+        return $esDisponible;
+    }
+
 }
 ?>
