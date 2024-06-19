@@ -500,7 +500,10 @@ do {
                 $otroViaje = new Viaje();
                 echo "Ingrese coste del viaje: ";
                 $costo = trim(fgets(STDIN));
-                $otroViaje->cargar(count($arrayViajes) + 1, $destino, $cantMaxPasajeros, $responsableSeleccionado, $empresa, $costo);
+                $misEmpresas=new Empresa();
+                $colEmpre=$misEmpresas->listar();
+                $laEmpresa=$colEmpre[0];
+                $otroViaje->cargar(count($arrayViajes) + 1, $destino, $cantMaxPasajeros, $responsableSeleccionado, $laEmpresa, $costo);
                 if ($otroViaje->insertar()) {
                     $arrayViajes[] = $otroViaje;
                     echo "Viaje correctamente insertado\n";
