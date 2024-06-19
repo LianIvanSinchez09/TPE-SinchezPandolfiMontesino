@@ -250,6 +250,9 @@ class Viaje {
                 $cantPasajeros++;
             }
         }
+        echo "---------------------\n";
+        echo $cantPasajeros;
+        echo "---------------------\n";
         if($this->getCantMaxPasajeros() > $cantPasajeros){
             $esDisponible = true;
         }
