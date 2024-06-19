@@ -16,8 +16,9 @@ function menu(){
         "\nIngrese 2: Para modificar datos del pasajero".
         "\nIngrese 3: Insertar viaje".
         "\nIngrese 4: Modificar viaje".
-        "\nIngrese 5: Modificar empresa".
-        "\nIngrese 6: Mostrar detalles del viaje\n";
+        "\nIngrese 5: Modificar al responsable del viaje".
+        "\nIngrese 6: Modificar empresa".
+        "\nIngrese 7: Mostrar detalles del viaje\n";
 }
 
 /**
