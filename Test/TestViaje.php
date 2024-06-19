@@ -607,8 +607,6 @@ do {
                         }
                     } while (!$estado);
                     break;
-                default:
-                    break;
             };
             break;
         case 8:
