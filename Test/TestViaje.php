@@ -553,9 +553,10 @@ do {
                 echo "Ingrese su numero de licencia\n";
                 $numLice = trim(fgets(STDIN));
                 $nuevaPersona->cargar($numDoc, $nombre, $apellido);
+                $nuevaPersona->insertar();
                 $nuevoResponsable->cargar($numDoc, $nombre, $apellido, $numEmp, $numLice);
                 $nuevoResponsable->insertar();
-                $nuevaPersona->insertar();
+                
                 echo "Responsable cargado en la base de datos";
             };
             break;
