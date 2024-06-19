@@ -421,7 +421,6 @@ do {
     $otroPasajero = new Pasajero();
     switch ($opcion) {
         case 1:
-            $viaje = new Viaje();
             $colViajes = $viaje->listar();
             foreach ($colViajes as $viaje) {
                 echo $viaje . "\n";
@@ -474,6 +473,7 @@ do {
             };
             break;
         case 3:
+            //pedirle al usuario antes un responsable para cargar un viaje, si no hay responsables no se podra cargar un viaje nuevo
             echo "Ingrese destino: \n";
             $destino = trim(fgets(STDIN));
             echo "Cantidad maxima de pasajeros: \n";
@@ -553,7 +553,7 @@ do {
                 $opcionCambio = trim(fgets(STDIN));
                 cambiarResponsable($responsableSeleccionado, $opcionCambio);
             }
-            ;break;        
+            ;break;
         case 7:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
@@ -587,7 +587,6 @@ do {
             };
             break;
         case 8:
-
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
