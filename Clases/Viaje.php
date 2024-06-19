@@ -191,9 +191,6 @@ class Viaje {
         return $arregloViaje;
     }
 
-
-
-
     public function insertar() {
         $base = new BaseDatos();
         $resp = false;
