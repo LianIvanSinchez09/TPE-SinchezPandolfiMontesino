@@ -24,7 +24,10 @@ function menu()
         "\nIngrese 9: Eliminar pasajero" .
         "\nIngrese 10: Eliminar viaje" .
         "\nIngrese 11: Eliminar responsable".
-        "\nIngrese 12: Eliminar pasajero";
+        "\nIngrese 12: Eliminar pasajero".
+        "\nIngrese 13: Mostrar pasajero" .
+        "\nIngrese 14: Mostrar viaje".
+        "\nIngrese 15: Mostrar responsable\n" ;
 }
 
 /**
