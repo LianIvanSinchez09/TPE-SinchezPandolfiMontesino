@@ -458,7 +458,7 @@ do{
                     break;
                 case 'nombre':
                     do {
-                        echo "Ingrese nueva nombre: \n";
+                        echo "Ingrese nuevo nombre: \n";
                         $nombre = trim(fgets(STDIN));
                         $empresa->setNombre($nombre);
                         if($empresa->modificar()){
@@ -523,8 +523,30 @@ do{
                     echo "\n";
                 }
             }else{
-                echo "Hubo un error eliminando el viaje\n";
-            }            
+                echo "Hubo un error eliminando el responsable\n";
+            }
+        case 12:
+            $lasEmpresas=new Empresa();
+            $arrEmpresas=$lasEmpresas->listar();
+            for ($i=0; $i < count($arrEmpresas); $i++) {
+                echo "---------" . $i + 1 . "------------"; 
+                echo $arrEmpresas[$i];
+                echo "\n";
+            }
+            echo "Seleccione cual responsable quiere cambiar: ";
+            $seleccion=trim(fgets(STDIN)) - 1;
+            $empresaSeleccionada = $arrEmpresas[$seleccion];
+            if($empresaSeleccionada->eliminar()){
+                unset($arrEmpresas[$seleccion]);
+                echo "Empresa eliminada\n";
+                for ($i=0; $i < count($arrEmpresas); $i++) {
+                    echo "---------" . $i + 1 . "------------"; 
+                    echo $arrEmpresas[$i];
+                    echo "\n";
+                }
+            }else{
+                echo "Hubo un error eliminando la empresa\n";
+            }           
             ;break;
         default:
             echo "\nOpcion Invalida";
