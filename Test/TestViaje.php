@@ -457,7 +457,7 @@ do {
             foreach ($colViajes as $viaje) {
                 echo $viaje . "\n";
             }
-            echo "A cual viaje desea ir: \n";
+            echo "A cual viaje desea ir (id): \n";
             $idOpcViaje = trim(fgets(STDIN));
             if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
                 echo "Hay pasajes disponibles\n";
