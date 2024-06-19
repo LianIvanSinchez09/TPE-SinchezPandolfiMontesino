@@ -99,23 +99,28 @@ class ResponsableV extends Persona
   {
     $base = new BaseDatos();
     $resp = false;
-    $consultaInsertar = "INSERT INTO personaresponsable(documento, numeroEmpleado, numeroLicencia) 
+
+    if (parent::insertar()) {
+
+      $consultaInsertar = "INSERT INTO personaresponsable(documento, numeroEmpleado, numeroLicencia) 
           VALUES ('" . parent::getdocumento() . "','" . $this->getNumEmpleado() . "','" . $this->getNumLicencia() . "')";
 
-    if ($base->Iniciar()) {
+      if ($base->Iniciar()) {
 
-      if ($base->Ejecutar($consultaInsertar)) {
+        if ($base->Ejecutar($consultaInsertar)) {
 
-        $resp =  true;
+          $resp =  true;
+        } else {
+          $this->setmensajeoperacion($base->getError());
+        }
       } else {
         $this->setmensajeoperacion($base->getError());
       }
-    } else {
-      $this->setmensajeoperacion($base->getError());
     }
     return $resp;
   }
 
+  // hasta aca me quede
   public function modificar()
   {
     $resp = false;
