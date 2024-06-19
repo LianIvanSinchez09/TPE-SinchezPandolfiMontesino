@@ -17,8 +17,9 @@ function menu(){
         "\nIngrese 3: Insertar viaje".
         "\nIngrese 4: Modificar viaje".
         "\nIngrese 5: Ingresar a un responsable del viaje".
-        "\nIngrese 6: Modificar empresa".
-        "\nIngrese 7: Mostrar detalles del viaje\n";
+        "\nIngrese 6: Modificar a un responsable del viaje".
+        "\nIngrese 7: Modificar empresa".
+        "\nIngrese 8: Mostrar detalles del viaje\n";
 }
 
 /**
@@ -318,7 +319,7 @@ do{
                 echo "Responsable cargado en la base de datos";
             }
             ;break;
-        case 6:
+        case 7:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
@@ -351,13 +352,13 @@ do{
                 default:
                     break;
             }
-        break;
-        case 7:
+            ;break;
+        case 8:
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
             }
-        break;
+        ;break;
         default:
             echo "\nOpcion Invalida";
         break;
