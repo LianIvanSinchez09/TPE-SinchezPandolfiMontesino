@@ -447,7 +447,7 @@ do {
                 echo $viaje . "\n";
             }
             echo "A cual viaje desea ir: \n";
-            $idOpcViaje = trim(fgets(STDIN)) - 1;            
+            $idOpcViaje = trim(fgets(STDIN));            
             if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
                 echo "Hay pasajes disponibles\n";
                 echo "ingrese el nombre del pasajero\n";
