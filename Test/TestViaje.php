@@ -19,12 +19,12 @@ function menu()
         "\nIngrese 4: Modificar un viaje" .
         "\nIngrese 5: Ingresar al responsable del viaje" .
         "\nIngrese 6: Modificar responsable del viaje" .
-        "\nIngrese 7: Ingresar otra empresa" .
-        "\nIngrese 8: Modificar empresa" .
-        "\nIngrese 9: Mostrar detalles del viaje" .
-        "\nIngrese 10: Eliminar pasajero" .
-        "\nIngrese 11: Eliminar viaje" .
-        "\nIngrese 12: Eliminar responsable";
+        "\nIngrese 7: Modificar empresa" .
+        "\nIngrese 8: Mostrar detalles del viaje" .
+        "\nIngrese 9: Eliminar pasajero" .
+        "\nIngrese 10: Eliminar viaje" .
+        "\nIngrese 11: Eliminar responsable".
+        "\nIngrese 12: Eliminar pasajero";
 }
 
 /**
