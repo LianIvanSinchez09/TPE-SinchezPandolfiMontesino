@@ -443,8 +443,13 @@ if (!$viaje->Buscar(1) && !$viaje2->Buscar(2)) {
     $arrayViajes[] = $viaje;
     $arrayViajes[] = $viaje2;
 }
-//------------------------------------------------------------------------------------
-
+//--------------------------------------------------------------------------
+$empresa = new Empresa();
+if($empresa->listar()==null){
+    $empresa->cargar(1, "Viaje Feliz", "Buenos Aires 1800");
+    $empresa->insertar();
+}
+//---------------------------------------------------------------------------
 do {
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
