@@ -319,6 +319,22 @@ do{
                 echo "Responsable cargado en la base de datos";
             }
             ;break;
+        case 6:
+            $losResponsables=new ResponsableV();
+            $arrResponsable=$losResponsables->listar();
+            for ($i=0; $i < count($arrResponsable); $i++) {
+                echo "---------" . $i + 1 . "------------"; 
+                echo $arrResponsable[$i];
+                echo "\n";
+            }
+            echo "Seleccione cual responsable quiere cambiar: ";
+            $seleccion=trim(fgets(STDIN)) - 1;
+            $responsableSeleccionado = $arrResponsable[$seleccion]; 
+            menuResponsable();
+            $opcionCambio=trim(fgets(STDIN));
+            cambiarResponsable($responsableSeleccionado,$opcionCambio);
+            ;break;
+
         case 7:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
@@ -359,7 +375,7 @@ do{
                 echo $viaje;
             }
         break;
-        case 8:
+        case 9:
             for ($i=0; $i < count($arrayViajes); $i++) {
                 echo "---------" . $i + 1 . "------------"; 
                 echo $arrayViajes[$i];
