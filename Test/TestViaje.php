@@ -406,33 +406,43 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
     }
 }
 
-//--------------------------------------------------------------------------
+//---------------CARGA DE OBJETOS PRINCIPALES-----------------------------------------
 $responsable = new Persona();
 $responsable1 = new ResponsableV();
-$responsable->cargar(44323057, "Lian", "Sinchez");
-$responsable1->cargar(44323057, "Lian", "Sinchez", 22, 22);
-$responsable->insertar();
-$responsable1->insertar();
-
-$arrayViajes = [];
 $empresa = new Empresa();
-$empresa->cargar(1, "Viaje Feliz", "Buenos Aires 1800");
 $viaje = new Viaje();
-$viaje->cargar(1, "Cipolletti", 20, $responsable1, $empresa, 1000);
 $viaje2 = new Viaje();
-$viaje2->cargar(2, "Cipolletti", 20, $responsable1, $empresa, 1000);
-$empresa->insertar();
-$viaje->insertar();
-$viaje2->insertar();
-$arrayViajes[] = $viaje;
-$arrayViajes[] = $viaje2;
-
 $res = new Persona();
 $res1 = new Pasajero();
+
+$responsable->cargar(44323057, "Lian", "Sinchez");
+$responsable1->cargar(44323057, "Lian", "Sinchez", 22, 22);
+$empresa->cargar(1, "Viaje Feliz", "Buenos Aires 1800");
+$viaje->cargar(1, "Cipolletti", 20, $responsable1, $empresa, 1000);
+$viaje2->cargar(2, "Cipolletti", 20, $responsable1, $empresa, 1000);
 $res->cargar(22222222, "matias", "pera");
 $res1->cargar(22222222, "matias", "pera", 22, $viaje, 2994130513);
-$res->insertar();
-$res1->insertar();
+
+if(!$res1->Buscar(22222222) && !$res->Buscar(22222222)){
+    $res->insertar();
+    $res1->insertar();
+}
+if(!$responsable->Buscar(44323057) && !$responsable1->Buscar(44323057)){
+    $responsable->insertar();
+    $responsable1->insertar();
+}
+if(!$empresa->Buscar(1)){
+    $empresa->insertar();
+}
+if(!$viaje->Buscar(1) && !$viaje2->Buscar(2)){
+    $arrayViajes = [];
+
+    $viaje->insertar();
+    $viaje2->insertar();
+    $arrayViajes[] = $viaje;
+    $arrayViajes[] = $viaje2;
+}
+//------------------------------------------------------------------------------------
 
 do {
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
