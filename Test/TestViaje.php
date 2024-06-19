@@ -20,7 +20,9 @@ function menu(){
         "\nIngrese 6: Modificar responsable del viaje".
         "\nIngrese 7: Modificar empresa".
         "\nIngrese 8: Mostrar detalles del viaje".
-        "\nIngrese 9: Eliminar viaje";
+        "\nIngrese 9: Eliminar pasajero".
+        "\nIngrese 10: Eliminar viaje".
+        "\nIngrese 11: Eliminar responsable";
 }
 
 /**
@@ -477,7 +479,9 @@ do{
                 echo $viaje;
             }
         break;
-        case 9:
+        case 10:
+            $losViajes=new Viaje();
+            $arrayViajes=$losViajes->listar();
             for ($i=0; $i < count($arrayViajes); $i++) {
                 echo "---------" . $i + 1 . "------------"; 
                 echo $arrayViajes[$i];
@@ -497,6 +501,31 @@ do{
             }else{
                 echo "Hubo un error eliminando el viaje\n";
             }
+            ;break;
+        case 11:
+            $losResponsables=new ResponsableV();
+            $arrResponsable=$losResponsables->listar();
+            for ($i=0; $i < count($arrResponsable); $i++) {
+                echo "---------" . $i + 1 . "------------"; 
+                echo $arrResponsable[$i];
+                echo "\n";
+            }
+            echo "Seleccione cual responsable quiere cambiar: ";
+            $seleccion=trim(fgets(STDIN)) - 1;
+            $responsableSeleccionado = $arrResponsable[$seleccion];
+            $responsableSeleccionado->eliminar();
+            if($responsableSeleccionado->eliminar()){
+                unset($arrResponsable[$seleccion]);
+                echo "Responsable eliminado\n";
+                for ($i=0; $i < count($arrResponsable); $i++) {
+                    echo "---------" . $i + 1 . "------------"; 
+                    echo $arrResponsable[$i];
+                    echo "\n";
+                }
+            }else{
+                echo "Hubo un error eliminando el viaje\n";
+            }            
+            ;break;
         default:
             echo "\nOpcion Invalida";
         break;
