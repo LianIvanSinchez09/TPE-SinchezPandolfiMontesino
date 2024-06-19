@@ -153,7 +153,7 @@ class Empresa
     {
         $resp = false;
         $base = new BaseDatos();
-        $consultaModifica = "UPDATE empresa SET direccion='" . $this->getDireccion() . "',nombre='" . $this->getNombre() . "' WHERE idEmpresa=" . $this->getIdEmpresa();
+        $consultaModifica = "UPDATE empresa SET direccion='" . $this->getDireccion() . "', nombre='" . $this->getNombre() . "' WHERE idEmpresa='" . $this->getIdEmpresa() . "'";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaModifica)) {
                 $resp =  true;
