@@ -413,6 +413,7 @@ if($empresa->listar()==null){
     $empresa->insertar();
 }
 //---------------------------------------------------------------------------
+$arrayViajes = [];
 do {
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
