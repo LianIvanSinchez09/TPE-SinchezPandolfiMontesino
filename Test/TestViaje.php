@@ -588,7 +588,7 @@ do {
             };
             break;
         case 8:
-            
+
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
