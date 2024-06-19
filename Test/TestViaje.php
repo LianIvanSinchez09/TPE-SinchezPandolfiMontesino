@@ -230,7 +230,6 @@ do{
             $viajeSeleccionado = $arrayViajes[$seleccion];
             menuViaje();
             $opcionCambio=trim(fgets(STDIN));
-            // menuViaje();
             switch($opcionCambio){
                 case 'destino':
                     do{
