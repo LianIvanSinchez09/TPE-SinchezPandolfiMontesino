@@ -413,7 +413,8 @@ if($empresa->listar()==null){
     $empresa->insertar();
 }
 //---------------------------------------------------------------------------
-$arrayViajes = [];
+$arrayViajes = array();
+$viaje= new Viaje();
 do {
     //solo existe un tipo viaje, para cambiar los valores de pasajero tengo que primero cambiar el valor del padre y despues darselo al hijo
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
@@ -423,40 +424,44 @@ do {
     switch ($opcion) {
         case 1:
             $colViajes = $viaje->listar();
-            foreach ($colViajes as $viaje) {
-                echo $viaje . "\n";
-            }
-            echo "A cual viaje desea ir (id): \n";
-            $idOpcViaje = trim(fgets(STDIN));
-            if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
-                echo "Hay pasajes disponibles\n";
-                echo "ingrese el nombre del pasajero\n";
-                $nombre = trim(fgets(STDIN));
-                echo "ingrese el apellido del pasajero\n";
-                $apellido = trim(fgets(STDIN));
-                echo "ingrese el numero de documento del pasajero\n";
-                $numDoc = trim(fgets(STDIN));
-
-                $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
-                $nuevaPersona = new Persona();
-                $personaYaCargada = $nuevaPersona->Buscar($numDoc);
-                if ($personaYaCargada) {
-                    echo "Esa persona ya existe en la base de datos";
-                } else if ($pasajeroYacargado) {
-                    echo "Ya se encuentra en ese viaje";
-                } else {
-                    echo "ingrese el numero de telefono del pasajero\n";
-                    $numTele = trim(fgets(STDIN));
-                    $nuevaPersona = new Persona();
-                    $nuevoPasajero = new Pasajero();
-                    $nuevaPersona->cargar($numDoc, $nombre, $apellido);
-                    $nuevoPasajero->cargar($numDoc, $nombre, $apellido, 20, $viaje, $numTele);
-                    $nuevaPersona->insertar();
-                    $nuevoPasajero->insertar();
-                    echo "Pasajero cargado en la base de datos";
+            if($colViajes==null){
+                echo "No hay ningun viaje cargado";
+            }else{
+                foreach ($colViajes as $viaje) {
+                    echo $viaje . "\n";
                 }
-            } else {
-                echo "No disponible";
+                echo "A cual viaje desea ir (id): \n";
+                $idOpcViaje = trim(fgets(STDIN));
+                if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
+                    echo "Hay pasajes disponibles\n";
+                    echo "ingrese el nombre del pasajero\n";
+                    $nombre = trim(fgets(STDIN));
+                    echo "ingrese el apellido del pasajero\n";
+                    $apellido = trim(fgets(STDIN));
+                    echo "ingrese el numero de documento del pasajero\n";
+                    $numDoc = trim(fgets(STDIN));
+    
+                    $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
+                    $nuevaPersona = new Persona();
+                    $personaYaCargada = $nuevaPersona->Buscar($numDoc);
+                    if ($personaYaCargada) {
+                        echo "Esa persona ya existe en la base de datos";
+                    } else if ($pasajeroYacargado) {
+                        echo "Ya se encuentra en ese viaje";
+                    } else {
+                        echo "ingrese el numero de telefono del pasajero\n";
+                        $numTele = trim(fgets(STDIN));
+                        $nuevaPersona = new Persona();
+                        $nuevoPasajero = new Pasajero();
+                        $nuevaPersona->cargar($numDoc, $nombre, $apellido);
+                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, 20, $viaje, $numTele);
+                        $nuevaPersona->insertar();
+                        $nuevoPasajero->insertar();
+                        echo "Pasajero cargado en la base de datos";
+                    }
+                } else {
+                    echo "No disponible";
+                }
             };
             break;
         case 2:
@@ -475,23 +480,37 @@ do {
             break;
         case 3:
             //pedirle al usuario antes un responsable para cargar un viaje, si no hay responsables no se podra cargar un viaje nuevo
-            echo "Ingrese destino: \n";
-            $destino = trim(fgets(STDIN));
-            echo "Cantidad maxima de pasajeros: \n";
-            $cantMaxPasajeros = trim(fgets(STDIN));
-            $otroViaje = new Viaje();
-            echo "Ingrese coste del viaje: ";
-            $costo = trim(fgets(STDIN));
-            $otroViaje->cargar(count($arrayViajes) + 1, $destino, $cantMaxPasajeros, $responsable1, $empresa, $costo);
-            if ($otroViaje->insertar()) {
-                $arrayViajes[] = $otroViaje;
-                echo "Viaje correctamente insertado\n";
-                $colViajes = $otroViaje->listar();
-                foreach ($colViajes as $viaje) {
-                    echo $viaje . "\n";
+            $losResponsables = new ResponsableV();
+            $arrResponsable = $losResponsables->listar();
+            if($arrResponsable==null){
+                echo "No hay ningun responsable cargado para cargar un nuevo viaje";
+            }else{
+                for ($i = 0; $i < count($arrResponsable); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrResponsable[$i];
+                    echo "\n";
+                }
+                echo "Seleccione cual responsable quiere que tenga el viaje: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $responsableSeleccionado = $arrResponsable[$seleccion];
+                echo "Ingrese destino: \n";
+                $destino = trim(fgets(STDIN));
+                echo "Cantidad maxima de pasajeros: \n";
+                $cantMaxPasajeros = trim(fgets(STDIN));
+                $otroViaje = new Viaje();
+                echo "Ingrese coste del viaje: ";
+                $costo = trim(fgets(STDIN));
+                $otroViaje->cargar(count($arrayViajes) + 1, $destino, $cantMaxPasajeros, $responsableSeleccionado, $empresa, $costo);
+                if ($otroViaje->insertar()) {
+                    $arrayViajes[] = $otroViaje;
+                    echo "Viaje correctamente insertado\n";
+                    $colViajes = $otroViaje->listar();
+                    foreach ($colViajes as $viaje) {
+                        echo $viaje . "\n";
+                    }
                 }
             }
-            break;
+            ;break;
         case 4:
             $misViajes = new Viaje();
             $arrayViajes = $misViajes->listar();
