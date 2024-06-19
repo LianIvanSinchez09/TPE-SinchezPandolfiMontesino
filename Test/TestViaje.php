@@ -414,6 +414,7 @@ $viaje = new Viaje();
 $viaje2 = new Viaje();
 $res = new Persona();
 $res1 = new Pasajero();
+$arrayViajes = [];
 
 $responsable->cargar(44323057, "Lian", "Sinchez");
 $responsable1->cargar(44323057, "Lian", "Sinchez", 22, 22);

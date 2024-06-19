@@ -244,10 +244,12 @@ class Viaje {
         $pasajero = new Pasajero();
         $cantPasajeros = 0;
         $pasajeros = $pasajero->listar();
+        print_r($pasajeros);
         $esDisponible = false;
         for ($i=0; $i < count($pasajeros); $i++) { 
             if($id == $pasajeros[$i]->getObjViaje()->getIdViaje()){
                 $cantPasajeros++;
+                echo $pasajeros[$i];
             }
         }
         echo "---------------------\n";
