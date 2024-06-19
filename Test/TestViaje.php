@@ -390,8 +390,8 @@ $arrayViajes[] = $viaje2;
 
 $res = new Persona();
 $res1 = new Pasajero();
-$res->cargar(22222222, "matias", "peña");
-$res1->cargar(22222222, "matias", "peña", 22, $viaje,2994130513);
+$res->cargar(22222222, "matias", "pera");
+$res1->cargar(22222222, "matias", "pera", 22, $viaje,2994130513);
 $res->insertar();
 $res1->insertar();
 
@@ -521,8 +521,9 @@ do{
             $opcionCambio=trim(fgets(STDIN));
             cambiarResponsable($responsableSeleccionado,$opcionCambio);
             ;break;
-
         case 7:
+            ;break;
+        case 8:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
@@ -556,7 +557,7 @@ do{
                     break;
             }
             ;break;
-        case 8:
+        case 9:
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
