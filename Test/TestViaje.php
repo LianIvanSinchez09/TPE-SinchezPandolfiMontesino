@@ -697,7 +697,25 @@ do {
             foreach ($colPasajero as $pasajero) {
                 echo $pasajero;
             }
-            break;
+            ;break;
+        case 14:
+            $losViajes = new Viaje();
+            $arrayViajes = $losViajes->listar();
+            for ($i = 0; $i < count($arrayViajes); $i++) {
+                echo "---------" . $i + 1 . "------------";
+                echo $arrayViajes[$i];
+                echo "\n";
+            }
+            ;break;
+        case 15:
+            $losResponsables = new ResponsableV();
+            $arrResponsable = $losResponsables->listar();
+            for ($i = 0; $i < count($arrResponsable); $i++) {
+                echo "---------" . $i + 1 . "------------";
+                echo $arrResponsable[$i];
+                echo "\n";
+            }
+            ;break;
         default:
             echo "\nOpcion Invalida";
             break;
