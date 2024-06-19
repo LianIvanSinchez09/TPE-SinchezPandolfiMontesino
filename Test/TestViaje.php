@@ -127,12 +127,14 @@ $responsable1->cargar(44323057, "Lian", "Sinchez", 22, 22);
 $responsable->insertar();
 $responsable1->insertar();
 
+$arrayViajes = [];
 $empresa=new Empresa();
 $empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
 $viaje = new Viaje();
 $viaje->cargar(1, "Cipolletti", 20, $responsable1, $empresa, 1000);
 $empresa->insertar();
 $viaje->insertar();
+$arrayViajes[] = $viaje;
 
 $res = new Persona();
 $res1 = new Pasajero();
@@ -209,6 +211,12 @@ do{
             }
         break;
         case 4:
+            $listaActualViaje = $viaje->listar();
+            for ($i=0; $i < count($listaActualViaje); $i++) {
+                echo "---------" . $i + 1 . "------------"; 
+                echo $listaActualViaje[$i];
+                echo "\n";
+            }
             menuViaje();
             $opcionCambio=trim(fgets(STDIN));
             switch($opcionCambio){
@@ -274,7 +282,7 @@ do{
                 break;
             }
         break;
-        case 4:
+        case 5:
             echo "Ingrese el documento del responsable";
             $numDoc=trim(fgets(STDIN));
             if($responsable1->Buscar($numDoc)){
@@ -297,7 +305,7 @@ do{
                 }
             }   
         break;
-        case 5:
+        case 6:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
@@ -331,7 +339,7 @@ do{
                     break;
             }
         break;
-        case 6:
+        case 7:
             $col = $viaje->listar();
             foreach ($col as $viaje) {
                 echo $viaje;
