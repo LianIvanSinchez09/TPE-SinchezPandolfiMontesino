@@ -23,7 +23,7 @@ function menu()
         "\nIngrese 8: Mostrar detalles del viaje" .
         "\nIngrese 9: Eliminar pasajero" .
         "\nIngrese 10: Eliminar viaje" .
-        "\nIngrese 11: Eliminar responsable".
+        "\nIngrese 11: Eliminar responsable" .
         "\nIngrese 12: Eliminar pasajero";
 }
 
@@ -554,9 +554,9 @@ do {
             $seleccion = trim(fgets(STDIN)) - 1;
             $responsableSeleccionado = $arrResponsable[$seleccion];
             menuResponsable();
-            $opcionCambio=trim(fgets(STDIN));
-            cambiarResponsable($responsableSeleccionado,$opcionCambio);
-            ;break;
+            $opcionCambio = trim(fgets(STDIN));
+            cambiarResponsable($responsableSeleccionado, $opcionCambio);;
+            break;
         case 7:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
@@ -589,8 +589,8 @@ do {
                     break;
                 default:
                     break;
-            }
-            ;break;
+            };
+            break;
         case 8:
             $col = $viaje->listar();
             foreach ($col as $viaje) {
@@ -664,6 +664,29 @@ do {
                 }
             } else {
                 echo "Hubo un error eliminando la empresa\n";
+            };
+            break;
+        case 12: //------------------------------------------------------------
+            $losPasajeros = new Pasajero();
+            $arrayPasajeros = $losPasajeros->listar();
+            for ($i = 0; $i < count($arrayPasajeros); $i++) {
+                echo "---------" . $i + 1 . "------------";
+                echo $arrayPasajeros[$i];
+                echo "\n";
+            }
+            echo "Seleccione cual pasajero quiere eliminar: ";
+            $seleccion = trim(fgets(STDIN)) - 1;
+            $pasajeroSeleccionada = $arrayPasajeros[$seleccion];
+            if ($pasajeroSeleccionada->eliminar()) {
+                unset($arrayPasajeros[$seleccion]);
+                echo "Pasajero eliminado\n";
+                for ($i = 0; $i < count($arrayPasajeros); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayPasajeros[$i];
+                    echo "\n";
+                }
+            } else {
+                echo "Hubo un error eliminando al pasajero\n";
             };
             break;
         default:
