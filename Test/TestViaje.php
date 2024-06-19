@@ -548,12 +548,14 @@ do {
                 $nombre = trim(fgets(STDIN));
                 echo "ingrese el apellido del responsable\n";
                 $apellido = trim(fgets(STDIN));
+                echo "ingrese el numero de empleado\n";
+                $numEmp = trim(fgets(STDIN));
                 echo "Ingrese su numero de licencia\n";
                 $numLice = trim(fgets(STDIN));
                 $nuevaPersona->cargar($numDoc, $nombre, $apellido);
-                $nuevoResponsable->cargar($numDoc, $nombre, $apellido, 2, $numLice);
-                $nuevaPersona->insertar();
+                $nuevoResponsable->cargar($numDoc, $nombre, $apellido, $numEmp, $numLice);
                 $nuevoResponsable->insertar();
+                $nuevaPersona->insertar();
                 echo "Responsable cargado en la base de datos";
             };
             break;
