@@ -23,11 +23,11 @@ function menu()
         "\nIngrese 8: Mostrar detalles del viaje" .
         "\nIngrese 9: Eliminar pasajero" .
         "\nIngrese 10: Eliminar viaje" .
-        "\nIngrese 11: Eliminar responsable".
-        "\nIngrese 12: Eliminar pasajero".
+        "\nIngrese 11: Eliminar responsable" .
+        "\nIngrese 12: Eliminar pasajero" .
         "\nIngrese 13: Mostrar pasajero" .
-        "\nIngrese 14: Mostrar viaje".
-        "\nIngrese 15: Mostrar responsable\n" ;
+        "\nIngrese 14: Mostrar viaje" .
+        "\nIngrese 15: Mostrar responsable\n";
 }
 
 /**
@@ -423,18 +423,18 @@ $viaje2->cargar(2, "Cipolletti", 20, $responsable1, $empresa, 1000);
 $res->cargar(22222222, "matias", "pera");
 $res1->cargar(22222222, "matias", "pera", 22, $viaje, 2994130513);
 
-if(!$res1->Buscar(22222222) && !$res->Buscar(22222222)){
+if (!$res1->Buscar(22222222) && !$res->Buscar(22222222)) {
     $res->insertar();
     $res1->insertar();
 }
-if(!$responsable->Buscar(44323057) && !$responsable1->Buscar(44323057)){
+if (!$responsable->Buscar(44323057) && !$responsable1->Buscar(44323057)) {
     $responsable->insertar();
     $responsable1->insertar();
 }
-if(!$empresa->Buscar(1)){
+if (!$empresa->Buscar(1)) {
     $empresa->insertar();
 }
-if(!$viaje->Buscar(1) && !$viaje2->Buscar(2)){
+if (!$viaje->Buscar(1) && !$viaje2->Buscar(2)) {
     $arrayViajes = [];
 
     $viaje->insertar();
@@ -457,7 +457,7 @@ do {
                 echo $viaje . "\n";
             }
             echo "A cual viaje desea ir: \n";
-            $idOpcViaje = trim(fgets(STDIN));            
+            $idOpcViaje = trim(fgets(STDIN));
             if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
                 echo "Hay pasajes disponibles\n";
                 echo "ingrese el nombre del pasajero\n";
@@ -708,7 +708,12 @@ do {
                 echo "Hubo un error eliminando al pasajero\n";
             };
             break;
-
+        case 13:
+            $colPasajero = $res1->listar();
+            foreach ($colPasajero as $pasajero) {
+                echo $pasajero;
+            }
+            break;
         case 14:
             $losViajes = new Viaje();
             $arrayViajes = $losViajes->listar();
@@ -716,8 +721,8 @@ do {
                 echo "---------" . $i + 1 . "------------";
                 echo $arrayViajes[$i];
                 echo "\n";
-            }
-            ;break;
+            };
+            break;
         case 15:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
@@ -725,8 +730,8 @@ do {
                 echo "---------" . $i + 1 . "------------";
                 echo $arrResponsable[$i];
                 echo "\n";
-            }
-            ;break;
+            };
+            break;
         default:
             echo "\nOpcion Invalida";
             break;
