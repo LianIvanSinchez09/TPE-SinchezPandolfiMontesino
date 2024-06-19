@@ -421,8 +421,8 @@ do {
     $otroPasajero = new Pasajero();
     switch ($opcion) {
         case 1:
-            $colViajes = $viaje->listar();
             $viaje = new Viaje();
+            $colViajes = $viaje->listar();
             foreach ($colViajes as $viaje) {
                 echo $viaje . "\n";
             }
