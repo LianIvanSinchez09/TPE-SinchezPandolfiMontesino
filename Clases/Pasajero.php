@@ -168,14 +168,5 @@ class Pasajero extends Persona {
         $unPasajero=parent::devuelveAlguien($unDni);
         return $unPasajero;
     }
-
-    public function hayPasajesDisponibles(){
-        $cantActualPasajeros = count($this->listar());
-        $esDisponible = false;
-        if($this->getObjViaje()->getCantMaxPasajeros() > $cantActualPasajeros){
-            $esDisponible = true;
-        }
-        return $esDisponible;
-    }
 }
 ?>
