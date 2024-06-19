@@ -161,13 +161,13 @@ do{
                 $numDoc = trim(fgets(STDIN));
 
                 $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
-
+                $nuevaPersona=new Persona();
                 if ($pasajeroYacargado) {
                     echo "Ya se encuentra en ese viaje";
                 } else {
                     echo "ingrese el numero de telefono del pasajero\n";
                     $numTele = trim(fgets(STDIN));
-                    $nuevaPersona=new Persona();
+                    
                     $nuevoPasajero= new Pasajero();
                     $nuevaPersona->cargar($numDoc,$nombre,$apellido);
                     $nuevoPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
@@ -352,7 +352,4 @@ do{
     echo "\nDesea hacer otra cosa? s/n\n";
     $desicion = trim(fgets(STDIN));
 } while ($desicion == 's');
-// case 7:
-//     echo $unViaje;
-
 ?>
