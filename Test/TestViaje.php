@@ -19,6 +19,7 @@ function menu(){
         "\nIngrese 5: Modificar al responsable del viaje".
         "\nIngrese 6: Modificar empresa".
         "\nIngrese 7: Mostrar detalles del viaje\n";
+        "\nIngrese 8: Eliminar Viaje\n";
 }
 
 /**
@@ -228,8 +229,8 @@ do{
             $seleccion=trim(fgets(STDIN)) - 1;
             $viajeSeleccionado = $arrayViajes[$seleccion];
             menuViaje();
+            echo count($arrayViajes);
             $opcionCambio=trim(fgets(STDIN));
-            // menuViaje();
             switch($opcionCambio){
                 case 'destino':
                     do{
@@ -356,6 +357,26 @@ do{
                 echo $viaje;
             }
         break;
+        case 8:
+            for ($i=0; $i < count($arrayViajes); $i++) {
+                echo "---------" . $i + 1 . "------------"; 
+                echo $arrayViajes[$i];
+                echo "\n";
+            }
+            echo "Seleccione cual viaje quiere eliminar: ";
+            $seleccion=trim(fgets(STDIN)) - 1;
+            $viajeSeleccionado = $arrayViajes[$seleccion];
+            if($viajeSeleccionado->eliminar()){
+                unset($arrayViajes[$seleccion]);
+                echo "Viaje eliminado\n";
+                for ($i=0; $i < count($arrayViajes); $i++) {
+                    echo "---------" . $i + 1 . "------------"; 
+                    echo $arrayViajes[$i];
+                    echo "\n";
+                }
+            }else{
+                echo "Hubo un error eliminando el viaje\n";
+            }
         default:
             echo "\nOpcion Invalida";
         break;
