@@ -644,70 +644,83 @@ do {
         case 10:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
-            for ($i = 0; $i < count($arrResponsable); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrResponsable[$i];
-                echo "\n";
-            }
-            echo "Seleccione cual responsable quiere cambiar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $responsableSeleccionado = $arrResponsable[$seleccion];
-            $responsableSeleccionado->eliminar();
-            if ($responsableSeleccionado->eliminar()) {
-                unset($arrResponsable[$seleccion]);
-                echo "Responsable eliminado\n";
+            if($arrResponsable==null){
+                echo "no hay ningun responsable";
+            }else{
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrResponsable[$i];
                     echo "\n";
                 }
-            } else {
-                echo "Hubo un error eliminando el responsable\n";
+                echo "Seleccione cual responsable quiere cambiar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $responsableSeleccionado = $arrResponsable[$seleccion];
+                $responsableSeleccionado->eliminar();
+                if ($responsableSeleccionado->eliminar()) {
+                    unset($arrResponsable[$seleccion]);
+                    echo "Responsable eliminado\n";
+                    for ($i = 0; $i < count($arrResponsable); $i++) {
+                        echo "---------" . $i + 1 . "------------";
+                        echo $arrResponsable[$i];
+                        echo "\n";
+                    }
+                } else {
+                    echo "Hubo un error eliminando el responsable\n";
+                }
             }
+        ;break;
         case 11:
             $lasEmpresas = new Empresa();
             $arrEmpresas = $lasEmpresas->listar();
-            for ($i = 0; $i < count($arrEmpresas); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrEmpresas[$i];
-                echo "\n";
-            }
-            echo "Seleccione cual responsable quiere cambiar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $empresaSeleccionada = $arrEmpresas[$seleccion];
-            if ($empresaSeleccionada->eliminar()) {
-                unset($arrEmpresas[$seleccion]);
-                echo "Empresa eliminada\n";
+            if($arrEmpresa==null){
+                echo "La empresa ya fue eliminada";
+            }else{
                 for ($i = 0; $i < count($arrEmpresas); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrEmpresas[$i];
                     echo "\n";
                 }
-            } else {
-                echo "Hubo un error eliminando la empresa\n";
-            };
-            break;
+                echo "Seleccione cual empresa quiere eliminar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $empresaSeleccionada = $arrEmpresas[$seleccion];
+                if ($empresaSeleccionada->eliminar()) {
+                    unset($arrEmpresas[$seleccion]);
+                    echo "Empresa eliminada\n";
+                    for ($i = 0; $i < count($arrEmpresas); $i++) {
+                        echo "---------" . $i + 1 . "------------";
+                        echo $arrEmpresas[$i];
+                        echo "\n";
+                    }
+                } else {
+                    echo "Hubo un error eliminando la empresa\n";
+                }
+            }
+            ;break;
         case 12: //------------------------------------------------------------
             $losPasajeros = new Pasajero();
             $arrayPasajeros = $losPasajeros->listar();
-            for ($i = 0; $i < count($arrayPasajeros); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrayPasajeros[$i];
-                echo "\n";
-            }
-            echo "Seleccione cual pasajero quiere eliminar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $pasajeroSeleccionada = $arrayPasajeros[$seleccion];
-            if ($pasajeroSeleccionada->eliminar()) {
-                unset($arrayPasajeros[$seleccion]);
-                echo "Pasajero eliminado\n";
+            if($arrayPasajeros==null){
+                echo "no hay passajeros cargados";
+            }else{
                 for ($i = 0; $i < count($arrayPasajeros); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrayPasajeros[$i];
                     echo "\n";
                 }
-            } else {
-                echo "Hubo un error eliminando al pasajero\n";
+                echo "Seleccione cual pasajero quiere eliminar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $pasajeroSeleccionada = $arrayPasajeros[$seleccion];
+                if ($pasajeroSeleccionada->eliminar()) {
+                    unset($arrayPasajeros[$seleccion]);
+                    echo "Pasajero eliminado\n";
+                    for ($i = 0; $i < count($arrayPasajeros); $i++) {
+                        echo "---------" . $i + 1 . "------------";
+                        echo $arrayPasajeros[$i];
+                        echo "\n";
+                    }
+                } else {
+                    echo "Hubo un error eliminando al pasajero\n";
+                }
             };
             break;
         case 13:
