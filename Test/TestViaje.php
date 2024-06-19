@@ -166,12 +166,15 @@ do{
 
                 $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
                 $nuevaPersona=new Persona();
-                if ($pasajeroYacargado) {
+                $personaYaCargada=$nuevaPersona->Buscar($numDoc);
+                if($personaYaCargada){
+                    echo "Esa persona ya existe en la base de datos";
+                }else if($pasajeroYacargado){
                     echo "Ya se encuentra en ese viaje";
                 } else {
                     echo "ingrese el numero de telefono del pasajero\n";
                     $numTele = trim(fgets(STDIN));
-                    
+                    $nuevaPersona=new Persona();
                     $nuevoPasajero= new Pasajero();
                     $nuevaPersona->cargar($numDoc,$nombre,$apellido);
                     $nuevoPasajero->cargar($numDoc,$nombre,$apellido,20,$viaje,$numTele);
@@ -189,10 +192,10 @@ do{
             //si el pasajero existe, realizara el cambio
             if($otroPasajero->Buscar($doc)){
                 $elPasajero=$otroPasajero->devuelveAlguien($doc);
-                //echo $elPasajero;
                 menuGeneral();
                 $opcionCambio=trim(fgets(STDIN));
                 cambiarDato($opcionCambio,$elPasajero);
+                echo $elPasajero;
             }else{
                 echo "Ese pasajero no existe";
             }
