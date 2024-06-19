@@ -292,30 +292,32 @@ do{
                     }
                 break;
             }
-        break;
+            ;break;
         case 5:
-            echo "Ingrese el documento del responsable";
+            echo "Ingrese el numero de documento del responsable del viaje";
             $numDoc=trim(fgets(STDIN));
-            if($responsable1->Buscar($numDoc)){
-                echo "este responsable ya existe";
-            } else{
-                echo "Ingrese el nombre: \n";
-                $nombre=trim(fgets(STDIN));
-                $responsable1->setNombre($nombre);
-                echo "Ingrese el apellido: \n";
-                $apellido=trim(fgets(STDIN));
-                $responsable1->setApellido($apellido);
-                echo "ingrese el numero de licencia: \n";
-                $numLicencia=trim(fgets(STDIN));
-                $responsable1->setNumLicencia($numLicencia);
-                if($responsable1->modificar()){
-                    echo "Datos Actualizados\n";
-                    echo $responsable1;
-                }else{
-                    echo "Hubo un error actualizando los datos\n";
-                }
-            }   
-        break;
+            $nuevoResponsable=new ResponsableV();
+            $responsableYacargado = $nuevoResponsable->Buscar($numDoc);
+            $nuevaPersona=new Persona();
+            $personaYaCargada=$nuevaPersona->Buscar($numDoc);
+            if($personaYaCargada){
+                echo "Esa persona ya existe en la base de datos";
+            }else if($responsableYacargado){
+                echo "Ya se encuentra ese responsable";
+            } else {
+                echo "ingrese el nombre del responsable\n";
+                $nombre = trim(fgets(STDIN));
+                echo "ingrese el apellido del responsable\n";
+                $apellido = trim(fgets(STDIN));
+                echo "Ingrese su numero de licencia\n";
+                $numLice=trim(fgets(STDIN));
+                $nuevaPersona->cargar($numDoc,$nombre,$apellido);
+                $nuevoResponsable->cargar($numDoc,$nombre,$apellido,2,$numLice);
+                $nuevaPersona->insertar();
+                $nuevoResponsable->insertar();
+                echo "Responsable cargado en la base de datos";
+            }
+            ;break;
         case 6:
             echo "Desea cambiar dirección o nombre de la empresa?: ";
             $opcion = trim(fgets(STDIN));
