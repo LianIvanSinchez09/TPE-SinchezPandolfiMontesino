@@ -1,7 +1,7 @@
 <?php
 class Pasajero extends Persona {
     private $idpasajero;
-    private $objViaje; // foránea 1:1 (obj) claveforánea es (atributo adentro del objeto: idViaje)
+    private $objViaje; // foránea 1:1 (obj) claveforánea es (atributo adentro del objeto: idViaje) ES UNO 1;n
     private $telefono;
     private $mensajeoperacion;
 

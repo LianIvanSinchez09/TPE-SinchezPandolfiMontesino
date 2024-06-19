@@ -127,7 +127,7 @@ class Empresa
         }
         return $arregloEmpresa;
     }
-
+    // hay que arreglar autoinc
     public function insertar()
     {
         $base = new BaseDatos();
