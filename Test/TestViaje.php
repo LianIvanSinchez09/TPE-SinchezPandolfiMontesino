@@ -37,7 +37,7 @@ function menuViaje(){
     echo "que quiere cambiar?\n";
     echo "\nIngrese (destino): Para cambiar el destino del viaje" .
          "\nIngrese (maximo): Para cambiar la capacidad maxima de pasajeros" .
-         "\nIngrese (costo): Para cambiar el costo del viaje".
+         "\nIngrese (importe): Para cambiar el importe del viaje".
          "\nIngrese (todo): Para cambiar toda la informacion del viaje\n";
 }
 
@@ -132,9 +132,13 @@ $empresa=new Empresa();
 $empresa->cargar(1,"Viaje Feliz","Buenos Aires 1800");
 $viaje = new Viaje();
 $viaje->cargar(1, "Cipolletti", 20, $responsable1, $empresa, 1000);
+$viaje2 = new Viaje();
+$viaje2->cargar(2, "Cipolletti", 20, $responsable1, $empresa, 1000);
 $empresa->insertar();
 $viaje->insertar();
+$viaje2->insertar();
 $arrayViajes[] = $viaje;
+$arrayViajes[] = $viaje2;
 
 $res = new Persona();
 $res1 = new Pasajero();
@@ -204,8 +208,9 @@ do{
             $otroViaje = new Viaje();
             echo "Ingrese coste del viaje: ";
             $costo = trim(fgets(STDIN));
-            $otroViaje->cargar(1, $destino, $cantMaxPasajeros, $responsable1, $empresa, $costo);
+            $otroViaje->cargar(count($arrayViajes) + 1, $destino, $cantMaxPasajeros, $responsable1, $empresa, $costo);
             if($otroViaje->insertar()){
+                $arrayViajes[] = $otroViaje;
                 echo "Viaje correctamente insertado\n";
                 $colViajes = $otroViaje->listar();
                 foreach ($colViajes as $viaje) {
@@ -214,24 +219,27 @@ do{
             }
         break;
         case 4:
-            $listaActualViaje = $viaje->listar();
-            for ($i=0; $i < count($listaActualViaje); $i++) {
+            for ($i=0; $i < count($arrayViajes); $i++) {
                 echo "---------" . $i + 1 . "------------"; 
-                echo $listaActualViaje[$i];
+                echo $arrayViajes[$i];
                 echo "\n";
             }
+            echo "Seleccione cual viaje quiere cambiar: ";
+            $seleccion=trim(fgets(STDIN)) - 1;
+            $viajeSeleccionado = $arrayViajes[$seleccion];
             menuViaje();
             $opcionCambio=trim(fgets(STDIN));
+            // menuViaje();
             switch($opcionCambio){
                 case 'destino':
                     do{
                         echo "ingrese otro destino\n";
                         $otroDato=trim(fgets(STDIN));
-                        if(strcmp($viaje->getDestino(),$otroDato)!=0){
+                        if(strcmp($viajeSeleccionado->getDestino(),$otroDato)!=0){
                             echo "destino cambiado";
-                            $viaje->setDestino($otroDato);
-                            $viaje->modificar();
-                            echo $viaje;
+                            $viajeSeleccionado->setDestino($otroDato);
+                            $viajeSeleccionado->modificar();
+                            echo $viajeSeleccionado;
                             $estado=true;
                         }else{
                             echo "No se puede cambiar por el mismo destino\n";
@@ -242,11 +250,11 @@ do{
                     do{
                         echo "ingrese otra capacidad maxima de personas\n";
                         $otroDato=trim(fgets(STDIN));
-                        if($viaje->getCantMaxPasajeros()!=$otroDato){
+                        if($viajeSeleccionado->getCantMaxPasajeros()!=$otroDato){
                             echo "capacidad cambiado";
-                            $viaje->setCantMaxPasajeros($otroDato);
-                            $viaje->modificar();
-                            echo $viaje;
+                            $viajeSeleccionado->setCantMaxPasajeros($otroDato);
+                            $viajeSeleccionado->modificar();
+                            echo $viajeSeleccionado;
                             $estado=true;
                         }else{
                             echo "No se puede cambiar por el misma capacidad\n";
@@ -257,11 +265,11 @@ do{
                     do{
                         echo "ingrese otra valor de importe\n";
                         $otroDato=trim(fgets(STDIN));
-                        if($viaje->getImporte()!=$otroDato){
+                        if($viajeSeleccionado->getImporte()!=$otroDato){
                             echo "importe cambiado";
-                            $viaje->setImporte($otroDato);
-                            $viaje->modificar();
-                            echo $viaje;
+                            $viajeSeleccionado->setImporte($otroDato);
+                            $viajeSeleccionado->modificar();
+                            echo $viajeSeleccionado;
                             $estado=true;
                         }else{
                             echo "No se puede cambiar por el misma importe\n";
@@ -275,12 +283,12 @@ do{
                     $maximo=trim(fgets(STDIN));
                     echo "ingrese otra valor de importe\n";
                     $importe=trim(fgets(STDIN));
-                    $viaje->setDestino($destino);
-                    $viaje->setCantMaxPasajeros($maximo);
-                    $viaje->setImporte($importe);
-                    if($viaje->modificar()){
+                    $viajeSeleccionado->setDestino($destino);
+                    $viajeSeleccionado->setCantMaxPasajeros($maximo);
+                    $viajeSeleccionado->setImporte($importe);
+                    if($viajeSeleccionado->modificar()){
                         echo "datos cambiados";
-                        echo $viaje;
+                        echo $viajeSeleccionado;
                     }
                 break;
             }
