@@ -23,11 +23,11 @@ function menu()
         "\nIngrese 8: Mostrar detalles del viaje" .
         "\nIngrese 9: Eliminar pasajero" .
         "\nIngrese 10: Eliminar viaje" .
-        "\nIngrese 11: Eliminar responsable".
-        "\nIngrese 12: Eliminar pasajero".
+        "\nIngrese 11: Eliminar responsable" .
+        "\nIngrese 12: Eliminar pasajero" .
         "\nIngrese 13: Mostrar pasajero" .
-        "\nIngrese 14: Mostrar viaje".
-        "\nIngrese 15: Mostrar responsable\n" ;
+        "\nIngrese 14: Mostrar viaje" .
+        "\nIngrese 15: Mostrar responsable\n";
 }
 
 /**
@@ -692,25 +692,12 @@ do {
                 echo "Hubo un error eliminando al pasajero\n";
             };
             break;
-
-        case 14:
-            $losViajes = new Viaje();
-            $arrayViajes = $losViajes->listar();
-            for ($i = 0; $i < count($arrayViajes); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrayViajes[$i];
-                echo "\n";
+        case 13:
+            $colPasajero = $res1->listar();
+            foreach ($colPasajero as $pasajero) {
+                echo $pasajero;
             }
-            ;break;
-        case 15:
-            $losResponsables = new ResponsableV();
-            $arrResponsable = $losResponsables->listar();
-            for ($i = 0; $i < count($arrResponsable); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrResponsable[$i];
-                echo "\n";
-            }
-            ;break;
+            break;
         default:
             echo "\nOpcion Invalida";
             break;
