@@ -16,12 +16,12 @@ SET time_zone = "+00:00";
 -- Crear tabla personaresponsable
     CREATE TABLE personaresponsable (
     documento VARCHAR(15),
-    numeroEmpleado BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,    
+    numeroEmpleado BIGINT,    
     numeroLicencia BIGINT,
-    PRIMARY KEY (numeroEmpleado),
+    PRIMARY KEY (documento),
     FOREIGN KEY (documento) REFERENCES persona (documento)
     ON UPDATE CASCADE ON DELETE CASCADE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT = 1;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Crear tabla empresa
     CREATE TABLE empresa (
@@ -48,15 +48,14 @@ SET time_zone = "+00:00";
 
     
     CREATE TABLE pasajero (
-    idPasajero BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     documento VARCHAR(15),
     idViaje BIGINT UNSIGNED,  -- Asegurar que este campo es UNSIGNED
     telefono BIGINT,
-    PRIMARY KEY (idPasajero),
+    PRIMARY KEY (documento),
     FOREIGN KEY (documento) REFERENCES persona(documento)
     ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (idViaje) REFERENCES viaje(idViaje)
     ON UPDATE CASCADE ON DELETE SET NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 COMMIT;
