@@ -582,6 +582,8 @@ do {
             switch ($opcion) {
                 case 'direccion':
                     do {
+                        $emp = new Empresa();
+                        $empresa = $emp->listar()[0];
                         echo "Ingrese nueva dirección: \n";
                         $direccion = trim(fgets(STDIN));
                         $empresa->setDireccion($direccion);
