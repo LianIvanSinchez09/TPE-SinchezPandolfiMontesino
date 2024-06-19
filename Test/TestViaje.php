@@ -61,7 +61,7 @@ function menuResponsable(){
  * @param int
  * @return boolean
  */
-function cambiarDato($opcionCambio,$elPasajero){
+function cambiarPasajero($opcionCambio,$elPasajero){
     $estado=false;
     switch ($opcionCambio) {
         case "nombre":
@@ -299,7 +299,7 @@ do{
                 $elPasajero=$otroPasajero->devuelveAlguien($doc);
                 menuGeneral();
                 $opcionCambio=trim(fgets(STDIN));
-                cambiarDato($opcionCambio,$elPasajero);
+                cambiarPasajero($opcionCambio,$elPasajero);
                 echo $elPasajero;
             }else{
                 echo "Ese pasajero no existe";
