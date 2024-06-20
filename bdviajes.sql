@@ -36,13 +36,13 @@ SET time_zone = "+00:00";
     idViaje BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     destino VARCHAR(150),
     cantMaxPasajeros INT,
-    numeroEmpleado BIGINT UNSIGNED,
+    documentoEmpleado VARCHAR(15),
     idEmpresa BIGINT UNSIGNED,
     importe FLOAT,
     PRIMARY KEY (idViaje),
     FOREIGN KEY (idEmpresa) REFERENCES empresa(idEmpresa)
     ON UPDATE CASCADE ON DELETE SET NULL,
-    FOREIGN KEY (numeroEmpleado) REFERENCES personaresponsable(numeroEmpleado)
+    FOREIGN KEY (documentoEmpleado) REFERENCES personaresponsable(documento)
     ON UPDATE CASCADE ON DELETE SET NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
