@@ -419,7 +419,6 @@ do {
     echo "Bienvenidos a Viaje Feliz" . "\nQue desea hacer?";
     menu();
     $opcion = trim(fgets(STDIN));
-    $otroPasajero = new Pasajero();
     switch ($opcion) {
         case 1:
             $colViajes = $viaje->listar();
@@ -439,22 +438,17 @@ do {
                     $apellido = trim(fgets(STDIN));
                     echo "ingrese el numero de documento del pasajero\n";
                     $numDoc = trim(fgets(STDIN));
-                    //dos metodos que se puede optimizar
-                    $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
-                    $nuevaPersona = new Persona();
-                    $personaYaCargada = $nuevaPersona->Buscar($numDoc);
-                    if ($personaYaCargada) {
-                        echo "Esa persona ya existe en la base de datos";
-                    } else if ($pasajeroYacargado) {
+    
+                    $nuevoPasajero = new Pasajero();
+                    $pasajeroYacargado = $nuevoPasajero->Buscar($numDoc);
+
+                    if ($pasajeroYacargado) {
                         echo "Ya se encuentra en ese viaje";
                     } else {
                         echo "ingrese el numero de telefono del pasajero\n";
                         $numTele = trim(fgets(STDIN));
-                        $nuevaPersona = new Persona();
-                        $nuevoPasajero = new Pasajero();
-                        $nuevaPersona->cargar($numDoc, $nombre, $apellido);
-                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, 20, $viaje, $numTele);
-                        $nuevaPersona->insertar();
+
+                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viaje, $numTele);
                         $nuevoPasajero->insertar();
                         echo "Pasajero cargado en la base de datos";
                     }
@@ -537,11 +531,9 @@ do {
             $numDoc = trim(fgets(STDIN));
             $nuevoResponsable = new ResponsableV();
             $responsableYacargado = $nuevoResponsable->Buscar($numDoc);
-            $nuevaPersona = new Persona();
-            $personaYaCargada = $nuevaPersona->Buscar($numDoc);
-            if ($personaYaCargada) {
-                echo "Esa persona ya existe en la base de datos\n";
-            } else if ($responsableYacargado) {
+            
+            
+            if ($responsableYacargado) {
                 echo "Ya se encuentra ese responsable\n";
             } else {
                 echo "ingrese el nombre del responsable\n";
@@ -552,8 +544,7 @@ do {
                 $numEmp = trim(fgets(STDIN));
                 echo "Ingrese su numero de licencia\n";
                 $numLice = trim(fgets(STDIN));
-                $nuevaPersona->cargar($numDoc, $nombre, $apellido);
-                $nuevaPersona->insertar();
+                
                 $nuevoResponsable->cargar($numDoc, $nombre, $apellido, $numEmp, $numLice);
                 $nuevoResponsable->insertar();
                 
@@ -733,7 +724,7 @@ do {
         case 13:
             $losPasajeros = new Pasajero();
             $arrayPas = $losPasajeros->listar();
-            if(count($arrayPas) > 0){
+            if(count($arrayPas) != 0){
                 for ($i = 0; $i < count($arrayPas); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrayPas[$i];
@@ -745,8 +736,8 @@ do {
             break;
         case 14:
             $losResponsables = new ResponsableV();
-            if(count($losResponsables->listar()) != 0){
-                $arrResponsable = $losResponsables->listar();
+            $arrResponsable = $losResponsables->listar();
+            if(count($arrResponsable) != 0){
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrResponsable[$i];

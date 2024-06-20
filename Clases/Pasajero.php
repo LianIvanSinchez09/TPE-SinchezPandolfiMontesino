@@ -72,9 +72,9 @@ class Pasajero extends Persona {
         $base = new BaseDatos();
         $consulta = "Select * from pasajero ";
         if ($condicion != "") {
-            $consulta = $consulta . ' WHERE ' . $condicion;
+            $consulta = $consulta . ' where ' . $condicion;
         }
-        $consulta .= " ORDER BY  ";
+        $consulta .= " order by documento ";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consulta)) {
                 $arreglo = array();
