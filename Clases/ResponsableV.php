@@ -73,6 +73,7 @@ class ResponsableV extends Persona
     $arreglo = null;
     $base = new BaseDatos();
     $consulta = "Select * from personaresponsable ";
+
     if ($condicion != "") {
       $consulta = $consulta . ' where ' . $condicion;
     }
@@ -110,6 +111,7 @@ class ResponsableV extends Persona
         if ($base->Ejecutar($consultaInsertar)) {
 
           $resp =  true;
+
         } else {
           $this->setmensajeoperacion($base->getError());
         }
@@ -126,7 +128,7 @@ class ResponsableV extends Persona
     $resp = false;
     $base = new BaseDatos();
     if (parent::modificar()) {
-      $consultaModifica = "UPDATE personaresponsable SET numeroLicencia='" . $this->getNumLicencia() . "' WHERE documento='" . parent::getDocumento() . "' AND numeroEmpleado='" . $this->getNumEmpleado() . "'";
+      $consultaModifica = "UPDATE personaresponsable SET numeroLicencia='" . $this->getNumLicencia() . "',numeroEmpleado='" . $this->getNumEmpleado() . "' WHERE documento='" . parent::getDocumento(); //  . "'" (alfinal puede ser despues de parent::getDocumento())
       if ($base->Iniciar()) {
         if ($base->Ejecutar($consultaModifica)) {
           $resp =  true;
@@ -158,3 +160,4 @@ class ResponsableV extends Persona
     return $resp;
   }
 }
+?>
