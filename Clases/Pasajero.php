@@ -70,7 +70,7 @@ class Pasajero extends Persona {
     public function listar($condicion = ""){
         $arreglo = null;
         $base = new BaseDatos();
-        $consulta = "SELECT * FROM pasajero ";
+        $consulta = "Select * from pasajero ";
         if ($condicion != "") {
             $consulta = $consulta . ' WHERE ' . $condicion;
         }
@@ -116,8 +116,7 @@ class Pasajero extends Persona {
         $resp = false;
         $base = new BaseDatos();
         if (parent::modificar()) {
-            $consultaModifica = "UPDATE pasajero SET telefono='" . $this->getTelefono() . "', idViaje='" . 
-            $this->getObjViaje()->getIdViaje() . "' WHERE documento='" . parent::getDocumento() . "' AND ='" . $this->get() . "'";
+            $consultaModifica = "UPDATE pasajero SET telefono='" . $this->getTelefono() . "', idViaje='" . $this->getObjViaje()->getIdViaje() . "' WHERE documento='" . parent::getdocumento()."'";
             if ($base->Iniciar()) {
                 if ($base->Ejecutar($consultaModifica)) {
                     $resp = true;
@@ -136,7 +135,7 @@ class Pasajero extends Persona {
         $base = new BaseDatos();
         $resp = false;
         if ($base->Iniciar()) {
-            $consultaBorra = "DELETE FROM pasajero WHERE documento='" . parent::getDocumento() . "' AND ='" . $this->get() . "'";
+            $consultaBorra = "DELETE FROM pasajero WHERE documento='" . parent::getdocumento(). "'";
             if ($base->Ejecutar($consultaBorra)) {
                 if (parent::eliminar()) {
                     $resp = true;
