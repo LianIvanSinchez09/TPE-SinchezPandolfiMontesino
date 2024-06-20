@@ -57,6 +57,7 @@ class Pasajero extends Persona {
                     $objViaje->Buscar($row2['idViaje']);
                     $this->setObjViaje($objViaje);
                     $resp = true;
+                    
                 }
             } else {
                 $this->setMensajeoperacion($base->getError());

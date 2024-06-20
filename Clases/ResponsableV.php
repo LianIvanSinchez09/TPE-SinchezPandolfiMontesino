@@ -49,11 +49,10 @@ class ResponsableV extends Persona
     if ($base->Iniciar()) {
       if ($base->Ejecutar($consulta)) {
         if ($row2 = $base->Registro()) {
-          if(parent::Buscar($dni)){
-            $this->setNumEmpleado($row2['numeroEmpleado']);
-            $this->setNumLicencia($row2['numeroLicencia']);
-            $resp = true;
-          }
+          parent::Buscar($dni);
+          $this->setNumEmpleado($row2['numeroEmpleado']);
+          $this->setNumLicencia($row2['numeroLicencia']);
+          $resp = true;
         }
       } else {
         $this->setmensajeoperacion($base->getError());
