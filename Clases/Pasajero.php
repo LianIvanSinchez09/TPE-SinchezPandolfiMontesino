@@ -116,7 +116,8 @@ class Pasajero extends Persona {
         $resp = false;
         $base = new BaseDatos();
         if (parent::modificar()) {
-            $consultaModifica = "UPDATE pasajero SET telefono='" . $this->getTelefono() . "', idViaje='" . $this->getObjViaje()->getIdViaje() . "' WHERE documento='" . parent::getDocumento() . "' AND ='" . $this->get() . "'";
+            $consultaModifica = "UPDATE pasajero SET telefono='" . $this->getTelefono() . "', idViaje='" . 
+            $this->getObjViaje()->getIdViaje() . "' WHERE documento='" . parent::getDocumento() . "' AND ='" . $this->get() . "'";
             if ($base->Iniciar()) {
                 if ($base->Ejecutar($consultaModifica)) {
                     $resp = true;
