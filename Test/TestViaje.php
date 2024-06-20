@@ -628,12 +628,9 @@ do {
             $seleccion = trim(fgets(STDIN)) - 1;
             $viajeSeleccionado = $arrayViajes[$seleccion];
             if ($viajeSeleccionado->eliminar()) {
-                unset($arrayViajes[$seleccion]);
-                echo "Viaje eliminado\n";
-                for ($i = 0; $i < count($arrayViajes); $i++) {
-                    echo "---------" . $i + 1 . "------------";
-                    echo $arrayViajes[$i];
-                    echo "\n";
+                $col = $viaje->listar();
+                foreach ($col as $viaje) {
+                    echo $viaje;
                 }
             } else {
                 echo "Hubo un error eliminando el viaje\n";

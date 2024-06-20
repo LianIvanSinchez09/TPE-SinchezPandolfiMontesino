@@ -128,6 +128,7 @@ class Viaje {
     }
 
 
+
     public function listar($condicion = "") {
         $arregloViaje = null;
         $base = new BaseDatos();
@@ -201,8 +202,7 @@ class Viaje {
         $resp = false;
         if ($base->Iniciar()) {
             $consultaBorra = "DELETE FROM viaje WHERE idViaje=" . $this->getIdViaje();
-            if ($id = $base->devuelveIDInsercion($consultaBorra)) {
-                $this->setIdViaje($id);
+            if ($base->Ejecutar($consultaBorra)) {
                 $resp =  true;
             } else {
                 $this->setmensajeoperacion($base->getError());
