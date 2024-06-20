@@ -53,10 +53,9 @@ class Pasajero extends Persona {
                 if ($row2 = $base->Registro()) {
                     parent::Buscar($dni);
                     $this->setTelefono($row2['telefono']);
-                    //$objViaje = new Viaje();
-                    //$objViaje->Buscar($row2['idViaje']);
-                    //$this->setObjViaje($objViaje);
-                    $this->setObjViaje($row2['idViaje']);
+                    $objViaje = new Viaje();
+                    $objViaje->Buscar($row2['idViaje']);
+                    $this->setObjViaje($objViaje);
                     $resp = true;
                 }
             } else {
@@ -71,7 +70,7 @@ class Pasajero extends Persona {
     public function listar($condicion = ""){
         $arreglo = null;
         $base = new BaseDatos();
-        $consulta = "SELECT * FROM pasajero ";
+        $consulta = "Select * from pasajero ";
         if ($condicion != "") {
             $consulta = $consulta . ' WHERE ' . $condicion;
         }

@@ -41,11 +41,6 @@ class ResponsableV extends Persona
     $this->numLicencia = $value;
   }
 
-  public function __toString()
-  {
-    return parent::__toString() . "Numero de Empleado: " . $this->getNumEmpleado() . "\nNumero de Licencia: " . $this->getNumLicencia() . "\n";
-  }
-
   public function Buscar($dni)
   {
     $base = new BaseDatos();
@@ -160,6 +155,11 @@ class ResponsableV extends Persona
       $this->setmensajeoperacion($base->getError());
     }
     return $resp;
+  }
+
+  public function __toString()
+  {
+    return parent::__toString() . "Numero de Empleado: " . $this->getNumEmpleado() . "\nNumero de Licencia: " . $this->getNumLicencia() . "\n";
   }
 }
 ?>
