@@ -35,7 +35,7 @@ function menu()
  */
 function menuGeneral()
 {
-    echo "que quiere cambiar?\n";
+    echo "Que quiere cambiar?\n";
     echo "Ingrese (nombre): Para cambiar el nombre del pasajero" .
         "\nIngrese (apellido): Para cambiar el apellido del pasajero" .
         "\nIngrese (telefono): Para cambiar el telefono del pasajero" .
