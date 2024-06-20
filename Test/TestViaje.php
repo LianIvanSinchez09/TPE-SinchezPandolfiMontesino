@@ -439,11 +439,12 @@ do {
                     $apellido = trim(fgets(STDIN));
                     echo "ingrese el numero de documento del pasajero\n";
                     $numDoc = trim(fgets(STDIN));
-    
-                    $nuevoPasajero = new Persona();
-                    $pasajeroYacargado = $nuevoPasajero->Buscar($numDoc);
+                    
+                    $nuevoPersona = new Persona();
+                    $personaYacargada = $nuevoPersona->Buscar($numDoc);        
+                    $pasajeroYacargado = new Pasajero();
 
-                    if ($pasajeroYacargado) {
+                    if ($personaYacargada) {
                         echo "Ya se encuentra en ese viaje";
                     } else {
                         echo "ingrese el numero de telefono del pasajero\n";
