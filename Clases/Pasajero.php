@@ -53,9 +53,10 @@ class Pasajero extends Persona {
                 if ($row2 = $base->Registro()) {
                     parent::Buscar($dni);
                     $this->setTelefono($row2['telefono']);
-                    $objViaje = new Viaje();
-                    $objViaje->Buscar($row2['idViaje']);
-                    $this->setObjViaje($objViaje);
+                    //$objViaje = new Viaje();
+                    //$objViaje->Buscar($row2['idViaje']);
+                    //$this->setObjViaje($objViaje);
+                    $this->setObjViaje($row2['idViaje']);
                     $resp = true;
                 }
             } else {
@@ -116,7 +117,7 @@ class Pasajero extends Persona {
         $resp = false;
         $base = new BaseDatos();
         if (parent::modificar()) {
-            $consultaModifica = "UPDATE pasajero SET telefono='" . $this->getTelefono() . "', idViaje='" . $this->getObjViaje()->getIdViaje() . "' WHERE documento='" . parent::getDocumento() . "' AND ='" . $this->get() . "'";
+            $consultaModifica = "UPDATE pasajero SET telefono='" . $this->getTelefono() . "', idViaje='" . $this->getObjViaje()->getIdViaje() . "' WHERE documento='" . parent::getdocumento()."'";
             if ($base->Iniciar()) {
                 if ($base->Ejecutar($consultaModifica)) {
                     $resp = true;
@@ -135,7 +136,7 @@ class Pasajero extends Persona {
         $base = new BaseDatos();
         $resp = false;
         if ($base->Iniciar()) {
-            $consultaBorra = "DELETE FROM pasajero WHERE documento='" . parent::getDocumento() . "' AND ='" . $this->get() . "'";
+            $consultaBorra = "DELETE FROM pasajero WHERE documento='" . parent::getdocumento(). "'";
             if ($base->Ejecutar($consultaBorra)) {
                 if (parent::eliminar()) {
                     $resp = true;

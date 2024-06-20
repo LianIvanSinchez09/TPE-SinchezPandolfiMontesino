@@ -128,7 +128,7 @@ class ResponsableV extends Persona
     $resp = false;
     $base = new BaseDatos();
     if (parent::modificar()) {
-      $consultaModifica = "UPDATE personaresponsable SET numeroLicencia='" . $this->getNumLicencia() . "',numeroEmpleado='" . $this->getNumEmpleado() . "' WHERE documento='" . parent::getDocumento(); //  . "'" (alfinal puede ser despues de parent::getDocumento())
+      $consultaModifica = "UPDATE personaresponsable SET numeroLicencia='" . $this->getNumLicencia() . "',numeroEmpleado='" . $this->getNumEmpleado() . "' WHERE documento='" . parent::getdocumento(); //  . "'" (alfinal puede ser despues de parent::getDocumento())
       if ($base->Iniciar()) {
         if ($base->Ejecutar($consultaModifica)) {
           $resp =  true;
@@ -148,9 +148,11 @@ class ResponsableV extends Persona
     $base = new BaseDatos();
     $resp = false;
     if ($base->Iniciar()) {
-      $consultaBorra = "DELETE FROM personaresponsable WHERE documento=" . $this->getdocumento();
+      $consultaBorra = "DELETE FROM personaresponsable WHERE documento=" . parent::getdocumento();
       if ($base->Ejecutar($consultaBorra)) {
-        $resp =  true;
+        if(parent::eliminar()){
+          $resp =  true;
+        }
       } else {
         $this->setmensajeoperacion($base->getError());
       }
