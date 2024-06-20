@@ -530,12 +530,13 @@ do {
         case 5:
             echo "Ingrese el numero de documento del responsable del viaje\n";
             $numDoc = trim(fgets(STDIN));
-            $nuevoResponsable = new ResponsableV();
-            $responsableYacargado = $nuevoResponsable->Buscar($numDoc);
+            $nuevoPersona = new Persona();
+            $personaYacargada = $nuevoPersona->Buscar($numDoc);
+            $nuevoResponsable=new ResponsableV();
             
             
-            if ($responsableYacargado) {
-                echo "Ya se encuentra ese responsable\n";
+            if ($personaYacargado) {
+                echo "Ya se encuentra cargado en la base de datos\n";
             } else {
                 echo "ingrese el nombre del responsable\n";
                 $nombre = trim(fgets(STDIN));
