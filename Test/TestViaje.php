@@ -442,7 +442,7 @@ do {
                     
                     $nuevoPersona = new Persona();
                     $personaYacargada = $nuevoPersona->Buscar($numDoc);        
-                    $pasajeroYacargado = new Pasajero();
+                    $nuevoPasajero = new Pasajero();
 
                     if ($personaYacargada) {
                         echo "Ya se encuentra en ese viaje";
@@ -503,7 +503,7 @@ do {
             $nuevoResponsable=new ResponsableV();
             
             
-            if ($personaYacargado) {
+            if ($personaYacargada) {
                 echo "Ya se encuentra cargado en la base de datos\n";
             } else {
                 echo "ingrese el nombre del responsable\n";
