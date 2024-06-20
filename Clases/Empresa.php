@@ -129,8 +129,8 @@ class Empresa
 
         if ($base->Iniciar()) {
 
-            if ($base->Ejecutar($consultaInsertar)) {
-
+            if ($id = $base->devuelveIDInsercion($consultaInsertar)) {
+                $this->setIdEmpresa($id);
                 $resp =  true;
             } else {
                 $this->setmensajeoperacion($base->getError());

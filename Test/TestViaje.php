@@ -440,7 +440,7 @@ do {
                     echo "ingrese el numero de documento del pasajero\n";
                     $numDoc = trim(fgets(STDIN));
     
-                    $nuevoPasajero = new Pasajero();
+                    $nuevoPasajero = new Persona();
                     $pasajeroYacargado = $nuevoPasajero->Buscar($numDoc);
 
                     if ($pasajeroYacargado) {
