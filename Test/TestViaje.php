@@ -15,11 +15,11 @@ function menu()
 {
     echo "\nIngrese 1: Para ingresar un pasajero" .
         "\nIngrese 2: Para modificar datos del pasajero" .
-        "\nIngrese 3: Insertar viaje" .
-        "\nIngrese 4: Modificar un viaje" .
-        "\nIngrese 5: Ingresar al responsable del viaje" .
-        "\nIngrese 6: Modificar responsable del viaje" .
-        "\nIngrese 7: Modificar empresa" .
+        "\nIngrese 3: Para ingresar un viaje" .
+        "\nIngrese 4: Para modificar un viaje" .
+        "\nIngrese 5: Para ingresar al responsable del viaje" .
+        "\nIngrese 6: Para modificar un responsable del viaje" .
+        "\nIngrese 7: Para modificar la empresa" .
         "\nIngrese 8: Mostrar detalles del viaje" .
         "\nIngrese 9: Eliminar viaje" .
         "\nIngrese 10: Eliminar responsable" .
@@ -472,7 +472,7 @@ do {
             };
             break;
         case 3:
-            //pedirle al usuario antes un responsable para cargar un viaje, si no hay responsables no se podra cargar un viaje nuevo
+            
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
             if($arrResponsable==null){
@@ -653,17 +653,24 @@ do {
                 echo "Seleccione cual responsable quiere cambiar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $responsableSeleccionado = $arrResponsable[$seleccion];
-                $responsableSeleccionado->eliminar();
-                if ($responsableSeleccionado->eliminar()) {
-                    unset($arrResponsable[$seleccion]);
-                    echo "Responsable eliminado\n";
-                    for ($i = 0; $i < count($arrResponsable); $i++) {
-                        echo "---------" . $i + 1 . "------------";
-                        echo $arrResponsable[$i];
-                        echo "\n";
+                
+                echo "Seguro que quiere hacerlo, esta informacion puede ser cambiar en otros lados\nIngrese s/n para continuar";
+                $rePregunta=trim(fgets(STDIN));
+                if($rePregunta=='s'){    
+
+                    if ($responsableSeleccionado->eliminar()) {
+                        unset($arrResponsable[$seleccion]);
+                        echo "Responsable eliminado\n";
+                        for ($i = 0; $i < count($arrResponsable); $i++) {
+                            echo "---------" . $i + 1 . "------------";
+                            echo $arrResponsable[$i];
+                            echo "\n";
+                        }
+                    } else {
+                        echo "Hubo un error eliminando el responsable\n";
                     }
-                } else {
-                    echo "Hubo un error eliminando el responsable\n";
+                }else{
+                    echo "la eliminacion se a parado";
                 }
             }
         ;break;
@@ -681,20 +688,27 @@ do {
                 echo "Seleccione cual empresa quiere eliminar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $empresaSeleccionada = $arrEmpresas[$seleccion];
-                if ($empresaSeleccionada->eliminar()) {
-                    unset($arrEmpresas[$seleccion]);
-                    echo "Empresa eliminada\n";
-                    for ($i = 0; $i < count($arrEmpresas); $i++) {
-                        echo "---------" . $i + 1 . "------------";
-                        echo $arrEmpresas[$i];
-                        echo "\n";
+
+                echo "Seguro que quiere hacerlo, esta informacion puede ser cambiar en otros lados\nIngrese s/n para continuar";
+                $rePregunta=trim(fgets(STDIN));
+                if($rePregunta=='s'){
+                    if ($empresaSeleccionada->eliminar()) {
+                        unset($arrEmpresas[$seleccion]);
+                        echo "Empresa eliminada\n";
+                        for ($i = 0; $i < count($arrEmpresas); $i++) {
+                            echo "---------" . $i + 1 . "------------";
+                            echo $arrEmpresas[$i];
+                            echo "\n";
+                        }
+                    } else {
+                        echo "Hubo un error eliminando la empresa\n";
                     }
-                } else {
-                    echo "Hubo un error eliminando la empresa\n";
+                }else{
+                    echo "la eliminacion se a parado";
                 }
             }
             ;break;
-        case 12: //------------------------------------------------------------
+        case 12: 
             $losPasajeros = new Pasajero();
             $arrayPasajeros = $losPasajeros->listar();
             if($arrayPasajeros==null){
@@ -708,17 +722,25 @@ do {
                 echo "Seleccione cual pasajero quiere eliminar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $pasajeroSeleccionada = $arrayPasajeros[$seleccion];
-                if ($pasajeroSeleccionada->eliminar()) {
-                    unset($arrayPasajeros[$seleccion]);
-                    echo "Pasajero eliminado\n";
-                    for ($i = 0; $i < count($arrayPasajeros); $i++) {
-                        echo "---------" . $i + 1 . "------------";
-                        echo $arrayPasajeros[$i];
-                        echo "\n";
+                
+                echo "Seguro que quiere hacerlo, esta informacion puede ser cambiar en otros lados\nIngrese s/n para continuar";
+                $rePregunta=trim(fgets(STDIN));
+                if($rePregunta=='s'){
+                    if ($pasajeroSeleccionada->eliminar()) {
+                        unset($arrayPasajeros[$seleccion]);
+                        echo "Pasajero eliminado\n";
+                        for ($i = 0; $i < count($arrayPasajeros); $i++) {
+                            echo "---------" . $i + 1 . "------------";
+                            echo $arrayPasajeros[$i];
+                            echo "\n";
+                        }
+                    } else {
+                        echo "Hubo un error eliminando al pasajero\n";
                     }
-                } else {
-                    echo "Hubo un error eliminando al pasajero\n";
+                }else{
+                    echo "la eliminacion se a parado";
                 }
+                
             };
             break;
         case 13:
