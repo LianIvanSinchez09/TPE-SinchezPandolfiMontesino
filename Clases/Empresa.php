@@ -82,9 +82,7 @@ class Empresa
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaEmpresa)) {
                 if ($row2 = $base->Registro()) {
-                    $this->setIdEmpresa($id);
-                    $this->setNombre($row2['nombre']);
-                    $this->setDireccion($row2['direccion']);
+                    $this->cargar($id, $row2['nombre'], $row2['direccion']);
                     $resp = true;
                 }
             } else {
@@ -98,7 +96,6 @@ class Empresa
 
     public function listar($condicion = "")
     {
-        $arregloPersona = null;
         $base = new BaseDatos();
         $consultaEmpresa = "Select * from empresa ";
         if ($condicion != "") {
@@ -110,13 +107,8 @@ class Empresa
             if ($base->Ejecutar($consultaEmpresa)) {
                 $arregloEmpresa = array();
                 while ($row2 = $base->Registro()) {
-
-                    $idEmpresa = $row2['idEmpresa'];
-                    $nombre = $row2['nombre'];
-                    $direccion = $row2['direccion'];
-
                     $empre = new Empresa();
-                    $empre->cargar($idEmpresa, $nombre, $direccion);
+                    $empre->cargar($row2['idEmpresa'], $row2['nombre'], $row2['direccion']);
                     array_push($arregloEmpresa, $empre);
                 }
             } else {
@@ -132,8 +124,8 @@ class Empresa
     {
         $base = new BaseDatos();
         $resp = false;
-        $consultaInsertar = "INSERT INTO empresa(idEmpresa, nombre, direccion) 
-				VALUES ('" . $this->getIdEmpresa() . "','" . $this->getNombre() . "','" . $this->getDireccion() . "')";
+        $consultaInsertar = "INSERT INTO empresa(nombre, direccion) 
+				VALUES ('" . $this->getNombre() . "','" . $this->getDireccion() . "')";
 
         if ($base->Iniciar()) {
 
