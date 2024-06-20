@@ -26,7 +26,8 @@ function menu()
         "\nIngrese 11: Eliminar empresa" .
         "\nIngrese 12: Eliminar pasajero" .
         "\nIngrese 13: Mostrar pasajeros" .
-        "\nIngrese 14: Mostrar responsables\n";
+        "\nIngrese 14: Mostrar responsables" . 
+        "\nIngrese 15: Mostrar empresa\n";
 }
 
 /**
@@ -766,6 +767,12 @@ do {
                 echo "No hay responsables que mostrar\n";
             }
         break;
+        case 15:
+            $emp = $empresa->listar();
+            foreach ($emp as $unaEmpresa) {
+                echo $unaEmpresa;
+            }
+            break;
         default:
             echo "\nOpcion Invalida";
             break;
