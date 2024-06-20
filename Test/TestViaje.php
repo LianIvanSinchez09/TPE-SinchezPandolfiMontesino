@@ -775,6 +775,12 @@ do {
                 echo "No hay responsables que mostrar\n";
             }
         break;
+        case 15:
+            $emp = $empresa->listar();
+            foreach ($emp as $unaEmpresa) {
+                echo $unaEmpresa;
+            }
+            break;
         default:
             echo "\nOpcion Invalida";
             break;
