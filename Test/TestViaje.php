@@ -14,20 +14,19 @@ include_once "../Clases/Pasajero.php";
 function menu()
 {
     echo "\nIngrese 1: Para ingresar un pasajero" .
-        "\nIngrese 2: Para modificar datos del pasajero" .
-        "\nIngrese 3: Para ingresar un viaje" .
-        "\nIngrese 4: Para modificar un viaje" .
-        "\nIngrese 5: Para ingresar al responsable del viaje" .
-        "\nIngrese 6: Para modificar un responsable del viaje" .
-        "\nIngrese 7: Para modificar la empresa" .
-        "\nIngrese 8: Mostrar detalles del viaje" .
-        "\nIngrese 9: Eliminar viaje" .
-        "\nIngrese 10: Eliminar responsable" .
-        "\nIngrese 11: Eliminar empresa" .
-        "\nIngrese 12: Eliminar pasajero" .
-        "\nIngrese 13: Mostrar pasajeros" .
-        "\nIngrese 14: Mostrar responsables" . 
-        "\nIngrese 15: Mostrar empresa\n";
+    "\nIngrese 2: Para ingresar un viaje" .
+    "\nIngrese 3: Para ingresar al responsable del viaje" .
+    "\nIngrese 4: Para modificar datos del pasajero" .
+    "\nIngrese 5: Para modificar un viaje" .
+    "\nIngrese 6: Para modificar un responsable del viaje" .
+    "\nIngrese 7: Para modificar la empresa" .
+    "\nIngrese 8: Eliminar viaje" .
+    "\nIngrese 9: Eliminar responsable" .
+    "\nIngrese 10: Eliminar empresa" .
+    "\nIngrese 11: Eliminar pasajero" .
+    "\nIngrese 12: Mostrar pasajeros" .
+    "\nIngrese 13: Mostrar detalles del viaje" .
+    "\nIngrese 14: Mostrar responsables\n";
 }
 
 /**
@@ -36,7 +35,7 @@ function menu()
  */
 function menuGeneral()
 {
-    echo "que quiere cambiar?\n";
+    echo "Que quiere cambiar?\n";
     echo "Ingrese (nombre): Para cambiar el nombre del pasajero" .
         "\nIngrese (apellido): Para cambiar el apellido del pasajero" .
         "\nIngrese (telefono): Para cambiar el telefono del pasajero" .
@@ -459,20 +458,6 @@ do {
             };
             break;
         case 2:
-            echo "Ingrese el documento del pasajero";
-            $doc = trim(fgets(STDIN));
-            //si el pasajero existe, realizara el cambio
-            if ($otroPasajero->Buscar($doc)) {
-                $elPasajero = $otroPasajero->devuelveAlguien($doc);
-                menuGeneral();
-                $opcionCambio = trim(fgets(STDIN));
-                cambiarPasajero($opcionCambio, $elPasajero);
-                echo $elPasajero;
-            } else {
-                echo "Ese pasajero no existe";
-            };
-            break;
-        case 3:
             
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
@@ -508,26 +493,7 @@ do {
                 }
             }
             ;break;
-        case 4:
-            $misViajes = new Viaje();
-            $arrayViajes = $misViajes->listar();
-            if($arrayViajes==null){
-                echo "No se hay cargado ningun viaje";
-            }else{
-                for ($i = 0; $i < count($arrayViajes); $i++) {
-                    echo "---------" . $i + 1 . "------------";
-                    echo $arrayViajes[$i];
-                    echo "\n";
-                }
-                echo "Seleccione cual viaje quiere cambiar: ";
-                $seleccion = trim(fgets(STDIN)) - 1;
-                $viajeSeleccionado = $arrayViajes[$seleccion];
-                menuViaje();
-                $opcionCambio = trim(fgets(STDIN));
-                cambioViaje($opcionCambio, $viajeSeleccionado);
-            }
-            ;break;
-        case 5:
+        case 3:
             echo "Ingrese el numero de documento del responsable del viaje\n";
             $numDoc = trim(fgets(STDIN));
             $nuevoPersona = new Persona();
@@ -553,6 +519,39 @@ do {
                 echo "Responsable cargado en la base de datos\n";
             };
             break;
+        case 4:
+            echo "Ingrese el documento del pasajero";
+            $doc = trim(fgets(STDIN));
+            //si el pasajero existe, realizara el cambio
+            if ($otroPasajero->Buscar($doc)) {
+                $elPasajero = $otroPasajero->devuelveAlguien($doc);
+                menuGeneral();
+                $opcionCambio = trim(fgets(STDIN));
+                cambiarPasajero($opcionCambio, $elPasajero);
+                echo $elPasajero;
+            } else {
+                echo "Ese pasajero no existe";
+            };
+            break;
+        case 5:
+            $misViajes = new Viaje();
+            $arrayViajes = $misViajes->listar();
+            if($arrayViajes==null){
+                echo "No se hay cargado ningun viaje";
+            }else{
+                for ($i = 0; $i < count($arrayViajes); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayViajes[$i];
+                    echo "\n";
+                }
+                echo "Seleccione cual viaje quiere cambiar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $viajeSeleccionado = $arrayViajes[$seleccion];
+                menuViaje();
+                $opcionCambio = trim(fgets(STDIN));
+                cambioViaje($opcionCambio, $viajeSeleccionado);
+            }
+            ;break;
         case 6:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
@@ -613,32 +612,31 @@ do {
             };
             break;
         case 8:
-            $col = $viaje->listar();
-            foreach ($col as $viaje) {
-                echo $viaje;
+            $losViajes = new Viaje();
+            $arrayViajes = $losViajes->listar();
+            if(count($arrayViajes) > 0){
+                for ($i = 0; $i < count($arrayViajes); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayViajes[$i];
+                    echo "\n";
+                }
+                echo "Seleccione cual viaje quiere eliminar: ";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $viajeSeleccionado = $arrayViajes[$seleccion];
+                if ($viajeSeleccionado->eliminar()) {
+                    $col = $viaje->listar();
+                    foreach ($col as $viaje) {
+                        echo $viaje;
+                    }
+                    echo "Viaje correctamente borrado\n";
+                } else {
+                    echo "Hubo un error eliminando el viaje\n";
+                };
+            }else{
+                echo "No hay viajes disponibles\n";
             }
             break;
         case 9:
-            $losViajes = new Viaje();
-            $arrayViajes = $losViajes->listar();
-            for ($i = 0; $i < count($arrayViajes); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrayViajes[$i];
-                echo "\n";
-            }
-            echo "Seleccione cual viaje quiere eliminar: ";
-            $seleccion = trim(fgets(STDIN)) - 1;
-            $viajeSeleccionado = $arrayViajes[$seleccion];
-            if ($viajeSeleccionado->eliminar()) {
-                $col = $viaje->listar();
-                foreach ($col as $viaje) {
-                    echo $viaje;
-                }
-            } else {
-                echo "Hubo un error eliminando el viaje\n";
-            };
-            break;
-        case 10:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
             if($arrResponsable==null){
@@ -673,7 +671,7 @@ do {
                 }
             }
         ;break;
-        case 11:
+        case 10:
             $lasEmpresas = new Empresa();
             $arrEmpresas = $lasEmpresas->listar();
             if($arrEmpresas==null){
@@ -707,7 +705,7 @@ do {
                 }
             }
             ;break;
-        case 12: 
+        case 11: 
             $losPasajeros = new Pasajero();
             $arrayPasajeros = $losPasajeros->listar();
             if($arrayPasajeros==null){
@@ -742,7 +740,7 @@ do {
                 
             };
             break;
-        case 13:
+        case 12:
             $losPasajeros = new Pasajero();
             $arrayPas = $losPasajeros->listar();
             if(count($arrayPas) != 0){
@@ -753,6 +751,16 @@ do {
                 };
             }else{
                 echo "No hay pasajeros\n";
+            }
+            break;
+        case 13:
+            $col = $viaje->listar();
+            if(count($col) > 0){
+                foreach ($col as $viaje) {
+                    echo $viaje;
+                }
+            }else{
+                echo "No hay viajes disponibles\n";
             }
             break;
         case 14:
