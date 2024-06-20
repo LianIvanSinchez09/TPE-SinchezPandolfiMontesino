@@ -533,16 +533,16 @@ do {
             }
             ;break;
         case 5:
-            echo "Ingrese el numero de documento del responsable del viaje";
+            echo "Ingrese el numero de documento del responsable del viaje\n";
             $numDoc = trim(fgets(STDIN));
             $nuevoResponsable = new ResponsableV();
             $responsableYacargado = $nuevoResponsable->Buscar($numDoc);
             $nuevaPersona = new Persona();
             $personaYaCargada = $nuevaPersona->Buscar($numDoc);
             if ($personaYaCargada) {
-                echo "Esa persona ya existe en la base de datos";
+                echo "Esa persona ya existe en la base de datos\n";
             } else if ($responsableYacargado) {
-                echo "Ya se encuentra ese responsable";
+                echo "Ya se encuentra ese responsable\n";
             } else {
                 echo "ingrese el nombre del responsable\n";
                 $nombre = trim(fgets(STDIN));
@@ -557,21 +557,21 @@ do {
                 $nuevoResponsable->cargar($numDoc, $nombre, $apellido, $numEmp, $numLice);
                 $nuevoResponsable->insertar();
                 
-                echo "Responsable cargado en la base de datos";
+                echo "Responsable cargado en la base de datos\n";
             };
             break;
         case 6:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
             if($arrResponsable==null){
-                echo "No hay ningun responsable cargado";
+                echo "No hay ningun responsable cargado\n";
             }else{
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrResponsable[$i];
                     echo "\n";
                 }
-                echo "Seleccione cual responsable quiere cambiar: ";
+                echo "Seleccione cual responsable quiere cambiar: \n";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $responsableSeleccionado = $arrResponsable[$seleccion];
                 menuResponsable();
@@ -580,7 +580,9 @@ do {
             }
             ;break;
         case 7:
-            echo "Desea cambiar dirección o nombre de la empresa?: ";
+            $emp = new Empresa();
+            echo $emp->listar()[0] . "\n";
+            echo "Desea cambiar dirección o nombre de la empresa?: \n";
             $opcion = trim(fgets(STDIN));
             switch ($opcion) {
                 case 'direccion':
@@ -592,9 +594,11 @@ do {
                         $empresa->setDireccion($direccion);
                         if ($empresa->modificar()) {
                             echo "Direccion modificada correctamente\n";
+                            echo $emp->listar()[0] . "\n";
                             $estado = true;
                         } else {
-                            echo "No se pudo modificar la dirección";
+                            echo $emp->listar()[0] . "\n";
+                            echo "No se pudo modificar la dirección\n";
                         }
                     } while (!$estado);
                     break;
@@ -604,10 +608,12 @@ do {
                         $nombre = trim(fgets(STDIN));
                         $empresa->setNombre($nombre);
                         if ($empresa->modificar()) {
+                            echo $emp->listar()[0] . "\n";
                             echo "Nombre modificada correctamente\n";
                             $estado = true;
                         } else {
-                            echo "No se pudo modificar el nombre";
+                            echo $emp->listar()[0] . "\n";
+                            echo "No se pudo modificar el nombre\n";
                         }
                     } while (!$estado);
                     break;
@@ -646,7 +652,7 @@ do {
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
             if($arrResponsable==null){
-                echo "no hay ningun responsable";
+                echo "no hay ningun responsable\n";
             }else{
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
@@ -673,7 +679,7 @@ do {
         case 11:
             $lasEmpresas = new Empresa();
             $arrEmpresas = $lasEmpresas->listar();
-            if($arrEmpresa==null){
+            if($arrEmpresas==null){
                 echo "La empresa ya fue eliminada";
             }else{
                 for ($i = 0; $i < count($arrEmpresas); $i++) {
@@ -734,18 +740,22 @@ do {
                     echo "\n";
                 };
             }else{
-                echo 'No hay pasajeros\n';
+                echo "No hay pasajeros\n";
             }
             break;
         case 14:
             $losResponsables = new ResponsableV();
-            $arrResponsable = $losResponsables->listar();
-            for ($i = 0; $i < count($arrResponsable); $i++) {
-                echo "---------" . $i + 1 . "------------";
-                echo $arrResponsable[$i];
-                echo "\n";
-            };
-            break;
+            if(count($losResponsables->listar()) != 0){
+                $arrResponsable = $losResponsables->listar();
+                for ($i = 0; $i < count($arrResponsable); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrResponsable[$i];
+                    echo "\n";
+                };
+            }else{
+                echo "No hay responsables que mostrar\n";
+            }
+        break;
         default:
             echo "\nOpcion Invalida";
             break;
