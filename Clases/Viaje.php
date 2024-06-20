@@ -5,7 +5,7 @@ class Viaje {
     private $idViaje;
     private $destino;
     private $cantMaxPasajeros;
-    private $objNumeroEmpleado; // objeto foráneo
+    private $objNumeroDniEmpleado; // objeto foráneo
     private $objIdEmpresa;      // objeto foráneo
     private $importe;
     private $mensajeoperacion;
@@ -15,17 +15,17 @@ class Viaje {
         $this->idViaje = "";
         $this->destino = "";
         $this->cantMaxPasajeros = "";
-        $this->objNumeroEmpleado = new ResponsableV(); // Inicializamos como objetos
+        $this->objNumeroDniEmpleado = new ResponsableV(); // Inicializamos como objetos
         $this->objIdEmpresa = new Empresa(); // Inicializamos como objetos
         $this->importe = "";
     }
 
-    public function cargar($idViaje, $destino, $cantMaxPasajeros, $objNumeroEmpleado, $objIdEmpresa, $importe)
+    public function cargar($idViaje, $destino, $cantMaxPasajeros, $objNumeroDniEmpleado, $objIdEmpresa, $importe)
     {
         $this->setIdViaje($idViaje);
         $this->setDestino($destino);
         $this->setCantMaxPasajeros($cantMaxPasajeros);
-        $this->setObjNumeroEmpleado($objNumeroEmpleado); // Objeto
+        $this->setObjNumeroDniEmpleado($objNumeroDniEmpleado); // Objeto
         $this->setObjIdEmpresa($objIdEmpresa); // Objeto
         $this->setImporte($importe);
     }
@@ -43,8 +43,8 @@ class Viaje {
         return $this->cantMaxPasajeros;
     }
 
-    public function getObjNumeroEmpleado() { // Objeto
-        return $this->objNumeroEmpleado;
+    public function getObjNumeroDniEmpleado() { // Objeto
+        return $this->objNumeroDniEmpleado;
     }
 
     public function getObjIdEmpresa() { // Objeto
@@ -72,8 +72,8 @@ class Viaje {
         $this->cantMaxPasajeros = $value;
     }
 
-    public function setObjNumeroEmpleado($value) { // Objeto
-        $this->objNumeroEmpleado = $value;
+    public function setObjNumeroDniEmpleado($value) { // Objeto
+        $this->objNumeroDniEmpleado = $value;
     }
 
     public function setObjIdEmpresa($value) { // Objeto
@@ -92,8 +92,8 @@ class Viaje {
         $info = "\nId Viaje: " . $this->getIdViaje();
         $info .= "\nDestino: " . $this->getDestino();
         $info .= "\nCantidad Max De Pasajeros: " . $this->getCantMaxPasajeros();
-        $info .= "\nEmpleado a cargo: \n" . $this->getObjNumeroEmpleado(); // clave foranea
-        $info .= "\nEmpresa a la que esta asociada: \n" . $this->getObjIdEmpresa(); // clave foranea
+        $info .= "\nDNI Empleado a cargo: \n" . $this->getObjNumeroDniEmpleado()->getdocumento(); // clave foranea
+        $info .= "\nEmpresa a la que esta asociada: \n" . $this->getObjIdEmpresa()->getIdEmpresa(); // clave foranea
         $info .= "\nImporte: $" . $this->getImporte() . "\n";
 
         return $info;
@@ -109,9 +109,9 @@ class Viaje {
                     $this->setIdViaje($id);
                     $this->setDestino($row2['destino']);
                     $this->setCantMaxPasajeros($row2['cantMaxPasajeros']);
-                    $numeroEmpleado = new ResponsableV();
-                    $numeroEmpleado->Buscar($row2['numeroEmpleado']); // Cargar objeto empleado
-                    $this->setObjNumeroEmpleado($numeroEmpleado);
+                    $numeroDniEmpleado = new ResponsableV();
+                    $numeroDniEmpleado->Buscar($row2['documento']); // Cargar objeto empleado
+                    $this->setObjNumeroDniEmpleado($numeroDniEmpleado);
                     $idEmpresa = new Empresa();
                     $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
                     $this->setObjIdEmpresa($idEmpresa);
@@ -173,7 +173,7 @@ class Viaje {
                     $destino = $row2['destino'];
                     $cantMaxPasajeros = $row2['cantMaxPasajeros'];
                     $numeroEmpleado = new ResponsableV();
-                    $numeroEmpleado->Buscar($row2['numeroEmpleado']); // Cargar objeto empleado
+                    $numeroEmpleado->Buscar($row2['documento']); // Cargar objeto empleado
                     $idEmpresa = new Empresa();
                     $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
                     $importe = $row2['importe'];
@@ -194,10 +194,11 @@ class Viaje {
     public function insertar() {
         $base = new BaseDatos();
         $resp = false;
-        $consultaInsertar = "INSERT INTO viaje(destino, cantMaxPasajeros, numeroEmpleado, idEmpresa, importe) 
-                VALUES ('" . $this->getDestino() . "','" . $this->getCantMaxPasajeros() . "','" . $this->getObjNumeroEmpleado()->getNumEmpleado() . "','" . $this->getObjIdEmpresa()->getIdEmpresa() . "','" . $this->getImporte() . "')";
+        $consultaInsertar = "INSERT INTO viaje(destino, cantMaxPasajeros, documentoEmpleado, idEmpresa, importe) 
+                VALUES ('" . $this->getDestino() . "','" . $this->getCantMaxPasajeros() . "','" . $this->getObjNumeroDniEmpleado()->getdocumento() . "','" . $this->getObjIdEmpresa()->getIdEmpresa() . "','" . $this->getImporte() . "')";
         if ($base->Iniciar()) {
-            if ($base->Ejecutar($consultaInsertar)) {
+            if ($id = $base->devuelveIDInsercion($consultaInsertar)) {
+                $this->setIdViaje($id);
                 $resp =  true;
             } else {
                 $this->setmensajeoperacion($base->getError());
@@ -211,7 +212,7 @@ class Viaje {
     public function modificar() {
         $resp = false;
         $base = new BaseDatos();
-        $consultaModifica = "UPDATE viaje SET destino='" . $this->getDestino() . "',cantMaxPasajeros='" . $this->getCantMaxPasajeros() . "',numeroEmpleado='" . $this->getObjNumeroEmpleado()->getNumEmpleado() . "',idEmpresa='" . $this->getObjIdEmpresa()->getIdEmpresa() . "',importe='" . $this->getImporte() . "' WHERE idViaje=" . $this->getIdViaje();
+        $consultaModifica = "UPDATE viaje SET destino='" . $this->getDestino() . "',cantMaxPasajeros='" . $this->getCantMaxPasajeros() . "',documentoEmpleado='" . $this->getObjNumeroDniEmpleado()->getdocumento() . "',idEmpresa='" . $this->getObjIdEmpresa()->getIdEmpresa() . "',importe='" . $this->getImporte() . "' WHERE idViaje=" . $this->getIdViaje();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($consultaModifica)) {
                 $resp =  true;
@@ -229,7 +230,8 @@ class Viaje {
         $resp = false;
         if ($base->Iniciar()) {
             $consultaBorra = "DELETE FROM viaje WHERE idViaje=" . $this->getIdViaje();
-            if ($base->Ejecutar($consultaBorra)) {
+            if ($id = $base->devuelveIDInsercion($consultaBorra)) {
+                $this->setIdViaje($id);
                 $resp =  true;
             } else {
                 $this->setmensajeoperacion($base->getError());
