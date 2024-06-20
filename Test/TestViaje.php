@@ -26,7 +26,8 @@ function menu()
     "\nIngrese 11: Eliminar pasajero" .
     "\nIngrese 12: Mostrar pasajeros" .
     "\nIngrese 13: Mostrar detalles del viaje" .
-    "\nIngrese 14: Mostrar responsables\n";
+    "\nIngrese 14: Mostrar responsables".
+    "\nIngrese 15 Mostrar Empresa\n";
 }
 
 /**
@@ -778,8 +779,12 @@ do {
         break;
         case 15:
             $emp = $empresa->listar();
-            foreach ($emp as $unaEmpresa) {
-                echo $unaEmpresa;
+            if(count($emp)!=0){
+                foreach ($emp as $unaEmpresa) {
+                    echo $unaEmpresa;
+                }
+            }else{
+                echo "La empresa fue elimina con anterioridad";
             }
             break;
         default:
