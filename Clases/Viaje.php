@@ -110,7 +110,7 @@ class Viaje {
                     $this->setDestino($row2['destino']);
                     $this->setCantMaxPasajeros($row2['cantMaxPasajeros']);
                     $numeroDniEmpleado = new ResponsableV();
-                    $numeroDniEmpleado->Buscar($row2['documento']); // Cargar objeto empleado
+                    $numeroDniEmpleado->Buscar($row2['documentoEmpleado']); // Cargar objeto empleado
                     $this->setObjNumeroDniEmpleado($numeroDniEmpleado);
                     $idEmpresa = new Empresa();
                     $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
@@ -173,7 +173,7 @@ class Viaje {
                     $destino = $row2['destino'];
                     $cantMaxPasajeros = $row2['cantMaxPasajeros'];
                     $numeroEmpleado = new ResponsableV();
-                    $numeroEmpleado->Buscar($row2['documento']); // Cargar objeto empleado
+                    $numeroEmpleado->Buscar($row2['documentoEmpleado']); // Cargar objeto empleado
                     $idEmpresa = new Empresa();
                     $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
                     $importe = $row2['importe'];
