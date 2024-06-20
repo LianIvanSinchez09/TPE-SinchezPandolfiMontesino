@@ -439,7 +439,7 @@ do {
                     $apellido = trim(fgets(STDIN));
                     echo "ingrese el numero de documento del pasajero\n";
                     $numDoc = trim(fgets(STDIN));
-    
+                    //dos metodos que se puede optimizar
                     $pasajeroYacargado = $otroPasajero->Buscar($numDoc);
                     $nuevaPersona = new Persona();
                     $personaYaCargada = $nuevaPersona->Buscar($numDoc);
