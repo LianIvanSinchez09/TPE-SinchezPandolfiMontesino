@@ -74,9 +74,7 @@ class Persona
 		if ($base->Iniciar()) {
 			if ($base->Ejecutar($consultaPersona)) {
 				if ($row2 = $base->Registro()) {
-					$this->setdocumento($dni);
-					$this->setNombre($row2['nombre']);
-					$this->setApellido($row2['apellido']);
+					$this->cargar($row2['documento'], $row2['nombre'], $row2['apellido']);
 					$resp = true;
 				}
 			} else {
@@ -103,13 +101,8 @@ class Persona
 			if ($base->Ejecutar($consultaPersonas)) {
 				$arregloPersona = array();
 				while ($row2 = $base->Registro()) {
-
-					$documento = $row2['documento'];
-					$Nombre = $row2['nombre'];
-					$Apellido = $row2['apellido'];
-
 					$perso = new Persona();
-					$perso->cargar($documento, $Nombre, $Apellido);
+					$perso->cargar($row2['documento'], $row2['nombre'], $row2['apellido']);
 					array_push($arregloPersona, $perso);
 				}
 			} else {
