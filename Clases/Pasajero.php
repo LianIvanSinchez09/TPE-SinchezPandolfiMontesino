@@ -52,11 +52,12 @@ class Pasajero extends Persona {
                 if ($row2 = $base->Registro()) {
                     parent::Buscar($dni);
                     $this->setTelefono($row2['telefono']);
-                    $objViaje = new Viaje();
-                    $objViaje->Buscar($row2['idViaje']);
-                    $this->setObjViaje($objViaje);
+                    if($row2['idViaje']!=null){
+                        $objViaje=new Viaje();
+                        $objViaje->Buscar($row2['idViaje']);// Cargar objeto empleado
+                        $this->setObjViaje($objViaje);
+                    }
                     $resp = true;
-                    
                 }
             } else {
                 $this->setMensajeoperacion($base->getError());

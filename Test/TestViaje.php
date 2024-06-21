@@ -522,6 +522,7 @@ do {
             };
             break;
         case 4:
+            $otroPasajero=new Pasajero();
             echo "Ingrese el documento del pasajero";
             $doc = trim(fgets(STDIN));
             if ($otroPasajero->Buscar($doc)) {
