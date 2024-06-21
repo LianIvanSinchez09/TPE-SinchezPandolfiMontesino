@@ -215,19 +215,30 @@ class Viaje {
 
     public function hayPasajesDisponibles($id){
         $pasajero = new Pasajero();
+        $viaje = new Viaje();
         $cantPasajeros = 0;
-        $viaje = null;
+        $viajes = $viaje->listar();
         $pasajeros = $pasajero->listar();
         $esDisponible = false;
-        for ($i=0; $i < count($pasajeros); $i++) { 
-            if($id == $pasajeros[$i]->getObjViaje()->getIdViaje()){
-                $viaje = $pasajeros[$i]->getObjViaje();
-                $cantPasajeros++;
+        $c = 0;
+        $encontrado = false;
+        while ($c < count($viajes) && !$encontrado) { 
+            if($id == $viajes[$c]->getIdViaje()){
+                $viaje = $viajes[$c];
+                $encontrado = true;
             }
+            $c++;
         }
-
-        if(count($pasajeros) == 0 || $viaje->getCantMaxPasajeros() > $cantPasajeros){
-            $esDisponible = true;
+        if(($viaje != null && $viaje->getCantMaxPasajeros() != 0)){
+            for ($i=0; $i < count($pasajeros); $i++) {
+                if($viaje->getIdViaje() == $pasajeros[$i]->getObjViaje()->getIdViaje()){
+                    $cantPasajeros++;
+                    echo $cantPasajeros . "\n";
+                }
+            }
+            if($viaje->getCantMaxPasajeros() > $cantPasajeros){
+                $esDisponible = true;
+            }
         }
         return $esDisponible;
     }
