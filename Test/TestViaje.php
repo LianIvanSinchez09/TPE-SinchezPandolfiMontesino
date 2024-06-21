@@ -85,7 +85,6 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                     $elPasajero->setNombre($otroDato);
                     $elPasajero->modificar();
                     echo "nombre cambiado";
-                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el nombre tiene que ser diferente\n";
@@ -102,7 +101,6 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                     $elPasajero->setApellido($otroDato);
                     $elPasajero->modificar();
                     echo "apellido cambiado";
-                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el nombre tiene que ser diferente\n";
@@ -119,7 +117,6 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                     $elPasajero->setTelefono($otroDato);
                     $elPasajero->modificar();
                     echo "telefono cambiado";
-                    echo $elPasajero;
                     $estado = true;
                 } else {
                     echo "el telefono tiene que ser diferente\n";
@@ -166,7 +163,6 @@ function cambiarPasajero($opcionCambio, $elPasajero)
             $elPasajero->setTelefono($numTele);
             $elPasajero->getObjViaje()->setIdViaje($numIdViaje);
             $elPasajero->modificar();
-            echo $elPasajero;
             echo "datos cambiados";
             break;
     }
