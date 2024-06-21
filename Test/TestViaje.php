@@ -524,7 +524,6 @@ do {
         case 4:
             echo "Ingrese el documento del pasajero";
             $doc = trim(fgets(STDIN));
-            //si el pasajero existe, realizara el cambio
             if ($otroPasajero->Buscar($doc)) {
                 $elPasajero = $otroPasajero->devuelveAlguien($doc);
                 menuGeneral();

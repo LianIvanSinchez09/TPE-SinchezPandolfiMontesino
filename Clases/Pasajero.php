@@ -92,7 +92,6 @@ class Pasajero extends Persona {
                     if($row2['idViaje']!=null){
                         $viaje->Buscar($row2['idViaje']);// Cargar objeto empleado
                     }
-                    
                     array_push($arreglo, $obj);
                 }
             } else {
