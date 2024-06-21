@@ -88,12 +88,24 @@ class Viaje {
         $this->mensajeoperacion = $mensajeoperacion;
     }
 
+    private function mostrarNulo($parametro){        
+        if($parametro == null){
+            $respuesta = "null\n";
+        }else{
+            $respuesta = $parametro;
+        }
+        return $respuesta;
+    }
+
     public function __toString() {
+        $empleado = $this->getObjNumeroDniEmpleado()->getdocumento();
+        $empresa = $this->getObjIdEmpresa()->getIdEmpresa();
+
         $info = "\nId Viaje: " . $this->getIdViaje();
         $info .= "\nDestino: " . $this->getDestino();
         $info .= "\nCantidad Max De Pasajeros: " . $this->getCantMaxPasajeros();
-        $info .= "\nDNI Empleado a cargo: \n" . $this->getObjNumeroDniEmpleado()->getdocumento(); // clave foranea
-        $info .= "\nEmpresa a la que esta asociada: \n" . $this->getObjIdEmpresa()->getIdEmpresa(); // clave foranea
+        $info .= "\nDNI Empleado a cargo: " . $this->mostrarNulo($empleado); // clave foranea
+        $info .= "\nEmpresa a la que esta asociada: " . $this->mostrarNulo($empresa); // clave foranea
         $info .= "\nImporte: $" . $this->getImporte() . "\n";
 
         return $info;
@@ -145,9 +157,13 @@ class Viaje {
                     $destino = $row2['destino'];
                     $cantMaxPasajeros = $row2['cantMaxPasajeros'];
                     $numeroEmpleado = new ResponsableV();
-                    $numeroEmpleado->Buscar($row2['documentoEmpleado']); // Cargar objeto empleado
+                    if($row2['documentoEmpleado']!=null){
+                        $numeroEmpleado->Buscar($row2['documentoEmpleado']);// Cargar objeto empleado
+                    }
                     $idEmpresa = new Empresa();
-                    $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
+                    if($row2['idEmpresa']!=null){
+                        $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
+                    }
                     $importe = $row2['importe'];
 
                     $viaj = new Viaje();

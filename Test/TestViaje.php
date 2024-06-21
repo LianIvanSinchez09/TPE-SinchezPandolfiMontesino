@@ -26,7 +26,8 @@ function menu()
     "\nIngrese 11: Eliminar pasajero" .
     "\nIngrese 12: Mostrar pasajeros" .
     "\nIngrese 13: Mostrar detalles del viaje" .
-    "\nIngrese 14: Mostrar responsables\n";
+    "\nIngrese 14: Mostrar responsables".
+    "\nIngrese 15 Mostrar Empresa\n";
 }
 
 /**
@@ -313,7 +314,7 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                     $otroDato = trim(fgets(STDIN)) - 1;
                     $nuevoRes = $arrResponsable[$otroDato];
                     echo "numero de empleado cambiado";
-                    $viajeSeleccionado->setObjNumeroEmpleado($nuevoRes);
+                    $viajeSeleccionado->setObjNumeroDniEmpleado($nuevoRes);
                     $viajeSeleccionado->modificar();
                     echo $viajeSeleccionado;
                     $estado = true;
@@ -438,11 +439,12 @@ do {
                     $apellido = trim(fgets(STDIN));
                     echo "ingrese el numero de documento del pasajero\n";
                     $numDoc = trim(fgets(STDIN));
-    
+                    
+                    $nuevoPersona = new Persona();
+                    $personaYacargada = $nuevoPersona->Buscar($numDoc);        
                     $nuevoPasajero = new Pasajero();
-                    $pasajeroYacargado = $nuevoPasajero->Buscar($numDoc);
 
-                    if ($pasajeroYacargado) {
+                    if ($personaYacargada) {
                         echo "Ya se encuentra en ese viaje";
                     } else {
                         echo "ingrese el numero de telefono del pasajero\n";
@@ -496,12 +498,13 @@ do {
         case 3:
             echo "Ingrese el numero de documento del responsable del viaje\n";
             $numDoc = trim(fgets(STDIN));
-            $nuevoResponsable = new ResponsableV();
-            $responsableYacargado = $nuevoResponsable->Buscar($numDoc);
+            $nuevoPersona = new Persona();
+            $personaYacargada = $nuevoPersona->Buscar($numDoc);
+            $nuevoResponsable=new ResponsableV();
             
             
-            if ($responsableYacargado) {
-                echo "Ya se encuentra ese responsable\n";
+            if ($personaYacargada) {
+                echo "Ya se encuentra cargado en la base de datos\n";
             } else {
                 echo "ingrese el nombre del responsable\n";
                 $nombre = trim(fgets(STDIN));
@@ -742,7 +745,7 @@ do {
         case 12:
             $losPasajeros = new Pasajero();
             $arrayPas = $losPasajeros->listar();
-            if(count($arrayPas) != 0){
+            if($arrayPas!=null){
                 for ($i = 0; $i < count($arrayPas); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrayPas[$i];
@@ -754,7 +757,7 @@ do {
             break;
         case 13:
             $col = $viaje->listar();
-            if(count($col) > 0){
+            if($col!=null){
                 foreach ($col as $viaje) {
                     echo $viaje;
                 }
@@ -765,7 +768,7 @@ do {
         case 14:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
-            if(count($arrResponsable) != 0){
+            if($arrResponsable!=null){
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrResponsable[$i];
@@ -777,8 +780,12 @@ do {
         break;
         case 15:
             $emp = $empresa->listar();
-            foreach ($emp as $unaEmpresa) {
-                echo $unaEmpresa;
+            if($emp!=null){
+                foreach ($emp as $unaEmpresa) {
+                    echo $unaEmpresa;
+                }
+            }else{
+                echo "La empresa fue elimina con anterioridad";
             }
             break;
         default:
