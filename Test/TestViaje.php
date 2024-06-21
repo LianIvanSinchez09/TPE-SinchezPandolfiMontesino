@@ -333,11 +333,11 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                         echo $arrEmpresa[$i];
                         echo "\n";
                     }
-                    echo "ingrese el indice del empleado al que quiera cambiar\n";
+                    echo "ingrese el indice de la empresa al que quiera cambiar\n";
                     $otroDato = trim(fgets(STDIN)) - 1;
                     $nuevoRes = $arrEmpresa[$otroDato];
                     echo "numero de empleado cambiado";
-                    $viajeSeleccionado->setObjNumeroEmpleado($nuevoRes);
+                    $viajeSeleccionado->setObjIdEmpresa($nuevoRes);
                     $viajeSeleccionado->modificar();
                     echo $viajeSeleccionado;
                     $estado = true;
