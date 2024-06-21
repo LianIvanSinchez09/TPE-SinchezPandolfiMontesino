@@ -40,6 +40,7 @@ function menuGeneral()
     echo "Ingrese (nombre): Para cambiar el nombre del pasajero" .
         "\nIngrese (apellido): Para cambiar el apellido del pasajero" .
         "\nIngrese (telefono): Para cambiar el telefono del pasajero" .
+        "\nIngrese (idViaje): Para cambiar el viaje del pasajero" .
         "\nIngrese (todo): Para cambiar toda la informacion de un pasajero\n";
 }
 
@@ -333,11 +334,11 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                         echo $arrEmpresa[$i];
                         echo "\n";
                     }
-                    echo "ingrese el indice del empleado al que quiera cambiar\n";
+                    echo "ingrese el indice de la empresa al que quiera cambiar\n";
                     $otroDato = trim(fgets(STDIN)) - 1;
                     $nuevoRes = $arrEmpresa[$otroDato];
                     echo "numero de empleado cambiado";
-                    $viajeSeleccionado->setObjNumeroEmpleado($nuevoRes);
+                    $viajeSeleccionado->setObjIdEmpresa($nuevoRes);
                     $viajeSeleccionado->modificar();
                     echo $viajeSeleccionado;
                     $estado = true;
