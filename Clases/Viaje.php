@@ -235,28 +235,30 @@ class Viaje {
         $cantPasajeros = 0;
         $viajes = $viaje->listar();
         $pasajeros = $pasajero->listar();
-        $esDisponible = false;
+        $viajeSeleccionado = null;
+        $viajeACargar = null;
         $c = 0;
         $encontrado = false;
+        //encuentro el viaje con la id
         while ($c < count($viajes) && !$encontrado) { 
             if($id == $viajes[$c]->getIdViaje()){
-                $viaje = $viajes[$c];
+                $viajeSeleccionado = $viajes[$c];
                 $encontrado = true;
             }
             $c++;
         }
-        if(($viaje != null && $viaje->getCantMaxPasajeros() != 0)){
+        //calculo la cantidad de pasajeros
+        if(($viajeSeleccionado->getCantMaxPasajeros() != 0)){
             for ($i=0; $i < count($pasajeros); $i++) {
-                if($viaje->getIdViaje() == $pasajeros[$i]->getObjViaje()->getIdViaje()){
+                if($viajeSeleccionado->getIdViaje() == $pasajeros[$i]->getObjViaje()->getIdViaje()){
                     $cantPasajeros++;
-                    echo $cantPasajeros . "\n";
                 }
             }
-            if($viaje->getCantMaxPasajeros() > $cantPasajeros){
-                $esDisponible = true;
+            if($viajeSeleccionado->getCantMaxPasajeros() > 0 && $cantPasajeros < $viajeSeleccionado->getCantMaxPasajeros()){
+                $viajeACargar = $viajeSeleccionado;
             }
         }
-        return $esDisponible;
+        return $viajeACargar;
     }
 
 }

@@ -431,7 +431,10 @@ do {
                 }
                 echo "A cual viaje desea ir (id): \n";
                 $idOpcViaje = trim(fgets(STDIN));
-                if ($viaje->hayPasajesDisponibles($idOpcViaje)) {
+                $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
+                if ($viajeRetornado == null) {
+                    echo "Viaje no disponible";
+                }else{
                     echo "Hay pasajes disponibles\n";
                     echo "ingrese el nombre del pasajero\n";
                     $nombre = trim(fgets(STDIN));
@@ -443,19 +446,18 @@ do {
                     $nuevoPersona = new Persona();
                     $personaYacargada = $nuevoPersona->Buscar($numDoc);        
                     $nuevoPasajero = new Pasajero();
-
+    
                     if ($personaYacargada) {
                         echo "Ya se encuentra en ese viaje";
                     } else {
                         echo "ingrese el numero de telefono del pasajero\n";
                         $numTele = trim(fgets(STDIN));
-
-                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viaje, $numTele);
+                        
+                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
                         $nuevoPasajero->insertar();
+                        
                         echo "Pasajero cargado en la base de datos";
                     }
-                } else {
-                    echo "No disponible";
                 }
             };
             break;
