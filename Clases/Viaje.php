@@ -157,9 +157,13 @@ class Viaje {
                     $destino = $row2['destino'];
                     $cantMaxPasajeros = $row2['cantMaxPasajeros'];
                     $numeroEmpleado = new ResponsableV();
-                    $numeroEmpleado->Buscar($row2['documentoEmpleado']); // Cargar objeto empleado
+                    if($row2['documentoEmpleado']!=null){
+                        $numeroEmpleado->Buscar($row2['documentoEmpleado']);// Cargar objeto empleado
+                    }
                     $idEmpresa = new Empresa();
-                    $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
+                    if($row2['idEmpresa']!=null){
+                        $idEmpresa->Buscar($row2['idEmpresa']); // Cargar objeto empresa
+                    }
                     $importe = $row2['importe'];
 
                     $viaj = new Viaje();
