@@ -158,13 +158,13 @@ class Pasajero extends Persona {
         if($parametro == null){
             $respuesta = "null\n";
         }else{
-            $respuesta = $parametro;
+            $respuesta = $parametro->getIdViaje();
         }
         return $respuesta;
     }
 
     public function __toString(){
-        $viaje=$this->getObjViaje()->getIdViaje();
+        $viaje=$this->getObjViaje();
         return parent::__toString()."\nId Viaje: " . $this->mostrarNulo($viaje) . "\nTelefono: " . $this->getTelefono() ."\n";
     }
 }
