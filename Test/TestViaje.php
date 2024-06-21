@@ -124,6 +124,7 @@ function cambiarPasajero($opcionCambio, $elPasajero)
             } while (!$estado);
             break;
         case "idViaje": // fran
+            
             $objViaje = new Viaje();
             $arrayViaje = $objViaje->listar();
             if (count($arrayViaje) == 0) {
@@ -136,15 +137,14 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                         echo $arrayViaje[$i];
                         echo "\n";
                     }
-                    $indice = trim(fgets(STDIN));
-                    if ($elPasajero->getObjViaje()->getIdViaje() == $indice) {
-                        echo "\nElija otro idViaje, tiene que ser diferente\n\n";
-                    } else {
-                        $elPasajero->getObjViaje()->setIdViaje($indice);
-                        $elPasajero->modificar();
-                        echo "\nidViaje cambiado!\n";
-                        $estado = true;
-                    }
+                    $indice = trim(fgets(STDIN)) - 1;
+                    $nuevoPasajero = $arrayViaje[$indice];                 
+                    $elPasajero->setObjViaje($nuevoPasajero);
+                    $elPasajero->modificar();
+                    echo "\nidViaje cambiado!\n";
+                    echo $elPasajero;
+                    $estado = true;
+                    
                 } while (!$estado);
             }
             break;
@@ -523,17 +523,22 @@ do {
             };
             break;
         case 4:
-            $otroPasajero=new Pasajero();
-            echo "Ingrese el documento del pasajero";
-            $doc = trim(fgets(STDIN));
-            if ($otroPasajero->Buscar($doc)) {
-                $elPasajero = $otroPasajero->devuelveAlguien($doc);
+            $losPasajeros = new Pasajero();
+            $arrayPasajeros = $losPasajeros->listar();
+            if ($arrayPasajeros == null) {
+                echo "No hay ningun pasajero cargado\n";
+            } else {
+                for ($i = 0; $i < count($arrayPasajeros); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayPasajeros[$i];
+                    echo "\n";
+                }
+                echo "Seleccione cual pasajero quiere cambiar: \n";
+                $seleccion = trim(fgets(STDIN)) - 1;
+                $pasajeroSeleccionado = $arrayPasajeros[$seleccion];
                 menuGeneral();
                 $opcionCambio = trim(fgets(STDIN));
-                cambiarPasajero($opcionCambio, $elPasajero);
-                echo $elPasajero;
-            } else {
-                echo "Ese pasajero no existe";
+                cambiarPasajero($opcionCambio, $pasajeroSeleccionado);
             };
             break;
         case 5:
