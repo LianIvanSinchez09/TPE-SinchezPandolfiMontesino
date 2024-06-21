@@ -320,27 +320,28 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                 }
             break;
         case 'empresa':
-            do {
+            
                 $misEmpresas = new Empresa();
                 $arrEmpresa = $misEmpresas->listar();
                 if ($arrEmpresa == null) {
                     echo "No hay otras empresas para hacer el cambio";
                 } else {
-                    for ($i = 0; $i < count($arrEmpresa); $i++) {
-                        echo "---------" . $i + 1 . "------------";
-                        echo $arrEmpresa[$i];
-                        echo "\n";
-                    }
-                    echo "ingrese el indice de la empresa al que quiera cambiar\n";
-                    $otroDato = trim(fgets(STDIN)) - 1;
-                    $nuevoRes = $arrEmpresa[$otroDato];
-                    echo "numero de empleado cambiado";
-                    $viajeSeleccionado->setObjIdEmpresa($nuevoRes);
-                    $viajeSeleccionado->modificar();
-                    echo $viajeSeleccionado;
-                    $estado = true;
+                    do {    
+                        for ($i = 0; $i < count($arrEmpresa); $i++) {
+                            echo "---------" . $i + 1 . "------------";
+                            echo $arrEmpresa[$i];
+                            echo "\n";
+                        }
+                        echo "ingrese el indice de la empresa al que quiera cambiar\n";
+                        $otroDato = trim(fgets(STDIN)) - 1;
+                        $nuevoRes = $arrEmpresa[$otroDato];
+                        echo "numero de empleado cambiado";
+                        $viajeSeleccionado->setObjIdEmpresa($nuevoRes);
+                        $viajeSeleccionado->modificar();
+                        echo $viajeSeleccionado;
+                        $estado = true;
+                    } while (!$estado);
                 }
-            } while (!$estado);;
             break;
         case 'importe':
             do {
