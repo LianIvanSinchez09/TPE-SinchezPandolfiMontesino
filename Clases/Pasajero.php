@@ -44,6 +44,12 @@ class Pasajero extends Persona {
 
     // Métodos
 
+
+
+
+
+
+    
     public function Buscar($dni){
         $base = new BaseDatos();
         $consulta = "SELECT * FROM pasajero WHERE documento='" . $dni . "'";
