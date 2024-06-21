@@ -314,7 +314,7 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                     $otroDato = trim(fgets(STDIN)) - 1;
                     $nuevoRes = $arrResponsable[$otroDato];
                     echo "numero de empleado cambiado";
-                    $viajeSeleccionado->setObjNumeroEmpleado($nuevoRes);
+                    $viajeSeleccionado->setObjNumeroDniEmpleado($nuevoRes);
                     $viajeSeleccionado->modificar();
                     echo $viajeSeleccionado;
                     $estado = true;

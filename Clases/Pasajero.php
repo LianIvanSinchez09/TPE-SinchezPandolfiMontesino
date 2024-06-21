@@ -82,6 +82,11 @@ class Pasajero extends Persona {
                 while ($row2 = $base->Registro()) {
                     $obj = new Pasajero();
                     $obj->Buscar($row2['documento']);
+                    $viaje = new Viaje();
+                    if($row2['idViaje']!=null){
+                        $viaje->Buscar($row2['idViaje']);// Cargar objeto empleado
+                    }
+                    
                     array_push($arreglo, $obj);
                 }
             } else {
