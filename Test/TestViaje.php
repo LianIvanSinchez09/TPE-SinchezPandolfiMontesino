@@ -155,15 +155,28 @@ function cambiarPasajero($opcionCambio, $elPasajero)
             $apellido = trim(fgets(STDIN));
             echo "ingrese el numero de telefono del pasajero\n";
             $numTele = trim(fgets(STDIN));
-            echo "ingrese el numero de id de viaje del pasajero\n";
-            $numIdViaje = trim(fgets(STDIN));
 
             $elPasajero->setNombre($nombre);
             $elPasajero->setApellido($apellido);
             $elPasajero->setTelefono($numTele);
-            $elPasajero->getObjViaje()->setIdViaje($numIdViaje);
-            $elPasajero->modificar();
-            echo "datos cambiados";
+
+            $misViajes= new Viaje();
+            $arrayViajes = $misViajes->listar();
+            if ($arrayViajes == null) {
+                echo "No hay otros viajes disponibles para hacer el cambio\n";
+            } else {
+                for ($i = 0; $i < count($arrayViajes); $i++) {
+                    echo "---------" . $i + 1 . "------------";
+                    echo $arrayViajes[$i];
+                    echo "\n";
+                }
+                echo "ingrese el indice del viaje al que quiera cambiar\n";
+                $otroDato = trim(fgets(STDIN)) - 1;
+                $nuevoViaj = $arrayViajes[$otroDato];
+                $elPasajero->setObjViaje($nuevoViaj);
+                $elPasajero->modificar();
+                echo "datos cambiados";
+            };            
             break;
     }
     return $estado;
