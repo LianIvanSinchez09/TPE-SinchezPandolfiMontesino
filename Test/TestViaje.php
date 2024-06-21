@@ -382,9 +382,9 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                 echo "ingrese el indice del empleado al que quiera cambiar\n";
                 $otroDato = trim(fgets(STDIN)) - 1;
                 $nuevoRes = $arrResponsable[$otroDato];
-                $viajeSeleccionado->setObjNumeroEmpleado($nuevoRes);
-                $viajeSeleccionado->modificar();
+                $viajeSeleccionado->setObjNumeroDniEmpleado($nuevoRes);
             }
+
             $misEmpresas = new Empresa();
             $arrEmpresa = $misEmpresas->listar();
             if ($arrEmpresa == null) {
@@ -398,7 +398,7 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                 echo "ingrese el indice del empleado al que quiera cambiar\n";
                 $otroDato = trim(fgets(STDIN)) - 1;
                 $nuevoRes = $arrEmpresa[$otroDato];
-                $viajeSeleccionado->setObjNumeroEmpleado($nuevoRes);
+                $viajeSeleccionado->setObjIdEmpresa($nuevoRes);
                 $viajeSeleccionado->modificar();
             }
             break;
