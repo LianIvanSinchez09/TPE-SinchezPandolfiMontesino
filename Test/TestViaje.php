@@ -745,7 +745,7 @@ do {
         case 12:
             $losPasajeros = new Pasajero();
             $arrayPas = $losPasajeros->listar();
-            if(count($arrayPas) != 0){
+            if($arrayPas!=null){
                 for ($i = 0; $i < count($arrayPas); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrayPas[$i];
@@ -757,7 +757,7 @@ do {
             break;
         case 13:
             $col = $viaje->listar();
-            if(count($col) > 0){
+            if($col!=null){
                 foreach ($col as $viaje) {
                     echo $viaje;
                 }
@@ -768,7 +768,7 @@ do {
         case 14:
             $losResponsables = new ResponsableV();
             $arrResponsable = $losResponsables->listar();
-            if(count($arrResponsable) != 0){
+            if($arrResponsable!=null){
                 for ($i = 0; $i < count($arrResponsable); $i++) {
                     echo "---------" . $i + 1 . "------------";
                     echo $arrResponsable[$i];
@@ -780,7 +780,7 @@ do {
         break;
         case 15:
             $emp = $empresa->listar();
-            if(count($emp)!=0){
+            if($emp!=null){
                 foreach ($emp as $unaEmpresa) {
                     echo $unaEmpresa;
                 }
