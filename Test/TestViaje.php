@@ -624,15 +624,22 @@ do {
                 echo "Seleccione cual viaje quiere eliminar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $viajeSeleccionado = $arrayViajes[$seleccion];
-                if ($viajeSeleccionado->eliminar()) {
-                    $col = $viaje->listar();
-                    foreach ($col as $viaje) {
-                        echo $viaje;
+
+                echo "Seguro que quiere hacerlo, esta informacion puede cambiar en otros lados\nIngrese s/n para continuar";
+                $rePregunta=trim(fgets(STDIN));
+                if($rePregunta=='s'){
+                    if ($viajeSeleccionado->eliminar()) {
+                        echo "Viaje correctamente borrado\n";
+                        $col = $viaje->listar();
+                        foreach ($col as $viaje) {
+                            echo $viaje;
+                        }
+                    } else {
+                        echo "Hubo un error eliminando el viaje\n";
                     }
-                    echo "Viaje correctamente borrado\n";
-                } else {
-                    echo "Hubo un error eliminando el viaje\n";
-                };
+                }else{
+                    echo "la eliminacion se a parado";
+                }
             }else{
                 echo "No hay viajes disponibles\n";
             }
@@ -652,7 +659,7 @@ do {
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $responsableSeleccionado = $arrResponsable[$seleccion];
                 
-                echo "Seguro que quiere hacerlo, esta informacion puede ser cambiar en otros lados\nIngrese s/n para continuar";
+                echo "Seguro que quiere hacerlo, esta informacion puede cambiar en otros lados\nIngrese s/n para continuar";
                 $rePregunta=trim(fgets(STDIN));
                 if($rePregunta=='s'){    
 
@@ -691,13 +698,7 @@ do {
                 $rePregunta=trim(fgets(STDIN));
                 if($rePregunta=='s'){
                     if ($empresaSeleccionada->eliminar()) {
-                        unset($arrEmpresas[$seleccion]);
-                        echo "Empresa eliminada\n";
-                        for ($i = 0; $i < count($arrEmpresas); $i++) {
-                            echo "---------" . $i + 1 . "------------";
-                            echo $arrEmpresas[$i];
-                            echo "\n";
-                        }
+                        echo "la empresa a sido eliminada correctamente\n";
                     } else {
                         echo "Hubo un error eliminando la empresa\n";
                     }
@@ -725,12 +726,16 @@ do {
                 $rePregunta=trim(fgets(STDIN));
                 if($rePregunta=='s'){
                     if ($pasajeroSeleccionada->eliminar()) {
-                        unset($arrayPasajeros[$seleccion]);
+                        $arrayPasajeros = $losPasajeros->listar();
                         echo "Pasajero eliminado\n";
-                        for ($i = 0; $i < count($arrayPasajeros); $i++) {
-                            echo "---------" . $i + 1 . "------------";
-                            echo $arrayPasajeros[$i];
-                            echo "\n";
+                        if($arrayPasajeros==null){
+                            echo "Sean eliminado todos los pasajeros";
+                        }else{
+                            for ($i = 0; $i < count($arrayPasajeros); $i++) {
+                                echo "---------" . $i + 1 . "------------";
+                                echo $arrayPasajeros[$i];
+                                echo "\n";
+                            }
                         }
                     } else {
                         echo "Hubo un error eliminando al pasajero\n";
