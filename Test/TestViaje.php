@@ -316,7 +316,7 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
                         $viajeSeleccionado->modificar();
                         echo $viajeSeleccionado;
                         $estado = true;
-                    }while (!$estado || $arrResponsable == null);
+                    }while (!$estado);
                 }
             break;
         case 'empresa':
