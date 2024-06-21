@@ -296,27 +296,28 @@ function cambioViaje($opcionCambio, $viajeSeleccionado)
             } while (!$estado);
             break;
         case 'empleado':
-            do {
+            
                 $losResponsables = new ResponsableV();
                 $arrResponsable = $losResponsables->listar();
                 if ($arrResponsable == null) {
                     echo "No hay otros empleados para hacer el cambio";
                 } else {
-                    for ($i = 0; $i < count($arrResponsable); $i++) {
-                        echo "---------" . $i + 1 . "------------";
-                        echo $arrResponsable[$i];
-                        echo "\n";
-                    }
-                    echo "ingrese el indice del empleado al que quiera cambiar\n";
-                    $otroDato = trim(fgets(STDIN)) - 1;
-                    $nuevoRes = $arrResponsable[$otroDato];
-                    echo "numero de empleado cambiado";
-                    $viajeSeleccionado->setObjNumeroDniEmpleado($nuevoRes);
-                    $viajeSeleccionado->modificar();
-                    echo $viajeSeleccionado;
-                    $estado = true;
+                    do {
+                        for ($i = 0; $i < count($arrResponsable); $i++) {
+                            echo "---------" . $i + 1 . "------------";
+                            echo $arrResponsable[$i];
+                            echo "\n";
+                        }
+                        echo "ingrese el indice del empleado al que quiera cambiar\n";
+                        $otroDato = trim(fgets(STDIN)) - 1;
+                        $nuevoRes = $arrResponsable[$otroDato];
+                        echo "numero de empleado cambiado";
+                        $viajeSeleccionado->setObjNumeroDniEmpleado($nuevoRes);
+                        $viajeSeleccionado->modificar();
+                        echo $viajeSeleccionado;
+                        $estado = true;
+                    }while (!$estado || $arrResponsable == null);
                 }
-            } while (!$estado);;
             break;
         case 'empresa':
             do {
