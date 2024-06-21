@@ -88,12 +88,24 @@ class Viaje {
         $this->mensajeoperacion = $mensajeoperacion;
     }
 
+    private function mostrarNulo($parametro){        
+        if($parametro == null){
+            $respuesta = "null\n";
+        }else{
+            $respuesta = $parametro;
+        }
+        return $respuesta;
+    }
+
     public function __toString() {
+        $empleado = $this->getObjNumeroDniEmpleado()->getdocumento();
+        $empresa = $this->getObjIdEmpresa()->getIdEmpresa();
+
         $info = "\nId Viaje: " . $this->getIdViaje();
         $info .= "\nDestino: " . $this->getDestino();
         $info .= "\nCantidad Max De Pasajeros: " . $this->getCantMaxPasajeros();
-        $info .= "\nDNI Empleado a cargo: \n" . $this->getObjNumeroDniEmpleado()->getdocumento(); // clave foranea
-        $info .= "\nEmpresa a la que esta asociada: \n" . $this->getObjIdEmpresa()->getIdEmpresa(); // clave foranea
+        $info .= "\nDNI Empleado a cargo: " . $this->mostrarNulo($empleado); // clave foranea
+        $info .= "\nEmpresa a la que esta asociada: " . $this->mostrarNulo($empresa); // clave foranea
         $info .= "\nImporte: $" . $this->getImporte() . "\n";
 
         return $info;
