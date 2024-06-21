@@ -40,6 +40,7 @@ function menuGeneral()
     echo "Ingrese (nombre): Para cambiar el nombre del pasajero" .
         "\nIngrese (apellido): Para cambiar el apellido del pasajero" .
         "\nIngrese (telefono): Para cambiar el telefono del pasajero" .
+        "\nIngrese (idViaje): Para cambiar el viaje del pasajero" .
         "\nIngrese (todo): Para cambiar toda la informacion de un pasajero\n";
 }
 
