@@ -458,10 +458,18 @@ do {
                     $nuevoPersona = new Persona();
                     $personaYacargada = $nuevoPersona->Buscar($numDoc);        
                     $nuevoPasajero = new Pasajero();
-    
+                    $resp = new ResponsableV();
+                    $verificarResp = $resp->Buscar($numDoc);
                     if ($personaYacargada) {
+                        // if($verificarResp){
+                        //     echo "La persona es actualmente un responsable\n";
+                        // }else{
+                        //     echo "Ya se encuentra en ese viaje";
+                        // }
                         echo "Ya se encuentra en ese viaje";
-                    } else {
+
+                    }
+                     else {
                         echo "ingrese el numero de telefono del pasajero\n";
                         $numTele = trim(fgets(STDIN));
                         
