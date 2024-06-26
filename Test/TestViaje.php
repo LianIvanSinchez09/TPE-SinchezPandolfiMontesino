@@ -138,13 +138,16 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                         echo "\n";
                     }
                     $indice = trim(fgets(STDIN)) - 1;
-                    $nuevoPasajero = $arrayViaje[$indice];                 
-                    $elPasajero->setObjViaje($nuevoPasajero);
-                    $elPasajero->modificar();
-                    echo "\nidViaje cambiado!\n";
-                    echo $elPasajero;
-                    $estado = true;
-                    
+                    $nuevoPasajero = $arrayViaje[$indice];
+                    if($nuevoPasajero->getCantMaxPasajeros() != 0){
+                        $elPasajero->setObjViaje($nuevoPasajero);
+                        $elPasajero->modificar();
+                        echo "\nidViaje cambiado!\n";
+                        echo $elPasajero;
+                        $estado = true;
+                    }else{
+                        echo "ERROR: Viaje no disponible\n";
+                    }
                 } while (!$estado);
             }
             break;
