@@ -602,6 +602,7 @@ do {
             ;break;
         case 7:
             $emp = new Empresa();
+            print_r($emp->listar());
             echo $emp->listar()[0] . "\n";
             echo "Desea cambiar dirección o nombre de la empresa?: \n";
             $opcion = trim(fgets(STDIN));
