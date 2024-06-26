@@ -438,58 +438,43 @@ do {
     $opcion = trim(fgets(STDIN));
     switch ($opcion) {
         case 1:
-            $losResponsables = new ResponsableV();
-            $arrResponsable = $losResponsables->listar();
-            if($arrResponsable==null){
-                echo "No hay responsable disponible para un";
+            $colViajes = $viaje->listar();
+            if($colViajes==null){
+                echo "No hay ningun viaje cargado";
             }else{
-                $colViajes = $viaje->listar();
-                if($colViajes==null){
-                    echo "No hay ningun viaje cargado";
+                foreach ($colViajes as $viaje) {
+                    echo $viaje . "\n";
+                }
+                echo "A cual viaje desea ir (id): \n";
+                $idOpcViaje = trim(fgets(STDIN));
+                $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
+                if ($viajeRetornado == null) {
+                    echo "Viaje no disponible";
                 }else{
-                    foreach ($colViajes as $viaje) {
-                        echo $viaje . "\n";
-                    }
-                    echo "A cual viaje desea ir (id): \n";
-                    $idOpcViaje = trim(fgets(STDIN));
-                    $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
-                    echo $viajeRetornado;
-                    if ($viajeRetornado == null) {
-                        echo "Viaje no disponible";
-                    }elseif($viaje->getObjNumeroDniEmpleado()->getdocumento() == null){
-                        echo "RESPONSABLE NO DISPONIBLE\n";
-                    }
-                    else{
-                        echo "Hay pasajes disponibles\n";
-                        echo "ingrese el nombre del pasajero\n";
-                        $nombre = trim(fgets(STDIN));
-                        echo "ingrese el apellido del pasajero\n";
-                        $apellido = trim(fgets(STDIN));
-                        echo "ingrese el numero de documento del pasajero\n";
-                        $numDoc = trim(fgets(STDIN));
+                    echo "Hay pasajes disponibles\n";
+                    echo "ingrese el nombre del pasajero\n";
+                    $nombre = trim(fgets(STDIN));
+                    echo "ingrese el apellido del pasajero\n";
+                    $apellido = trim(fgets(STDIN));
+                    echo "ingrese el numero de documento del pasajero\n";
+                    $numDoc = trim(fgets(STDIN));
+                    
+                    $nuevoPersona = new Persona();
+                    $personaYacargada = $nuevoPersona->Buscar($numDoc);        
+                    $nuevoPasajero = new Pasajero();
+    
+                    if ($personaYacargada) {
+                        echo "Ya se encuentra en ese viaje";
+                    } else {
+                        echo "ingrese el numero de telefono del pasajero\n";
+                        $numTele = trim(fgets(STDIN));
                         
-                        $nuevoPersona = new Persona();
-                        $personaYacargada = $nuevoPersona->Buscar($numDoc);        
-                        $nuevoPasajero = new Pasajero();
-                        $resp = new ResponsableV();
-                        $verificarResp = $resp->Buscar($numDoc);
-                        if ($personaYacargada) {
-                            if($verificarResp){
-                                echo "La persona es actualmente un responsable\n";
-                            }else{
-                                echo "Ya se encuentra en ese viaje";
-                            }
-                        }
-                         else {
-                            echo "ingrese el numero de telefono del pasajero\n";
-                            $numTele = trim(fgets(STDIN));
-                            $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
-                            $nuevoPasajero->insertar();
-                            echo $nuevoPasajero;
-                            echo "Pasajero cargado en la base de datos";
-                        }
+                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
+                        $nuevoPasajero->insertar();
+                        
+                        echo "Pasajero cargado en la base de datos";
                     }
-                }   
+                }
             };
             break;
         case 2:
@@ -512,7 +497,7 @@ do {
                 echo "Cantidad maxima de pasajeros: \n";
                 $cantMaxPasajeros = trim(fgets(STDIN));
                 $otroViaje = new Viaje();
-                echo "Ingrese coste del viaje: ";
+                echo "Ingrese costo del viaje: ";
                 $costo = trim(fgets(STDIN));
                 $misEmpresas=new Empresa();
                 $colEmpre=$misEmpresas->listar();
@@ -584,7 +569,7 @@ do {
                     echo $arrayViajes[$i];
                     echo "\n";
                 }
-                echo "Seleccione cual viaje quiere cambiar (posicion arreglo): ";
+                echo "Seleccione cual viaje quiere cambiar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $viajeSeleccionado = $arrayViajes[$seleccion];
                 menuViaje();
@@ -616,20 +601,19 @@ do {
             echo $emp->listar()[0] . "\n";
             echo "Desea cambiar dirección o nombre de la empresa?: \n";
             $opcion = trim(fgets(STDIN));
+            $empresa = $emp->listar()[0];
             switch ($opcion) {
                 case 'direccion':
                     do {
-                        $emp = new Empresa();
-                        $empresa = $emp->listar()[0];
+                        //$emp = new Empresa();                        
                         echo "Ingrese nueva dirección: \n";
                         $direccion = trim(fgets(STDIN));
                         $empresa->setDireccion($direccion);
                         if ($empresa->modificar()) {
-                            echo "Direccion modificada correctamente\n";
+                            echo "Direccion modificado correctamente\n";
                             echo $emp->listar()[0] . "\n";
                             $estado = true;
-                        } else {
-                            echo $emp->listar()[0] . "\n";
+                        } else {                            
                             echo "No se pudo modificar la dirección\n";
                         }
                     } while (!$estado);
@@ -641,10 +625,9 @@ do {
                         $empresa->setNombre($nombre);
                         if ($empresa->modificar()) {
                             echo $emp->listar()[0] . "\n";
-                            echo "Nombre modificada correctamente\n";
+                            echo "Nombre modificado correctamente\n";
                             $estado = true;
                         } else {
-                            echo $emp->listar()[0] . "\n";
                             echo "No se pudo modificar el nombre\n";
                         }
                     } while (!$estado);
