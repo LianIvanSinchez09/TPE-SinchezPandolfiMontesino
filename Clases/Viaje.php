@@ -236,7 +236,7 @@ class Viaje {
         $cantPasajeros = 0;
         $viajes = $viaje->listar();
         $pasajeros = $pasajero->listar();
-        print_r($pasajeros);
+        //print_r($pasajeros);
         $viajeSeleccionado = null;
         $viajeACargar = null;
         $c = 0;

@@ -771,6 +771,7 @@ do {
         case 12:
             $losPasajeros = new Pasajero();
             $arrayPas = $losPasajeros->listar();
+            //print_r($arrayPas);
             if($arrayPas!=null){
                 for ($i = 0; $i < count($arrayPas); $i++) {
                     echo "---------" . $i + 1 . "------------";
