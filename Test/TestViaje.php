@@ -480,7 +480,7 @@ do {
                                 echo "Ya se encuentra en ese viaje";
                             }
                         }
-                         else {
+                        else {
                             echo "ingrese el numero de telefono del pasajero\n";
                             $numTele = trim(fgets(STDIN));
                             $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
