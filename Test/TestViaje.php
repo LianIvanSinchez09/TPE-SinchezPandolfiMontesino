@@ -138,16 +138,13 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                         echo "\n";
                     }
                     $indice = trim(fgets(STDIN)) - 1;
-                    $nuevoPasajero = $arrayViaje[$indice];
-                    if($nuevoPasajero->getCantMaxPasajeros() != 0){
-                        $elPasajero->setObjViaje($nuevoPasajero);
-                        $elPasajero->modificar();
-                        echo "\nidViaje cambiado!\n";
-                        echo $elPasajero;
-                        $estado = true;
-                    }else{
-                        echo "ERROR: Viaje no disponible\n";
-                    }
+                    $nuevoPasajero = $arrayViaje[$indice];                 
+                    $elPasajero->setObjViaje($nuevoPasajero);
+                    $elPasajero->modificar();
+                    echo "\nidViaje cambiado!\n";
+                    echo $elPasajero;
+                    $estado = true;
+                    
                 } while (!$estado);
             }
             break;
@@ -437,59 +434,43 @@ do {
     $opcion = trim(fgets(STDIN));
     switch ($opcion) {
         case 1:
-            $losResponsables = new ResponsableV();
-            $arrResponsable = $losResponsables->listar();
-            //print_r($arrResponsable);
-            if($arrResponsable==null){
-                echo "No hay responsable disponible para un";
+            $colViajes = $viaje->listar();
+            if($colViajes==null){
+                echo "No hay ningun viaje cargado";
             }else{
-                $colViajes = $viaje->listar();
-                if($colViajes==null){
-                    echo "No hay ningun viaje cargado";
+                foreach ($colViajes as $viaje) {
+                    echo $viaje . "\n";
+                }
+                echo "A cual viaje desea ir (id): \n";
+                $idOpcViaje = trim(fgets(STDIN));
+                $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
+                if ($viajeRetornado == null) {
+                    echo "Viaje no disponible";
                 }else{
-                    foreach ($colViajes as $viaje) {
-                        echo $viaje . "\n";
-                    }
-                    echo "A cual viaje desea ir (id): \n";
-                    $idOpcViaje = trim(fgets(STDIN));
-                    $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
-                    echo $viajeRetornado;
-                    if ($viajeRetornado == null) {
-                        echo "Viaje no disponible";
-                    }elseif($viaje->getObjNumeroDniEmpleado()->getdocumento() == null){
-                        echo "RESPONSABLE NO DISPONIBLE\n";
-                    }
-                    else{
-                        echo "Hay pasajes disponibles\n";
-                        echo "ingrese el nombre del pasajero\n";
-                        $nombre = trim(fgets(STDIN));
-                        echo "ingrese el apellido del pasajero\n";
-                        $apellido = trim(fgets(STDIN));
-                        echo "ingrese el numero de documento del pasajero\n";
-                        $numDoc = trim(fgets(STDIN));
+                    echo "Hay pasajes disponibles\n";
+                    echo "ingrese el nombre del pasajero\n";
+                    $nombre = trim(fgets(STDIN));
+                    echo "ingrese el apellido del pasajero\n";
+                    $apellido = trim(fgets(STDIN));
+                    echo "ingrese el numero de documento del pasajero\n";
+                    $numDoc = trim(fgets(STDIN));
+                    
+                    $nuevoPersona = new Persona();
+                    $personaYacargada = $nuevoPersona->Buscar($numDoc);        
+                    $nuevoPasajero = new Pasajero();
+    
+                    if ($personaYacargada) {
+                        echo "Ya se encuentra en ese viaje";
+                    } else {
+                        echo "ingrese el numero de telefono del pasajero\n";
+                        $numTele = trim(fgets(STDIN));
                         
-                        $nuevoPersona = new Persona();
-                        $personaYacargada = $nuevoPersona->Buscar($numDoc);        
-                        $nuevoPasajero = new Pasajero();
-                        $resp = new ResponsableV();
-                        $verificarResp = $resp->Buscar($numDoc);
-                        if ($personaYacargada) {
-                            if($verificarResp){
-                                echo "La persona es actualmente un responsable\n";
-                            }else{
-                                echo "Ya se encuentra en ese viaje";
-                            }
-                        }
-                        else {
-                            echo "ingrese el numero de telefono del pasajero\n";
-                            $numTele = trim(fgets(STDIN));
-                            $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
-                            $nuevoPasajero->insertar();
-                            echo $nuevoPasajero;
-                            echo "Pasajero cargado en la base de datos";
-                        }
+                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
+                        $nuevoPasajero->insertar();
+                        
+                        echo "Pasajero cargado en la base de datos";
                     }
-                }   
+                }
             };
             break;
         case 2:
@@ -613,7 +594,6 @@ do {
             ;break;
         case 7:
             $emp = new Empresa();
-            //print_r($emp->listar());
             echo $emp->listar()[0] . "\n";
             echo "Desea cambiar dirección o nombre de la empresa?: \n";
             $opcion = trim(fgets(STDIN));
@@ -695,22 +675,22 @@ do {
                     echo $arrResponsable[$i];
                     echo "\n";
                 }
-                echo "Seleccione cual responsable quiere eliminar: ";
+                echo "Seleccione cual responsable quiere cambiar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $responsableSeleccionado = $arrResponsable[$seleccion];
                 
-                echo "Seguro que quiere hacerlo, esta informacion puede cambiar en otros lados\nIngrese s/n para continuar: ";
+                echo "Seguro que quiere hacerlo, esta informacion puede cambiar en otros lados\nIngrese s/n para continuar";
                 $rePregunta=trim(fgets(STDIN));
                 if($rePregunta=='s'){    
+
                     if ($responsableSeleccionado->eliminar()) {
+                        unset($arrResponsable[$seleccion]);
                         echo "Responsable eliminado\n";
-                        $col = $losResponsables->listar();
-                        $j = 1;
-                        foreach ($col as $respon) {
-                            echo "---------" . $j++ . "------------";
-                            echo $respon . "\n";
+                        for ($i = 0; $i < count($arrResponsable); $i++) {
+                            echo "---------" . $i + 1 . "------------";
+                            echo $arrResponsable[$i];
+                            echo "\n";
                         }
-                        
                     } else {
                         echo "Hubo un error eliminando el responsable\n";
                     }
