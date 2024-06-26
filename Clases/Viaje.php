@@ -232,9 +232,11 @@ class Viaje {
     public function hayPasajesDisponibles($id){
         $pasajero = new Pasajero();
         $viaje = new Viaje();
+        $resp = new ResponsableV();
         $cantPasajeros = 0;
         $viajes = $viaje->listar();
         $pasajeros = $pasajero->listar();
+        print_r($pasajeros);
         $viajeSeleccionado = null;
         $viajeACargar = null;
         $c = 0;
@@ -247,16 +249,21 @@ class Viaje {
             }
             $c++;
         }
+        for ($k=0; $k < count($pasajeros); $k++) { 
+
+        }
         //calculo la cantidad de pasajeros
-        if(($viajeSeleccionado->getCantMaxPasajeros() != 0)){
-            for ($i=0; $i < count($pasajeros); $i++) {
-                if($viajeSeleccionado->getIdViaje() == $pasajeros[$i]->getObjViaje()->getIdViaje()){
-                    $cantPasajeros++;
+        if(($viajeSeleccionado != null && $viajeSeleccionado->getCantMaxPasajeros() != 0)){
+                for ($i=0; $i < count($pasajeros); $i++) {
+                    if($pasajeros[$i]->getObjViaje() != null && $viajeSeleccionado->getIdViaje() == $pasajeros[$i]->getObjViaje()->getIdViaje()){
+                        $cantPasajeros++;
+                    }
                 }
-            }
-            if($viajeSeleccionado->getCantMaxPasajeros() > 0 && $cantPasajeros < $viajeSeleccionado->getCantMaxPasajeros()){
-                $viajeACargar = $viajeSeleccionado;
-            }
+                if($viajeSeleccionado->getCantMaxPasajeros() > 0 && $cantPasajeros < $viajeSeleccionado->getCantMaxPasajeros()){
+                    $viajeACargar = $viajeSeleccionado;
+                }
+                echo "CANTIDAD PASAJEROS: \n";
+                echo $cantPasajeros;
         }
         return $viajeACargar;
     }
