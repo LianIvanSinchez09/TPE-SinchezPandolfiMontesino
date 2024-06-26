@@ -512,7 +512,7 @@ do {
                 echo "Cantidad maxima de pasajeros: \n";
                 $cantMaxPasajeros = trim(fgets(STDIN));
                 $otroViaje = new Viaje();
-                echo "Ingrese coste del viaje: ";
+                echo "Ingrese costo del viaje: ";
                 $costo = trim(fgets(STDIN));
                 $misEmpresas=new Empresa();
                 $colEmpre=$misEmpresas->listar();
@@ -617,20 +617,19 @@ do {
             echo $emp->listar()[0] . "\n";
             echo "Desea cambiar dirección o nombre de la empresa?: \n";
             $opcion = trim(fgets(STDIN));
+            $empresa = $emp->listar()[0];
             switch ($opcion) {
                 case 'direccion':
                     do {
-                        $emp = new Empresa();
-                        $empresa = $emp->listar()[0];
+                        //$emp = new Empresa();                        
                         echo "Ingrese nueva dirección: \n";
                         $direccion = trim(fgets(STDIN));
                         $empresa->setDireccion($direccion);
                         if ($empresa->modificar()) {
-                            echo "Direccion modificada correctamente\n";
+                            echo "Direccion modificado correctamente\n";
                             echo $emp->listar()[0] . "\n";
                             $estado = true;
-                        } else {
-                            echo $emp->listar()[0] . "\n";
+                        } else {                            
                             echo "No se pudo modificar la dirección\n";
                         }
                     } while (!$estado);
@@ -642,10 +641,9 @@ do {
                         $empresa->setNombre($nombre);
                         if ($empresa->modificar()) {
                             echo $emp->listar()[0] . "\n";
-                            echo "Nombre modificada correctamente\n";
+                            echo "Nombre modificado correctamente\n";
                             $estado = true;
                         } else {
-                            echo $emp->listar()[0] . "\n";
                             echo "No se pudo modificar el nombre\n";
                         }
                     } while (!$estado);
