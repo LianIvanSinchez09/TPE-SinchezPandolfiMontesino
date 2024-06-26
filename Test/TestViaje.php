@@ -694,22 +694,22 @@ do {
                     echo $arrResponsable[$i];
                     echo "\n";
                 }
-                echo "Seleccione cual responsable quiere cambiar: ";
+                echo "Seleccione cual responsable quiere eliminar: ";
                 $seleccion = trim(fgets(STDIN)) - 1;
                 $responsableSeleccionado = $arrResponsable[$seleccion];
                 
-                echo "Seguro que quiere hacerlo, esta informacion puede cambiar en otros lados\nIngrese s/n para continuar";
+                echo "Seguro que quiere hacerlo, esta informacion puede cambiar en otros lados\nIngrese s/n para continuar: ";
                 $rePregunta=trim(fgets(STDIN));
                 if($rePregunta=='s'){    
-
                     if ($responsableSeleccionado->eliminar()) {
-                        unset($arrResponsable[$seleccion]);
                         echo "Responsable eliminado\n";
-                        for ($i = 0; $i < count($arrResponsable); $i++) {
-                            echo "---------" . $i + 1 . "------------";
-                            echo $arrResponsable[$i];
-                            echo "\n";
+                        $col = $losResponsables->listar();
+                        $j = 1;
+                        foreach ($col as $respon) {
+                            echo "---------" . $j++ . "------------";
+                            echo $respon . "\n";
                         }
+                        
                     } else {
                         echo "Hubo un error eliminando el responsable\n";
                     }
