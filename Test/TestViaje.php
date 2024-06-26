@@ -182,6 +182,8 @@ function cambiarPasajero($opcionCambio, $elPasajero)
                 echo "datos cambiados";
             };            
             break;
+            default:
+                break;
     }
     return $estado;
 }

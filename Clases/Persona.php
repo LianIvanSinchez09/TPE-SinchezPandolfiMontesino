@@ -178,23 +178,4 @@ class Persona
 		return "\nNombre: " . $this->getNombre() . "\nApellido: " . $this->getApellido() . "\nDNI: " . $this->getdocumento() . "\n";
 	}
 
-	//<---------------------------METODOS PROPIOS--------------------------------->
-	public function devuelveAlguien($unDni){
-		$cumple=false;
-        $i=0;
-		$colPersona=$this->listar();
-		$cantCol=count($colPersona);
-		if($cantCol!=0){
-			while(!$cumple & $i<$cantCol){
-				if($unDni==$colPersona[$i]->getdocumento()){
-					$cumple=true;
-					$unaPersona=new Persona();
-					$unaPersona=$colPersona[$i];
-				}else{
-					$i++;
-				}
-			}
-		}
-		return $unaPersona;
-	}
 }
