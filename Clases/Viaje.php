@@ -236,7 +236,7 @@ class Viaje {
         $cantPasajeros = 0;
         $viajes = $viaje->listar();
         $pasajeros = $pasajero->listar();
-        //print_r($pasajeros);
+        print_r($pasajeros);
         $viajeSeleccionado = null;
         $viajeACargar = null;
         $c = 0;
@@ -249,9 +249,6 @@ class Viaje {
             }
             $c++;
         }
-        for ($k=0; $k < count($pasajeros); $k++) { 
-
-        }
         //calculo la cantidad de pasajeros
         if(($viajeSeleccionado != null && $viajeSeleccionado->getCantMaxPasajeros() != 0)){
                 for ($i=0; $i < count($pasajeros); $i++) {
@@ -262,8 +259,6 @@ class Viaje {
                 if($viajeSeleccionado->getCantMaxPasajeros() > 0 && $cantPasajeros < $viajeSeleccionado->getCantMaxPasajeros()){
                     $viajeACargar = $viajeSeleccionado;
                 }
-                echo "CANTIDAD PASAJEROS: " . $cantPasajeros . "\n";
-                
         }
         return $viajeACargar;
     }
