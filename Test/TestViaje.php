@@ -434,51 +434,59 @@ do {
     $opcion = trim(fgets(STDIN));
     switch ($opcion) {
         case 1:
-            $colViajes = $viaje->listar();
-            if($colViajes==null){
-                echo "No hay ningun viaje cargado";
+            $losResponsables = new ResponsableV();
+            $arrResponsable = $losResponsables->listar();
+            print_r($arrResponsable);
+            if($arrResponsable==null){
+                echo "No hay responsable disponible para un";
             }else{
-                foreach ($colViajes as $viaje) {
-                    echo $viaje . "\n";
-                }
-                echo "A cual viaje desea ir (id): \n";
-                $idOpcViaje = trim(fgets(STDIN));
-                $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
-                if ($viajeRetornado == null) {
-                    echo "Viaje no disponible";
+                $colViajes = $viaje->listar();
+                if($colViajes==null){
+                    echo "No hay ningun viaje cargado";
                 }else{
-                    echo "Hay pasajes disponibles\n";
-                    echo "ingrese el nombre del pasajero\n";
-                    $nombre = trim(fgets(STDIN));
-                    echo "ingrese el apellido del pasajero\n";
-                    $apellido = trim(fgets(STDIN));
-                    echo "ingrese el numero de documento del pasajero\n";
-                    $numDoc = trim(fgets(STDIN));
-                    
-                    $nuevoPersona = new Persona();
-                    $personaYacargada = $nuevoPersona->Buscar($numDoc);        
-                    $nuevoPasajero = new Pasajero();
-                    $resp = new ResponsableV();
-                    $verificarResp = $resp->Buscar($numDoc);
-                    if ($personaYacargada) {
-                        // if($verificarResp){
-                        //     echo "La persona es actualmente un responsable\n";
-                        // }else{
-                        //     echo "Ya se encuentra en ese viaje";
-                        // }
-                        echo "Ya se encuentra en ese viaje";
-
+                    foreach ($colViajes as $viaje) {
+                        echo $viaje . "\n";
                     }
-                     else {
-                        echo "ingrese el numero de telefono del pasajero\n";
-                        $numTele = trim(fgets(STDIN));
-                        
-                        $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
-                        $nuevoPasajero->insertar();
-                        
-                        echo "Pasajero cargado en la base de datos";
+                    echo "A cual viaje desea ir (id): \n";
+                    $idOpcViaje = trim(fgets(STDIN));
+                    $viajeRetornado = $viaje->hayPasajesDisponibles($idOpcViaje);
+                    echo $viajeRetornado;
+                    if ($viajeRetornado == null) {
+                        echo "Viaje no disponible";
+                    }elseif($viaje->getObjNumeroDniEmpleado()->getdocumento() == null){
+                        echo "RESPONSABLE NO DISPONIBLE\n";
                     }
-                }
+                    else{
+                        echo "Hay pasajes disponibles\n";
+                        echo "ingrese el nombre del pasajero\n";
+                        $nombre = trim(fgets(STDIN));
+                        echo "ingrese el apellido del pasajero\n";
+                        $apellido = trim(fgets(STDIN));
+                        echo "ingrese el numero de documento del pasajero\n";
+                        $numDoc = trim(fgets(STDIN));
+                        
+                        $nuevoPersona = new Persona();
+                        $personaYacargada = $nuevoPersona->Buscar($numDoc);        
+                        $nuevoPasajero = new Pasajero();
+                        $resp = new ResponsableV();
+                        $verificarResp = $resp->Buscar($numDoc);
+                        if ($personaYacargada) {
+                            if($verificarResp){
+                                echo "La persona es actualmente un responsable\n";
+                            }else{
+                                echo "Ya se encuentra en ese viaje";
+                            }
+                        }
+                         else {
+                            echo "ingrese el numero de telefono del pasajero\n";
+                            $numTele = trim(fgets(STDIN));
+                            $nuevoPasajero->cargar($numDoc, $nombre, $apellido, $viajeRetornado, $numTele);
+                            $nuevoPasajero->insertar();
+                            echo $nuevoPasajero;
+                            echo "Pasajero cargado en la base de datos";
+                        }
+                    }
+                }   
             };
             break;
         case 2:
